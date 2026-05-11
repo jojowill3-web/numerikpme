@@ -285,6 +285,53 @@ export default function App() {
         .phase-block:hover{background:#121E35}
         .impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:36px}
         .impact-card{text-align:center;background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 14px}
+
+        /* ── MOBILE NAV BOTTOM BAR ── */
+        .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(6,10,20,0.96);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.08);padding:8px 0 env(safe-area-inset-bottom,8px)}
+        .mob-nav-inner{display:flex;justify-content:space-around;align-items:center}
+        .mob-tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;border:none;background:transparent;cursor:pointer;transition:all 0.18s;border-radius:10px;min-width:52px}
+        .mob-tab-icon{font-size:20px;line-height:1}
+        .mob-tab-lbl{font-size:9px;font-weight:600;letter-spacing:0.3px;color:#4B5A7A;font-family:'DM Sans',sans-serif;transition:color 0.18s}
+        .mob-tab.active .mob-tab-lbl{color:#4F8EF7}
+        .mob-tab.active .mob-tab-icon{filter:drop-shadow(0 0 6px #4F8EF7)}
+
+        /* ── MEDIA QUERIES ── */
+        @media(max-width:768px){
+          .nav{padding:0 16px;height:56px}
+          .nav nav{display:none}
+          .nav-lang{padding:6px 10px;font-size:11px}
+          .mob-nav{display:block}
+          .main{padding:0 16px 90px}
+          .hero{padding:48px 0 40px}
+          .hero-glow{width:100%;height:300px}
+          .hero-badge{font-size:9px;letter-spacing:1.5px;padding:5px 12px}
+          .hero-sub{font-size:13px;max-width:100%}
+          .hero-btns{flex-direction:column;align-items:center}
+          .btn-p,.btn-s{width:100%;max-width:320px;text-align:center;padding:14px 20px;font-size:15px}
+          .feat-grid{grid-template-columns:1fr}
+          .feat-card{padding:20px}
+          .stats-row{grid-template-columns:repeat(2,1fr)}
+          .sec-head{padding-top:28px;margin-bottom:24px}
+          .sec-title{font-size:22px}
+          .diag-card{padding:24px 20px;border-radius:16px}
+          .diag-opt{padding:14px 16px;font-size:14px}
+          .chat-box{height:52vh;padding:16px;border-radius:14px}
+          .bub-u,.bub-a{max-width:88%;font-size:13px}
+          .sug-pill{font-size:11px;padding:6px 11px}
+          .chat-in{font-size:14px;padding:12px 14px}
+          .send-btn{padding:12px 16px;font-size:13px}
+          .grants-grid{grid-template-columns:1fr}
+          .filter-row{flex-wrap:wrap}
+          .phase-block{padding:16px 18px}
+          .impact-grid{grid-template-columns:repeat(2,1fr)}
+        }
+        @media(max-width:400px){
+          .stats-row{grid-template-columns:repeat(2,1fr)}
+          .impact-grid{grid-template-columns:repeat(2,1fr)}
+        }
+        @supports(padding:env(safe-area-inset-bottom)){
+          .mob-nav{padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+        }
       `}</style>
 
       {/* NAV */}
@@ -315,6 +362,24 @@ export default function App() {
 
         <button className="nav-lang" onClick={switchLang}>🌐 {t.lang}</button>
       </header>
+
+      {/* MOBILE BOTTOM NAV */}
+      <nav className="mob-nav">
+        <div className="mob-nav-inner">
+          {[
+            { key: "home",       icon: "🏠", label: lang === "fr" ? "Accueil"    : "Home" },
+            { key: "diagnostic", icon: "🔍", label: lang === "fr" ? "Diagnostic" : "Diagnostic" },
+            { key: "assistant",  icon: "🤖", label: lang === "fr" ? "Assistant"  : "Assistant" },
+            { key: "grants",     icon: "💰", label: lang === "fr" ? "Aides"      : "Grants" },
+            { key: "plan",       icon: "📋", label: lang === "fr" ? "Plan"       : "Plan" },
+          ].map(({ key, icon, label }) => (
+            <button key={key} className={`mob-tab${activeTab === key ? " active" : ""}`} onClick={() => setActiveTab(key)}>
+              <span className="mob-tab-icon">{icon}</span>
+              <span className="mob-tab-lbl">{label}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
 
       <main className="main">
 
