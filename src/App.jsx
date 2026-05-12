@@ -174,11 +174,22 @@ export default function App() {
     setInput("");
     setLoading(true);
     try {
+      const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
+
+      // Verifye si kle a la
+      if (!apiKey) {
+        setMessages([...newMessages, { role: "assistant", content: lang === "fr"
+          ? "❌ Clé API manquante. Ajoutez VITE_ANTHROPIC_API_KEY dans Vercel → Settings → Environment Variables."
+          : "❌ API key missing. Add VITE_ANTHROPIC_API_KEY in Vercel → Settings → Environment Variables." }]);
+        setLoading(false);
+        return;
+      }
+
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": import.meta.env.VITE_ANTHROPIC_API_KEY,
+          "x-api-key": apiKey,
           "anthropic-version": "2023-06-01",
           "anthropic-dangerous-direct-browser-access": "true",
         },
@@ -189,11 +200,41 @@ export default function App() {
           messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
         }),
       });
+
       const data = await res.json();
-      const reply = data.content?.[0]?.text || "Je suis désolé, je n'ai pas pu générer une réponse.";
+
+      // Si API retounen yon erè
+      if (!res.ok || data.error) {
+        const errType = data.error?.type || "";
+        let errMsg = "";
+        if (errType === "authentication_error") {
+          errMsg = lang === "fr"
+            ? "❌ Clé API invalide (401). Créez une nouvelle clé sur console.anthropic.com et mettez-la à jour sur Vercel."
+            : "❌ Invalid API key (401). Create a new key at console.anthropic.com and update it on Vercel.";
+        } else if (errType === "permission_error") {
+          errMsg = lang === "fr"
+            ? "❌ Accès refusé (403). Vérifiez les permissions de votre clé API."
+            : "❌ Access denied (403). Check your API key permissions.";
+        } else if (errType === "rate_limit_error") {
+          errMsg = lang === "fr"
+            ? "⏳ Trop de requêtes. Veuillez attendre quelques secondes et réessayer."
+            : "⏳ Too many requests. Please wait a few seconds and try again.";
+        } else {
+          errMsg = lang === "fr"
+            ? `❌ Erreur API: ${data.error?.message || res.status}`
+            : `❌ API Error: ${data.error?.message || res.status}`;
+        }
+        setMessages([...newMessages, { role: "assistant", content: errMsg }]);
+        setLoading(false);
+        return;
+      }
+
+      const reply = data.content?.[0]?.text || (lang === "fr" ? "Réponse vide reçue." : "Empty response received.");
       setMessages([...newMessages, { role: "assistant", content: reply }]);
-    } catch {
-      setMessages([...newMessages, { role: "assistant", content: lang === "fr" ? "Erreur de connexion. Veuillez réessayer." : "Connection error. Please try again." }]);
+    } catch (err) {
+      setMessages([...newMessages, { role: "assistant", content: lang === "fr"
+        ? `❌ Erreur de connexion: ${err.message}. Vérifiez votre connexion internet.`
+        : `❌ Connection error: ${err.message}. Check your internet connection.` }]);
     }
     setLoading(false);
   };
