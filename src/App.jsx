@@ -370,6 +370,33 @@ export default function App() {
           .stats-row{grid-template-columns:repeat(2,1fr)}
           .impact-grid{grid-template-columns:repeat(2,1fr)}
         }
+        /* ── FOOTER ── */
+        .footer{background:#0A0F1C;border-top:1px solid rgba(255,255,255,0.07);padding:48px 24px 32px;margin-top:80px}
+        .footer-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
+        .footer-brand{display:flex;flex-direction:column;gap:12px}
+        .footer-logo{display:flex;align-items:center;gap:10px}
+        .footer-tag{color:#4B5A7A;font-size:12.5px;line-height:1.65;max-width:280px}
+        .footer-social{display:flex;gap:8px;margin-top:6px}
+        .footer-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;color:#8B97B4;text-decoration:none;transition:all 0.18s;font-size:13px}
+        .footer-icon:hover{border-color:#4F8EF7;color:#4F8EF7;background:rgba(79,142,247,0.06)}
+        .footer-col h4{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#E8EBF4;margin-bottom:14px}
+        .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+        .footer-col a,.footer-col li{font-size:12.5px;color:#4B5A7A;text-decoration:none;transition:color 0.18s;cursor:pointer}
+        .footer-col a:hover{color:#4F8EF7}
+        .footer-contact{font-size:12.5px;color:#4B5A7A;line-height:1.7}
+        .footer-contact strong{color:#8B97B4;font-weight:500}
+        .footer-bottom{max-width:960px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+        .footer-copy{font-size:11.5px;color:#4B5A7A}
+        .footer-legal{display:flex;gap:18px;font-size:11.5px}
+        .footer-legal a{color:#4B5A7A;text-decoration:none;transition:color 0.18s}
+        .footer-legal a:hover{color:#8B97B4}
+        @media(max-width:768px){
+          .footer{padding:36px 16px 100px}
+          .footer-inner{grid-template-columns:1fr;gap:28px}
+          .footer-bottom{flex-direction:column;text-align:center;gap:10px}
+          .footer-legal{flex-wrap:wrap;justify-content:center}
+        }
+
         @supports(padding:env(safe-area-inset-bottom)){
           .mob-nav{padding-bottom:calc(8px + env(safe-area-inset-bottom))}
         }
@@ -666,6 +693,75 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* ── FOOTER ── */}
+      <footer className="footer">
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <div className="footer-logo">
+              <div className="logo-mark" style={{ width: 32, height: 32 }}>
+                <div className="logo-bars">
+                  {[5, 8, 11, 7].map((h, i) => <div key={i} className="logo-bar" style={{ height: h, width: 3 }} />)}
+                </div>
+              </div>
+              <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 16, color: "#E8EBF4" }}>NuMérik PME</span>
+            </div>
+            <p className="footer-tag">
+              {lang === "fr"
+                ? "Plateforme bilingue d'accélération numérique pour les PME de la région Gatineau-Ottawa."
+                : "Bilingual digital acceleration platform for SMEs in the Gatineau-Ottawa region."}
+            </p>
+            <div className="footer-social">
+              <a href="mailto:contact@numerikpme.ca" className="footer-icon" title="Email">✉️</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="footer-icon" title="LinkedIn">in</a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="footer-icon" title="Facebook">f</a>
+            </div>
+          </div>
+
+          <div className="footer-col">
+            <h4>{lang === "fr" ? "Produit" : "Product"}</h4>
+            <ul>
+              <li><a onClick={() => setActiveTab("diagnostic")}>{t.nav.diagnostic}</a></li>
+              <li><a onClick={() => setActiveTab("assistant")}>{t.nav.assistant}</a></li>
+              <li><a onClick={() => setActiveTab("grants")}>{t.nav.subventions}</a></li>
+              <li><a onClick={() => setActiveTab("plan")}>{t.nav.plan}</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h4>{lang === "fr" ? "Ressources" : "Resources"}</h4>
+            <ul>
+              <li><a href="https://quebec.ca/plan-pme" target="_blank" rel="noopener noreferrer">Plan PME 2025-2028</a></li>
+              <li><a href="https://futurpreneur.ca" target="_blank" rel="noopener noreferrer">Futurpreneur Canada</a></li>
+              <li><a href="https://bdc.ca" target="_blank" rel="noopener noreferrer">BDC</a></li>
+              <li><a href="https://cldgatineau.com" target="_blank" rel="noopener noreferrer">CLD Gatineau</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h4>{lang === "fr" ? "Contact" : "Contact"}</h4>
+            <div className="footer-contact">
+              <strong>contact@numerikpme.ca</strong><br />
+              Gatineau, QC<br />
+              Outaouais, Canada<br /><br />
+              <strong>{lang === "fr" ? "Service" : "Service"}:</strong><br />
+              {lang === "fr" ? "Lun-Ven · 9h-17h" : "Mon-Fri · 9am-5pm"}
+            </div>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <div className="footer-copy">
+            © 2026 NuMérik PME. {lang === "fr" ? "Tous droits réservés." : "All rights reserved."}
+          </div>
+          <div className="footer-legal">
+            <a href="#confidentialite">{lang === "fr" ? "Confidentialité" : "Privacy"}</a>
+            <a href="#conditions">{lang === "fr" ? "Conditions" : "Terms"}</a>
+            <a href="#mentions">{lang === "fr" ? "Mentions légales" : "Legal"}</a>
+            <span style={{ color: "#4F8EF7" }}>🇨🇦 {lang === "fr" ? "Fait au Canada" : "Made in Canada"}</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
