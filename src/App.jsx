@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 const translations = {
   fr: {
@@ -762,6 +763,9 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Vercel Analytics */}
+      <Analytics />
     </div>
   );
 }
