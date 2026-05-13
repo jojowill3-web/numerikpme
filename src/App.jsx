@@ -70,6 +70,22 @@ const translations = {
       impacts: [{ label: "Hausse productivité", value: "+22%", icon: "📈" },{ label: "Prime de valorisation", value: "+30%", icon: "💎" },{ label: "Réduction coûts opérationnels", value: "-15%", icon: "💰" },{ label: "Temps économisé / semaine", value: "8h", icon: "⏱️" }],
     },
     lang: "EN",
+    legal: {
+      title: "Politique de Confidentialité",
+      lastUpdate: "Dernière mise à jour : 12 mai 2026",
+      back: "← Retour",
+      sections: [
+        { h: "1. Introduction", p: "NuMérik PME (« nous », « notre ») respecte votre vie privée et s'engage à protéger vos renseignements personnels. Cette politique explique comment nous collectons, utilisons et protégeons vos informations conformément à la Loi 25 du Québec et à la Loi sur la protection des renseignements personnels et les documents électroniques (LPRPDE) du Canada." },
+        { h: "2. Renseignements collectés", p: "Nous collectons uniquement les informations que vous nous fournissez volontairement lors du diagnostic numérique (secteur d'activité, nombre d'employés, niveau technologique) et les questions posées à notre assistant IA. Nous ne collectons aucune donnée nominative sans votre consentement explicite." },
+        { h: "3. Utilisation des données", p: "Vos données sont utilisées exclusivement pour : générer votre diagnostic personnalisé, recommander des subventions adaptées à votre profil, améliorer notre service. Nous ne vendons jamais vos données à des tiers." },
+        { h: "4. Hébergement et sécurité", p: "Vos données sont hébergées sur des serveurs Vercel (infrastructure cloud sécurisée). L'assistant IA utilise la technologie Claude d'Anthropic. Les communications sont chiffrées en HTTPS. Nous appliquons les meilleures pratiques de sécurité de l'industrie." },
+        { h: "5. Cookies et analytique", p: "Nous utilisons Vercel Analytics pour mesurer le trafic du site de manière anonyme. Aucun cookie publicitaire ni de pistage tiers n'est utilisé. Vous pouvez désactiver le suivi via les paramètres de votre navigateur." },
+        { h: "6. Vos droits (Loi 25)", p: "Vous avez le droit d'accéder à vos renseignements personnels, de les corriger, de les supprimer, et de retirer votre consentement à tout moment. Pour exercer ces droits, contactez-nous à : contact@numerikpme.ca" },
+        { h: "7. Responsable de la protection", p: "Conformément à la Loi 25, notre responsable de la protection des renseignements personnels peut être contacté à : contact@numerikpme.ca" },
+        { h: "8. Modifications", p: "Cette politique peut être mise à jour. La date de dernière mise à jour est indiquée en haut de la page. Les changements importants vous seront communiqués." },
+        { h: "9. Contact", p: "Pour toute question concernant cette politique ou vos données personnelles : contact@numerikpme.ca · NuMérik PME, Gatineau, Québec, Canada." },
+      ],
+    },
   },
   en: {
     appTitle: "DigiSME", appSubtitle: "Your AI assistant for digital transformation", region: "Gatineau · Ottawa",
@@ -124,6 +140,22 @@ const translations = {
       impacts: [{ label: "Productivity increase", value: "+22%", icon: "📈" },{ label: "Valuation premium", value: "+30%", icon: "💎" },{ label: "Operating cost reduction", value: "-15%", icon: "💰" },{ label: "Time saved / week", value: "8h", icon: "⏱️" }],
     },
     lang: "FR",
+    legal: {
+      title: "Privacy Policy",
+      lastUpdate: "Last updated: May 12, 2026",
+      back: "← Back",
+      sections: [
+        { h: "1. Introduction", p: "NuMérik PME (\"we\", \"our\") respects your privacy and is committed to protecting your personal information. This policy explains how we collect, use, and protect your information in accordance with Quebec's Law 25 and Canada's Personal Information Protection and Electronic Documents Act (PIPEDA)." },
+        { h: "2. Information collected", p: "We collect only the information you voluntarily provide during the digital diagnostic (business sector, number of employees, technology level) and questions asked to our AI assistant. We do not collect any personal identifying data without your explicit consent." },
+        { h: "3. Use of data", p: "Your data is used exclusively to: generate your personalized diagnostic, recommend grants adapted to your profile, improve our service. We never sell your data to third parties." },
+        { h: "4. Hosting and security", p: "Your data is hosted on Vercel servers (secure cloud infrastructure). The AI assistant uses Anthropic's Claude technology. Communications are encrypted via HTTPS. We apply industry best security practices." },
+        { h: "5. Cookies and analytics", p: "We use Vercel Analytics to measure site traffic anonymously. No advertising cookies or third-party tracking is used. You can disable tracking via your browser settings." },
+        { h: "6. Your rights (Law 25)", p: "You have the right to access your personal information, correct it, delete it, and withdraw your consent at any time. To exercise these rights, contact us at: contact@numerikpme.ca" },
+        { h: "7. Privacy officer", p: "In accordance with Law 25, our privacy officer can be contacted at: contact@numerikpme.ca" },
+        { h: "8. Changes", p: "This policy may be updated. The last update date is indicated at the top of the page. Significant changes will be communicated to you." },
+        { h: "9. Contact", p: "For any questions regarding this policy or your personal data: contact@numerikpme.ca · NuMérik PME, Gatineau, Quebec, Canada." },
+      ],
+    },
   },
 };
 
@@ -371,6 +403,16 @@ export default function App() {
           .stats-row{grid-template-columns:repeat(2,1fr)}
           .impact-grid{grid-template-columns:repeat(2,1fr)}
         }
+        /* ── LEGAL PAGE ── */
+        .legal-wrap{max-width:760px;margin:0 auto;padding:48px 0 32px}
+        .legal-back{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:#8B97B4;font-size:12.5px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.18s;margin-bottom:28px}
+        .legal-back:hover{border-color:#4F8EF7;color:#4F8EF7}
+        .legal-title{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;letter-spacing:-0.8px;margin-bottom:8px}
+        .legal-date{font-size:12.5px;color:#4B5A7A;margin-bottom:36px}
+        .legal-section{background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 24px;margin-bottom:12px}
+        .legal-h{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#E8EBF4;margin-bottom:8px}
+        .legal-p{font-size:13.5px;color:#8B97B4;line-height:1.7}
+
         /* ── FOOTER ── */
         .footer{background:#0A0F1C;border-top:1px solid rgba(255,255,255,0.07);padding:48px 24px 32px;margin-top:80px}
         .footer-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
@@ -693,9 +735,36 @@ export default function App() {
             </div>
           </div>
         )}
+
+        {/* LEGAL / PRIVACY PAGE */}
+        {activeTab === "legal" && (
+          <div className="fade-up legal-wrap">
+            <button className="legal-back" onClick={() => setActiveTab("home")}>
+              {t.legal.back}
+            </button>
+            <h1 className="legal-title">{t.legal.title}</h1>
+            <p className="legal-date">{t.legal.lastUpdate}</p>
+            {t.legal.sections.map((s, i) => (
+              <div key={i} className="legal-section">
+                <h3 className="legal-h">{s.h}</h3>
+                <p className="legal-p">{s.p}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </main>
 
-      {/* ── FOOTER ── */}
+      {/* ── LEGAL PAGE ── */
+        .legal-wrap{max-width:760px;margin:0 auto;padding:48px 0 32px}
+        .legal-back{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:#8B97B4;font-size:12.5px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.18s;margin-bottom:28px}
+        .legal-back:hover{border-color:#4F8EF7;color:#4F8EF7}
+        .legal-title{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;letter-spacing:-0.8px;margin-bottom:8px}
+        .legal-date{font-size:12.5px;color:#4B5A7A;margin-bottom:36px}
+        .legal-section{background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 24px;margin-bottom:12px}
+        .legal-h{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#E8EBF4;margin-bottom:8px}
+        .legal-p{font-size:13.5px;color:#8B97B4;line-height:1.7}
+
+        /* ── FOOTER ── */}
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-brand">
@@ -756,7 +825,7 @@ export default function App() {
             © 2026 NuMérik PME. {lang === "fr" ? "Tous droits réservés." : "All rights reserved."}
           </div>
           <div className="footer-legal">
-            <a href="#confidentialite">{lang === "fr" ? "Confidentialité" : "Privacy"}</a>
+            <a onClick={() => setActiveTab("legal")}>{lang === "fr" ? "Confidentialité" : "Privacy"}</a>
             <a href="#conditions">{lang === "fr" ? "Conditions" : "Terms"}</a>
             <a href="#mentions">{lang === "fr" ? "Mentions légales" : "Legal"}</a>
             <span style={{ color: "#4F8EF7" }}>🇨🇦 {lang === "fr" ? "Fait au Canada" : "Made in Canada"}</span>
