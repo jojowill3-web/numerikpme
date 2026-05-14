@@ -303,6 +303,7 @@ export default function App() {
         .nav-tab.active{background:rgba(79,142,247,0.12);color:#4F8EF7;border:1px solid rgba(79,142,247,0.2)}
         .nav-lang{padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.12);background:#0D1526;color:#8B97B4;transition:all 0.18s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px}
         .nav-lang:hover{border-color:#4F8EF7;color:#4F8EF7}
+        @media(max-width:500px){.contact-lbl{display:none}}
         .main{max-width:960px;margin:0 auto;padding:0 24px 80px}
         .hero{padding:88px 0 68px;text-align:center;position:relative}
         .hero-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:480px;background:radial-gradient(ellipse at 50% 30%,rgba(79,142,247,0.1) 0%,rgba(99,102,241,0.05) 40%,transparent 70%);pointer-events:none}
@@ -471,7 +472,12 @@ export default function App() {
           ))}
         </nav>
 
-        <button className="nav-lang" onClick={switchLang}>🌐 {t.lang}</button>
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <a href="mailto:contact@numerikpme.ca" className="nav-lang" style={{ textDecoration: "none" }}>
+            ✉️ <span className="contact-lbl">{lang === "fr" ? "Contact" : "Contact"}</span>
+          </a>
+          <button className="nav-lang" onClick={switchLang}>🌐 {t.lang}</button>
+        </div>
       </header>
 
       {/* MOBILE BOTTOM NAV */}
@@ -773,8 +779,6 @@ export default function App() {
             </p>
             <div className="footer-social">
               <a href="mailto:contact@numerikpme.ca" className="footer-icon" title="Email">✉️</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="footer-icon" title="LinkedIn">in</a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="footer-icon" title="Facebook">f</a>
             </div>
           </div>
 
@@ -816,8 +820,6 @@ export default function App() {
           </div>
           <div className="footer-legal">
             <a onClick={() => setActiveTab("legal")}>{lang === "fr" ? "Confidentialité" : "Privacy"}</a>
-            <a href="#conditions">{lang === "fr" ? "Conditions" : "Terms"}</a>
-            <a href="#mentions">{lang === "fr" ? "Mentions légales" : "Legal"}</a>
             <span style={{ color: "#4F8EF7" }}>🇨🇦 {lang === "fr" ? "Fait au Canada" : "Made in Canada"}</span>
           </div>
         </div>
