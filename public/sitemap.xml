@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://numerikpme.vercel.app/</loc>
+    <loc>https://numerikpme.ca/</loc>
     <lastmod>2026-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://numerikpme.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="en-CA" href="https://numerikpme.vercel.app/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://numerikpme.ca/"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://numerikpme.ca/?lang=en"/>
   </url>
 </urlset>
