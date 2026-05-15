@@ -37,6 +37,20 @@ const translations = {
       ],
       viewPlan: "Voir mon plan d'action", viewGrants: "Voir mes subventions",
     },
+    inscription: {
+      title: "Recevez votre rapport personnalisé",
+      subtitle: "Recevez par email votre diagnostic complet, les subventions adaptées à votre profil et votre plan d'action sur 12 mois.",
+      email: "Votre email professionnel",
+      nom: "Votre nom",
+      entreprise: "Nom de votre entreprise (optionnel)",
+      submit: "Recevoir mon rapport",
+      submitting: "Envoi en cours...",
+      success: "✅ Inscription réussie ! Vous recevrez votre rapport sous peu.",
+      error: "❌ Une erreur est survenue. Veuillez réessayer.",
+      privacy: "Vos données sont protégées (Loi 25). Aucun spam, désinscription en 1 clic.",
+      benefits: ["📊 Rapport PDF personnalisé", "💰 Subventions adaptées à votre profil", "📋 Plan d'action 12 mois", "🤖 Conseils IA prioritaires"],
+      skip: "Continuer sans inscription",
+    },
     assistant: {
       title: "Assistant IA PME",
       subtitle: "Posez vos questions sur la transformation numérique, les subventions et la croissance de votre entreprise",
@@ -108,6 +122,20 @@ const translations = {
       levelDesc: ["Your business has great digital growth potential. Significant grants are available to help you get started.","You've laid the groundwork. It's time to accelerate with more powerful tools and automations.","Good progress! Focus on AI and system integration to maximize your productivity.","You're a digital leader! Explore emerging technologies (generative AI, autonomous agents) to maintain your edge."],
       viewPlan: "See my action plan", viewGrants: "See my grants",
     },
+    inscription: {
+      title: "Get your personalized report",
+      subtitle: "Receive by email your complete diagnostic, grants adapted to your profile and your 12-month action plan.",
+      email: "Your business email",
+      nom: "Your name",
+      entreprise: "Your company name (optional)",
+      submit: "Get my report",
+      submitting: "Sending...",
+      success: "✅ Registration successful! You will receive your report shortly.",
+      error: "❌ An error occurred. Please try again.",
+      privacy: "Your data is protected (Law 25). No spam, 1-click unsubscribe.",
+      benefits: ["📊 Personalized PDF report", "💰 Grants adapted to your profile", "📋 12-month action plan", "🤖 Priority AI advice"],
+      skip: "Continue without registration",
+    },
     assistant: {
       title: "SME AI Assistant", subtitle: "Ask your questions about digital transformation, grants and business growth",
       placeholder: "Ex: What grants are available to digitize my SME in Gatineau?",
@@ -169,6 +197,12 @@ export default function App() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [grantFilter, setGrantFilter] = useState("all");
+  const [showInscription, setShowInscription] = useState(false);
+  const [inscEmail, setInscEmail] = useState("");
+  const [inscNom, setInscNom] = useState("");
+  const [inscEntreprise, setInscEntreprise] = useState("");
+  const [inscLoading, setInscLoading] = useState(false);
+  const [inscStatus, setInscStatus] = useState(null); // null | "success" | "error"
   const messagesEndRef = useRef(null);
   const t = translations[lang];
 
@@ -196,6 +230,40 @@ export default function App() {
   };
 
   const resetDiag = () => { setDiagStep(0); setDiagAnswers([]); setDiagResult(null); };
+
+  const submitInscription = async () => {
+    if (!inscEmail.trim() || !inscNom.trim()) {
+      setInscStatus("error");
+      return;
+    }
+    setInscLoading(true);
+    setInscStatus(null);
+    try {
+      // Get sector from first diagnostic answer if available
+      const secteur = diagAnswers[0] || "";
+      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkjq5nN5wWtYOX4iYNOr6DwkIuTT2qg8EIQO7FltXUBrcgN5FHfSpPE8RatM0rig/exec";
+
+      // Apps Script needs no-cors mode (returns opaque response but request still sent)
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          email: inscEmail,
+          nom: inscNom,
+          entreprise: inscEntreprise,
+          secteur: secteur,
+          score: diagResult ? diagResult.score + "%" : "",
+          langue: lang.toUpperCase(),
+        }),
+      });
+      setInscStatus("success");
+      setTimeout(() => setShowInscription(false), 2500);
+    } catch (err) {
+      setInscStatus("error");
+    }
+    setInscLoading(false);
+  };
 
   // Client-side rate limit: 15 mesaj pa sesyon
   const MAX_MESSAGES_PER_SESSION = 15;
@@ -613,11 +681,86 @@ export default function App() {
                   <text x="80" y="96" textAnchor="middle" fill="#4B5A7A" fontSize="11" fontFamily="DM Sans">{t.diagnostic.levels[diagResult.level]}</text>
                 </svg>
                 <p style={{ color: "#8B97B4", fontSize: 13.5, lineHeight: 1.7, marginBottom: 28 }}>{t.diagnostic.levelDesc[diagResult.level]}</p>
+                <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 16 }}>
+                  <button className="btn-p" style={{ fontSize: 13, background: "linear-gradient(135deg,#F59E0B,#EA580C)" }} onClick={() => { setShowInscription(true); setInscStatus(null); }}>
+                    📧 {lang === "fr" ? "Recevoir mon rapport complet" : "Get my full report"}
+                  </button>
+                </div>
                 <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
                   <button className="btn-p" style={{ fontSize: 13 }} onClick={() => setActiveTab("plan")}>📋 {t.diagnostic.viewPlan}</button>
                   <button className="btn-p" style={{ fontSize: 13, background: "linear-gradient(135deg,#10B981,#059669)" }} onClick={() => setActiveTab("grants")}>💰 {t.diagnostic.viewGrants}</button>
                   <button className="btn-s" style={{ fontSize: 13 }} onClick={resetDiag}>↺ Recommencer</button>
                 </div>
+
+                {/* INSCRIPTION MODAL */}
+                {showInscription && (
+                  <div style={{
+                    position: "fixed", inset: 0, background: "rgba(6,10,20,0.85)",
+                    backdropFilter: "blur(8px)", zIndex: 1000,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    padding: 20, animation: "fadeUp 0.25s ease"
+                  }} onClick={(e) => { if (e.target === e.currentTarget) setShowInscription(false); }}>
+                    <div style={{
+                      background: "#0D1526", border: "1px solid rgba(255,255,255,0.1)",
+                      borderRadius: 20, padding: 36, maxWidth: 500, width: "100%",
+                      maxHeight: "90vh", overflowY: "auto",
+                      boxShadow: "0 30px 80px rgba(0,0,0,0.5)"
+                    }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+                        <h3 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px" }}>
+                          {t.inscription.title}
+                        </h3>
+                        <button onClick={() => setShowInscription(false)} style={{
+                          background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
+                          color: "#8B97B4", width: 30, height: 30, borderRadius: 8,
+                          cursor: "pointer", fontSize: 16, fontFamily: "inherit"
+                        }}>✕</button>
+                      </div>
+                      <p style={{ color: "#8B97B4", fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>
+                        {t.inscription.subtitle}
+                      </p>
+
+                      <ul style={{ listStyle: "none", padding: 0, marginBottom: 24, display: "flex", flexDirection: "column", gap: 8 }}>
+                        {t.inscription.benefits.map((b, i) => (
+                          <li key={i} style={{ fontSize: 13, color: "#8B97B4", display: "flex", alignItems: "center", gap: 8 }}>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
+                        <input className="chat-in" type="email" placeholder={t.inscription.email}
+                          value={inscEmail} onChange={(e) => setInscEmail(e.target.value)} required />
+                        <input className="chat-in" type="text" placeholder={t.inscription.nom}
+                          value={inscNom} onChange={(e) => setInscNom(e.target.value)} required />
+                        <input className="chat-in" type="text" placeholder={t.inscription.entreprise}
+                          value={inscEntreprise} onChange={(e) => setInscEntreprise(e.target.value)} />
+                      </div>
+
+                      {inscStatus === "success" && (
+                        <div style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)",
+                          borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#10B981" }}>
+                          {t.inscription.success}
+                        </div>
+                      )}
+                      {inscStatus === "error" && (
+                        <div style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)",
+                          borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#EF4444" }}>
+                          {t.inscription.error}
+                        </div>
+                      )}
+
+                      <button className="btn-p" style={{ width: "100%", padding: "13px", fontSize: 14, marginBottom: 12 }}
+                        onClick={submitInscription} disabled={inscLoading}>
+                        {inscLoading ? t.inscription.submitting : `✉️ ${t.inscription.submit}`}
+                      </button>
+
+                      <p style={{ fontSize: 11, color: "#4B5A7A", textAlign: "center", lineHeight: 1.5 }}>
+                        🔒 {t.inscription.privacy}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
