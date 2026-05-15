@@ -203,6 +203,12 @@ export default function App() {
   const [inscEntreprise, setInscEntreprise] = useState("");
   const [inscLoading, setInscLoading] = useState(false);
   const [inscStatus, setInscStatus] = useState(null); // null | "success" | "error"
+  const [showContact, setShowContact] = useState(false);
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [contactStatus, setContactStatus] = useState(null);
+  const [contactLoading, setContactLoading] = useState(false);
   const messagesEndRef = useRef(null);
   const t = translations[lang];
 
@@ -230,6 +236,40 @@ export default function App() {
   };
 
   const resetDiag = () => { setDiagStep(0); setDiagAnswers([]); setDiagResult(null); };
+
+  const submitContact = async () => {
+    if (!contactName.trim() || !contactEmail.trim() || !contactMessage.trim()) {
+      setContactStatus("error");
+      return;
+    }
+    setContactLoading(true);
+    setContactStatus(null);
+    try {
+      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkjq5nN5wWtYOX4iYNOr6DwkIuTT2qg8EIQO7FltXUBrcgN5FHfSpPE8RatM0rig/exec";
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          email: contactEmail,
+          nom: contactName,
+          entreprise: "[CONTACT] " + contactMessage.substring(0, 200),
+          secteur: "Contact form",
+          score: "",
+          langue: lang.toUpperCase(),
+        }),
+      });
+      setContactStatus("success");
+      setTimeout(() => {
+        setShowContact(false);
+        setContactName(""); setContactEmail(""); setContactMessage("");
+        setContactStatus(null);
+      }, 2500);
+    } catch (err) {
+      setContactStatus("error");
+    }
+    setContactLoading(false);
+  };
 
   const submitInscription = async () => {
     if (!inscEmail.trim() || !inscNom.trim()) {
@@ -559,9 +599,9 @@ export default function App() {
         </nav>
 
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <a href="mailto:contact@numerikpme.ca" className="nav-lang" style={{ textDecoration: "none" }}>
+          <button className="nav-lang" onClick={() => { setShowContact(true); setContactStatus(null); }}>
             ✉️ <span className="contact-lbl">{lang === "fr" ? "Contact" : "Contact"}</span>
-          </a>
+          </button>
           <button className="nav-lang" onClick={switchLang}>🌐 {t.lang}</button>
         </div>
       </header>
@@ -920,6 +960,85 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* CONTACT MODAL */}
+      {showContact && (
+        <div style={{
+          position: "fixed", inset: 0, background: "rgba(6,10,20,0.85)",
+          backdropFilter: "blur(8px)", zIndex: 1000,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          padding: 20, animation: "fadeUp 0.25s ease"
+        }} onClick={(e) => { if (e.target === e.currentTarget) setShowContact(false); }}>
+          <div style={{
+            background: "#0D1526", border: "1px solid rgba(255,255,255,0.1)",
+            borderRadius: 20, padding: 36, maxWidth: 500, width: "100%",
+            maxHeight: "90vh", overflowY: "auto",
+            boxShadow: "0 30px 80px rgba(0,0,0,0.5)"
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+              <h3 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px" }}>
+                {lang === "fr" ? "Contactez-nous" : "Contact us"}
+              </h3>
+              <button onClick={() => setShowContact(false)} style={{
+                background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
+                color: "#8B97B4", width: 30, height: 30, borderRadius: 8,
+                cursor: "pointer", fontSize: 16, fontFamily: "inherit"
+              }}>✕</button>
+            </div>
+            <p style={{ color: "#8B97B4", fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>
+              {lang === "fr"
+                ? "Une question? Un partenariat? Envoyez-nous un message et nous reviendrons vers vous rapidement."
+                : "A question? A partnership? Send us a message and we will get back to you quickly."}
+            </p>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
+              <input className="chat-in" type="text"
+                placeholder={lang === "fr" ? "Votre nom" : "Your name"}
+                value={contactName} onChange={(e) => setContactName(e.target.value)} required />
+              <input className="chat-in" type="email"
+                placeholder={lang === "fr" ? "Votre email" : "Your email"}
+                value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} required />
+              <textarea className="chat-in"
+                placeholder={lang === "fr" ? "Votre message..." : "Your message..."}
+                value={contactMessage}
+                onChange={(e) => setContactMessage(e.target.value)}
+                rows={4}
+                style={{ resize: "vertical", minHeight: 100, fontFamily: "'DM Sans',sans-serif" }} />
+            </div>
+
+            {contactStatus === "success" && (
+              <div style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)",
+                borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#10B981" }}>
+                {lang === "fr"
+                  ? "✅ Message envoyé! Nous vous répondrons rapidement."
+                  : "✅ Message sent! We will reply quickly."}
+              </div>
+            )}
+            {contactStatus === "error" && (
+              <div style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)",
+                borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#EF4444" }}>
+                {lang === "fr"
+                  ? "❌ Veuillez remplir tous les champs."
+                  : "❌ Please fill in all fields."}
+              </div>
+            )}
+
+            <button className="btn-p" style={{ width: "100%", padding: "13px", fontSize: 14, marginBottom: 12 }}
+              onClick={submitContact} disabled={contactLoading}>
+              {contactLoading
+                ? (lang === "fr" ? "Envoi en cours..." : "Sending...")
+                : `✉️ ${lang === "fr" ? "Envoyer le message" : "Send message"}`}
+            </button>
+
+            <p style={{ fontSize: 11, color: "#4B5A7A", textAlign: "center", lineHeight: 1.5 }}>
+              {lang === "fr" ? "Ou écrivez-nous directement à " : "Or write to us directly at "}
+              <a href="mailto:contact@numerikpme.ca" style={{ color: "#4F8EF7", textDecoration: "none" }}>
+                contact@numerikpme.ca
+              </a>
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* ── FOOTER ── */}
       <footer className="footer">
