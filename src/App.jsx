@@ -159,8 +159,6 @@ const translations = {
   },
 };
 
-const SYSTEM_PROMPT = `You are a specialized AI assistant for SMEs in the Gatineau-Ottawa region of Canada with deep expertise in digital transformation, government grants (2025-2026), AI tools, ERP/CRM recommendations, and productivity strategies. Always give practical, actionable advice. Respond in the same language as the user (French or English). Be warm, professional, and encouraging.`;
-
 export default function App() {
   const [lang, setLang] = useState("fr");
   const [activeTab, setActiveTab] = useState("home");
@@ -199,75 +197,95 @@ export default function App() {
 
   const resetDiag = () => { setDiagStep(0); setDiagAnswers([]); setDiagResult(null); };
 
+  // Client-side rate limit: 15 mesaj pa sesyon
+  const MAX_MESSAGES_PER_SESSION = 15;
+  const getMessageCount = () => {
+    try {
+      const stored = localStorage.getItem("numerikpme_msg_count");
+      const data = stored ? JSON.parse(stored) : { count: 0, date: new Date().toDateString() };
+      if (data.date !== new Date().toDateString()) {
+        return { count: 0, date: new Date().toDateString() };
+      }
+      return data;
+    } catch {
+      return { count: 0, date: new Date().toDateString() };
+    }
+  };
+  const incrementMessageCount = () => {
+    try {
+      const data = getMessageCount();
+      data.count++;
+      localStorage.setItem("numerikpme_msg_count", JSON.stringify(data));
+      return data.count;
+    } catch {
+      return 0;
+    }
+  };
+
   const sendMessage = async (text) => {
     const userText = text || input;
     if (!userText.trim()) return;
+
+    // Verifye limit kliyan
+    const usage = getMessageCount();
+    if (usage.count >= MAX_MESSAGES_PER_SESSION) {
+      setMessages([...messages, { role: "user", content: userText }, { role: "assistant", content: lang === "fr"
+        ? `⏳ Vous avez atteint la limite de ${MAX_MESSAGES_PER_SESSION} messages par jour. Revenez demain pour continuer la conversation !`
+        : `⏳ You have reached the limit of ${MAX_MESSAGES_PER_SESSION} messages per day. Come back tomorrow to continue!` }]);
+      setInput("");
+      return;
+    }
+
+    // Verifye longè mesaj
+    if (userText.length > 2000) {
+      setMessages([...messages, { role: "assistant", content: lang === "fr"
+        ? "⚠️ Message trop long (max 2000 caractères). Veuillez raccourcir votre question."
+        : "⚠️ Message too long (max 2000 characters). Please shorten your question." }]);
+      return;
+    }
+
     const newMessages = [...messages, { role: "user", content: userText }];
     setMessages(newMessages);
     setInput("");
     setLoading(true);
+
     try {
-      const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
-
-      // Verifye si kle a la
-      if (!apiKey) {
-        setMessages([...newMessages, { role: "assistant", content: lang === "fr"
-          ? "❌ Clé API manquante. Ajoutez VITE_ANTHROPIC_API_KEY dans Vercel → Settings → Environment Variables."
-          : "❌ API key missing. Add VITE_ANTHROPIC_API_KEY in Vercel → Settings → Environment Variables." }]);
-        setLoading(false);
-        return;
-      }
-
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      // Apèl sou backend sekirize nou (pa dirèkteman Anthropic)
+      const res = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": apiKey,
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-direct-browser-access": "true",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-5",
-          max_tokens: 1000,
-          system: SYSTEM_PROMPT,
           messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
         }),
       });
 
       const data = await res.json();
 
-      // Si API retounen yon erè
-      if (!res.ok || data.error) {
-        const errType = data.error?.type || "";
+      if (!res.ok) {
         let errMsg = "";
-        if (errType === "authentication_error") {
+        if (res.status === 429 || data.error === "rate_limit") {
           errMsg = lang === "fr"
-            ? "❌ Clé API invalide (401). Créez une nouvelle clé sur console.anthropic.com et mettez-la à jour sur Vercel."
-            : "❌ Invalid API key (401). Create a new key at console.anthropic.com and update it on Vercel.";
-        } else if (errType === "permission_error") {
-          errMsg = lang === "fr"
-            ? "❌ Accès refusé (403). Vérifiez les permissions de votre clé API."
-            : "❌ Access denied (403). Check your API key permissions.";
-        } else if (errType === "rate_limit_error") {
-          errMsg = lang === "fr"
-            ? "⏳ Trop de requêtes. Veuillez attendre quelques secondes et réessayer."
-            : "⏳ Too many requests. Please wait a few seconds and try again.";
+            ? `⏳ ${data.message || "Trop de demandes. Veuillez réessayer plus tard."}`
+            : `⏳ ${data.message || "Too many requests. Please try again later."}`;
         } else {
           errMsg = lang === "fr"
-            ? `❌ Erreur API: ${data.error?.message || res.status}`
-            : `❌ API Error: ${data.error?.message || res.status}`;
+            ? `❌ Erreur: ${data.message || data.error || res.status}`
+            : `❌ Error: ${data.message || data.error || res.status}`;
         }
         setMessages([...newMessages, { role: "assistant", content: errMsg }]);
         setLoading(false);
         return;
       }
 
-      const reply = data.content?.[0]?.text || (lang === "fr" ? "Réponse vide reçue." : "Empty response received.");
+      // Enkremante kont mesaj kliyan apre siksè
+      incrementMessageCount();
+
+      const reply = data.reply || (lang === "fr" ? "Réponse vide reçue." : "Empty response received.");
       setMessages([...newMessages, { role: "assistant", content: reply }]);
     } catch (err) {
       setMessages([...newMessages, { role: "assistant", content: lang === "fr"
-        ? `❌ Erreur de connexion: ${err.message}. Vérifiez votre connexion internet.`
-        : `❌ Connection error: ${err.message}. Check your internet connection.` }]);
+        ? `❌ Erreur de connexion. Vérifiez votre connexion internet.`
+        : `❌ Connection error. Check your internet connection.` }]);
     }
     setLoading(false);
   };
