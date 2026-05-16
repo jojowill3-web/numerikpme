@@ -75,10 +75,10 @@ const translations = {
     plan: {
       title: "Plan d'Action Personnalisé", subtitle: "Votre feuille de route numérique sur 12 mois",
       phases: [
-        { phase: "Phase 1", period: "Mois 1–2", title: "Diagnostic & Planification", color: "#4F8EF7", icon: "🔍", actions: ["Contacter le Réseau Accès PME (gratuit)","Réaliser un diagnostic numérique complet","Identifier vos priorités technologiques","Cartographier vos processus actuels"] },
-        { phase: "Phase 2", period: "Mois 3–4", title: "Demandes de Subventions", color: "#10B981", icon: "💰", actions: ["Appliquer au programme ESSOR (plan numérique)","S'inscrire à l'Offensive Tr@ns Num","Contacter BDC pour prêt à 0%","Consulter un conseiller PARI-CNRC"] },
-        { phase: "Phase 3", period: "Mois 5–8", title: "Implantation Technologique", color: "#8B5CF6", icon: "⚡", actions: ["Choisir et implanter ERP/CRM adapté","Migrer vers l'infonuagique (Cloud)","Former vos employés aux nouveaux outils","Automatiser 3 processus répétitifs"] },
-        { phase: "Phase 4", period: "Mois 9–12", title: "IA & Optimisation", color: "#F59E0B", icon: "🤖", actions: ["Intégrer des outils IA dans vos opérations","Mesurer le ROI de vos investissements","Réclamer crédits CRIC dans déclaration 2026","Planifier la phase d'expansion"] },
+        { phase: "Phase 1", period: "Mois 1–2", title: "Diagnostic & Planification", color: "#635BFF", icon: "🔍", actions: ["Contacter le Réseau Accès PME (gratuit)","Réaliser un diagnostic numérique complet","Identifier vos priorités technologiques","Cartographier vos processus actuels"] },
+        { phase: "Phase 2", period: "Mois 3–4", title: "Demandes de Subventions", color: "#635BFF", icon: "💰", actions: ["Appliquer au programme ESSOR (plan numérique)","S'inscrire à l'Offensive Tr@ns Num","Contacter BDC pour prêt à 0%","Consulter un conseiller PARI-CNRC"] },
+        { phase: "Phase 3", period: "Mois 5–8", title: "Implantation Technologique", color: "#635BFF", icon: "⚡", actions: ["Choisir et implanter ERP/CRM adapté","Migrer vers l'infonuagique (Cloud)","Former vos employés aux nouveaux outils","Automatiser 3 processus répétitifs"] },
+        { phase: "Phase 4", period: "Mois 9–12", title: "IA & Optimisation", color: "#635BFF", icon: "🤖", actions: ["Intégrer des outils IA dans vos opérations","Mesurer le ROI de vos investissements","Réclamer crédits CRIC dans déclaration 2026","Planifier la phase d'expansion"] },
       ],
       impact: "Impact attendu",
       impacts: [{ label: "Hausse productivité", value: "+22%", icon: "📈" },{ label: "Prime de valorisation", value: "+30%", icon: "💎" },{ label: "Réduction coûts opérationnels", value: "-15%", icon: "💰" },{ label: "Temps économisé / semaine", value: "8h", icon: "⏱️" }],
@@ -102,7 +102,7 @@ const translations = {
     },
   },
   en: {
-    appTitle: "DigiSME", appSubtitle: "Your AI assistant for digital transformation", region: "Gatineau · Ottawa",
+    appTitle: "NuMérik PME", appSubtitle: "Your AI assistant for digital transformation", region: "Gatineau · Ottawa",
     nav: { diagnostic: "Diagnostic", assistant: "AI Assistant", subventions: "Grants", plan: "Action Plan" },
     hero: { title: "Power your SME\ninto the digital age", subtitle: "Smart Diagnostic · Government Grants · Personalized Action Plan · 24/7 AI Assistant", cta: "Start Diagnostic", cta2: "Talk to Assistant", badge: "Gatineau · Ottawa · 2026" },
     diagnostic: {
@@ -159,10 +159,10 @@ const translations = {
     plan: {
       title: "Personalized Action Plan", subtitle: "Your 12-month digital roadmap",
       phases: [
-        { phase: "Phase 1", period: "Month 1–2", title: "Diagnostic & Planning", color: "#4F8EF7", icon: "🔍", actions: ["Contact Réseau Accès PME (free)","Complete a full digital diagnostic","Identify your technology priorities","Map your current processes"] },
-        { phase: "Phase 2", period: "Month 3–4", title: "Grant Applications", color: "#10B981", icon: "💰", actions: ["Apply to ESSOR program (digital plan)","Register for Offensive Tr@ns Num","Contact BDC for 0% loan","Consult a IRAP-NRC advisor"] },
-        { phase: "Phase 3", period: "Month 5–8", title: "Technology Implementation", color: "#8B5CF6", icon: "⚡", actions: ["Choose and implement adapted ERP/CRM","Migrate to cloud infrastructure","Train employees on new tools","Automate 3 repetitive processes"] },
-        { phase: "Phase 4", period: "Month 9–12", title: "AI & Optimization", color: "#F59E0B", icon: "🤖", actions: ["Integrate AI tools in your operations","Measure ROI of your investments","Claim CRIC credits in 2026 return","Plan expansion phase"] },
+        { phase: "Phase 1", period: "Month 1–2", title: "Diagnostic & Planning", color: "#635BFF", icon: "🔍", actions: ["Contact Réseau Accès PME (free)","Complete a full digital diagnostic","Identify your technology priorities","Map your current processes"] },
+        { phase: "Phase 2", period: "Month 3–4", title: "Grant Applications", color: "#635BFF", icon: "💰", actions: ["Apply to ESSOR program (digital plan)","Register for Offensive Tr@ns Num","Contact BDC for 0% loan","Consult a IRAP-NRC advisor"] },
+        { phase: "Phase 3", period: "Month 5–8", title: "Technology Implementation", color: "#635BFF", icon: "⚡", actions: ["Choose and implement adapted ERP/CRM","Migrate to cloud infrastructure","Train employees on new tools","Automate 3 repetitive processes"] },
+        { phase: "Phase 4", period: "Month 9–12", title: "AI & Optimization", color: "#635BFF", icon: "🤖", actions: ["Integrate AI tools in your operations","Measure ROI of your investments","Claim CRIC credits in 2026 return","Plan expansion phase"] },
       ],
       impact: "Expected Impact",
       impacts: [{ label: "Productivity increase", value: "+22%", icon: "📈" },{ label: "Valuation premium", value: "+30%", icon: "💎" },{ label: "Operating cost reduction", value: "-15%", icon: "💰" },{ label: "Time saved / week", value: "8h", icon: "⏱️" }],
@@ -405,184 +405,344 @@ export default function App() {
         .replace(/^/, "<p>").replace(/$/, "</p>");
 
   const scoreColor = diagResult
-    ? diagResult.score < 25 ? "#EF4444" : diagResult.score < 50 ? "#F59E0B" : diagResult.score < 75 ? "#4F8EF7" : "#10B981"
-    : "#4F8EF7";
+    ? diagResult.score < 25 ? "#E25C5C" : diagResult.score < 50 ? "#FF8A4C" : diagResult.score < 75 ? "#635BFF" : "#00A865"
+    : "#635BFF";
 
   return (
-    <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif", background: "#060A14", minHeight: "100vh", color: "#E8EBF4" }}>
+    <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", background: "#FFFFFF", minHeight: "100vh", color: "#0A2540" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#060A14}::-webkit-scrollbar-thumb{background:#121E35;border-radius:4px}
-        input,button{outline:none}
-        @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-        @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-        .fade-up{animation:fadeUp 0.45s ease forwards}
-        .logo-mark{width:38px;height:38px;background:linear-gradient(135deg,#4F8EF7,#6366F1);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(79,142,247,0.35);flex-shrink:0;position:relative;overflow:hidden}
-        .logo-mark::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,transparent 55%)}
-        .logo-bars{display:flex;gap:2.5px;align-items:flex-end;z-index:1}
-        .logo-bar{width:4px;border-radius:2px;background:white}
-        .nav{position:sticky;top:0;z-index:100;background:rgba(6,10,20,0.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.07);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px}
-        .nav-tab{padding:7px 15px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:#4B5A7A;transition:all 0.18s;font-family:'DM Sans',sans-serif;white-space:nowrap}
-        .nav-tab:hover{color:#8B97B4;background:rgba(255,255,255,0.04)}
-        .nav-tab.active{background:rgba(79,142,247,0.12);color:#4F8EF7;border:1px solid rgba(79,142,247,0.2)}
-        .nav-lang{padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.12);background:#0D1526;color:#8B97B4;transition:all 0.18s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px}
-        .nav-lang:hover{border-color:#4F8EF7;color:#4F8EF7}
-        @media(max-width:500px){.contact-lbl{display:none}}
-        .main{max-width:960px;margin:0 auto;padding:0 24px 80px}
-        .hero{padding:88px 0 68px;text-align:center;position:relative}
-        .hero-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:480px;background:radial-gradient(ellipse at 50% 30%,rgba(79,142,247,0.1) 0%,rgba(99,102,241,0.05) 40%,transparent 70%);pointer-events:none}
-        .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(79,142,247,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,0.04) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 0%,transparent 100%);pointer-events:none}
-        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.2);font-size:10.5px;font-weight:600;letter-spacing:2px;color:#4F8EF7;text-transform:uppercase;margin-bottom:28px}
-        .badge-dot{width:5px;height:5px;border-radius:50%;background:#4F8EF7;animation:blink 2s infinite}
-        .hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,5.5vw,54px);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:22px;background:linear-gradient(160deg,#E8EBF4 35%,#8B97B4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .hero-sub{color:#4B5A7A;font-size:14px;line-height:1.75;max-width:460px;margin:0 auto 40px}
-        .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-        .btn-p{padding:13px 26px;border-radius:10px;background:linear-gradient(135deg,#4F8EF7,#6366F1);color:white;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;transition:all 0.2s;box-shadow:0 4px 20px rgba(79,142,247,0.28)}
-        .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,142,247,0.4)}
-        .btn-s{padding:13px 26px;border-radius:10px;background:rgba(255,255,255,0.04);color:#8B97B4;border:1px solid rgba(255,255,255,0.12);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;transition:all 0.2s}
-        .btn-s:hover{border-color:#4F8EF7;color:#4F8EF7;background:rgba(79,142,247,0.06)}
-        .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
-        .feat-card{background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:24px;cursor:pointer;transition:all 0.22s;position:relative;overflow:hidden}
-        .feat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ac,#4F8EF7),transparent);opacity:0;transition:opacity 0.3s}
-        .feat-card:hover::after{opacity:1}
-        .feat-card:hover{border-color:rgba(255,255,255,0.12);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.3)}
-        .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-        .stat-c{background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:18px 14px;text-align:center;transition:border-color 0.2s}
-        .stat-c:hover{border-color:rgba(255,255,255,0.12)}
-        .sec-head{text-align:center;margin-bottom:36px;padding-top:48px}
-        .sec-title{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}
-        .sec-sub{color:#4B5A7A;font-size:13.5px}
-        .diag-card{max-width:600px;margin:0 auto;background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:36px}
-        .diag-opt{width:100%;text-align:left;padding:13px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;color:#8B97B4;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13.5px;transition:all 0.18s;margin-bottom:8px;display:block}
-        .diag-opt:hover{border-color:#4F8EF7;color:#E8EBF4;background:rgba(79,142,247,0.06)}
-        .score-ring{transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
-        .chat-box{background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:18px;padding:20px;height:440px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;margin-bottom:14px}
-        .ai-av{width:30px;height:30px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,#4F8EF7,#6366F1);display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:2px;box-shadow:0 0 12px rgba(79,142,247,0.3)}
-        .bub-u{background:linear-gradient(135deg,#4F8EF7,#6366F1);color:white;padding:11px 16px;border-radius:16px 16px 4px 16px;max-width:75%;font-size:13.5px;line-height:1.6}
-        .bub-a{background:#121E35;border:1px solid rgba(255,255,255,0.07);color:#8B97B4;padding:11px 16px;border-radius:16px 16px 16px 4px;max-width:75%;font-size:13.5px;line-height:1.6}
-        .tdot{width:6px;height:6px;border-radius:50%;background:#4F8EF7;display:inline-block;margin:0 2px}
-        .tdot:nth-child(1){animation:bounce 1.2s infinite 0s}.tdot:nth-child(2){animation:bounce 1.2s infinite 0.2s}.tdot:nth-child(3){animation:bounce 1.2s infinite 0.4s}
-        .sug-pill{background:#0D1526;border:1px solid rgba(255,255,255,0.07);color:#4B5A7A;padding:7px 13px;border-radius:100px;font-size:11.5px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.18s;white-space:nowrap}
-        .sug-pill:hover{border-color:#4F8EF7;color:#4F8EF7}
-        .chat-in{flex:1;background:#0D1526;border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:13px 18px;color:#E8EBF4;font-size:13.5px;font-family:'DM Sans',sans-serif;transition:border-color 0.18s}
-        .chat-in:focus{border-color:#4F8EF7}
-        .chat-in::placeholder{color:#4B5A7A}
-        .send-btn{padding:13px 22px;border-radius:12px;background:linear-gradient(135deg,#4F8EF7,#6366F1);color:white;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;transition:all 0.2s;flex-shrink:0;box-shadow:0 2px 12px rgba(79,142,247,0.25)}
-        .send-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(79,142,247,0.4)}
-        .send-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
-        .grants-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-        .grant-card{background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:22px;transition:all 0.22s}
-        .grant-card:hover{border-color:rgba(255,255,255,0.12);transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,0,0,0.3)}
-        .filter-row{display:flex;gap:8px;justify-content:center;margin-bottom:28px}
-        .fpill{padding:8px 20px;border-radius:100px;font-size:12.5px;font-weight:500;cursor:pointer;border:1px solid rgba(255,255,255,0.12);background:transparent;color:#4B5A7A;font-family:'DM Sans',sans-serif;transition:all 0.18s}
-        .fpill.active{background:linear-gradient(135deg,#4F8EF7,#6366F1);color:white;border-color:transparent}
-        .fpill:not(.active):hover{border-color:#4F8EF7;color:#4F8EF7}
-        .chip{display:inline-block;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:#4B5A7A;font-size:10.5px;padding:2px 9px;border-radius:100px}
-        .grant-lnk{display:block;text-align:center;padding:10px;background:linear-gradient(135deg,#4F8EF7,#6366F1);color:white;border-radius:9px;text-decoration:none;font-size:12.5px;font-weight:600;transition:opacity 0.2s}
-        .grant-lnk:hover{opacity:0.88}
-        .phase-block{border-left:3px solid;padding:20px 22px;background:#0D1526;border-radius:0 14px 14px 0;margin-bottom:10px;transition:background 0.2s}
-        .phase-block:hover{background:#121E35}
-        .impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:36px}
-        .impact-card{text-align:center;background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 14px}
+        ::-webkit-scrollbar{width:10px;height:10px}
+        ::-webkit-scrollbar-track{background:#F6F9FC}
+        ::-webkit-scrollbar-thumb{background:#C1C9D2;border-radius:6px}
+        ::-webkit-scrollbar-thumb:hover{background:#8898AA}
+        input,button,textarea{outline:none;font-family:inherit}
+        a{color:inherit;text-decoration:none}
 
-        /* ── MOBILE NAV BOTTOM BAR ── */
-        .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(6,10,20,0.96);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.08);padding:8px 0 env(safe-area-inset-bottom,8px)}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
+        @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        @keyframes meshShift{0%,100%{transform:translate(0,0) rotate(0deg)}33%{transform:translate(30px,-20px) rotate(2deg)}66%{transform:translate(-20px,30px) rotate(-2deg)}}
+        @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+        .fade-up{animation:fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) forwards}
+
+        /* ── LOGO 3D (premium) ── */
+        @keyframes logoFloat{0%,100%{transform:perspective(180px) rotateX(0) rotateY(0)}50%{transform:perspective(180px) rotateX(-3deg) rotateY(4deg)}}
+        .logo-mark{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;background:linear-gradient(160deg,#7A73FF 0%,#635BFF 35%,#5046E5 70%,#3D34C2 100%);box-shadow:0 1px 0 rgba(255,255,255,0.25) inset,0 -3px 6px rgba(0,0,0,0.18) inset,0 0 0 0.5px rgba(99,91,255,0.50),0 4px 8px rgba(50,50,93,0.18),0 12px 24px -6px rgba(99,91,255,0.40),0 18px 32px -10px rgba(80,70,229,0.25);transform-style:preserve-3d;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);will-change:transform}
+        .logo-mark:hover{transform:perspective(220px) rotateX(-8deg) rotateY(10deg) scale(1.04)}
+        /* Top glossy reflection (curved highlight) */
+        .logo-mark::before{content:'';position:absolute;top:2px;left:4px;right:4px;height:42%;background:linear-gradient(180deg,rgba(255,255,255,0.55) 0%,rgba(255,255,255,0.18) 50%,rgba(255,255,255,0) 100%);border-radius:9px 9px 80% 80%/9px 9px 100% 100%;pointer-events:none;z-index:2;mix-blend-mode:overlay}
+        /* Soft ambient glow inside */
+        .logo-mark::after{content:'';position:absolute;inset:0;border-radius:11px;background:radial-gradient(circle at 28% 22%,rgba(255,255,255,0.45) 0%,transparent 45%),radial-gradient(circle at 80% 90%,rgba(160,150,255,0.55) 0%,transparent 50%);pointer-events:none;z-index:1}
+        .logo-svg{width:62%;height:62%;position:relative;z-index:3;display:block;filter:drop-shadow(0 1.5px 1.5px rgba(0,0,0,0.30)) drop-shadow(0 0 0.5px rgba(255,255,255,0.4))}
+        .logo-accent{filter:drop-shadow(0 0 4px rgba(255,200,80,0.7))}
+
+        /* ── NAV TOP ── */
+        .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.04);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:68px}
+        .nav-tab{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;border:none;background:transparent;color:#425466;transition:all 0.15s ease;font-family:'Inter',sans-serif;white-space:nowrap}
+        .nav-tab:hover{color:#0A2540;background:rgba(99,91,255,0.06)}
+        .nav-tab.active{color:#635BFF;background:rgba(99,91,255,0.08)}
+        .nav-lang{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #E6EBF1;background:#FFFFFF;color:#425466;transition:all 0.15s ease;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+        .nav-lang:hover{border-color:#635BFF;color:#635BFF;box-shadow:0 1px 3px rgba(99,91,255,0.12)}
+        @media(max-width:560px){.contact-lbl{display:none}}
+
+        /* ── MAIN ── */
+        .main{max-width:1180px;margin:0 auto;padding:0 32px 80px}
+
+        /* ── HERO with mesh gradient ── */
+        .hero{padding:96px 0 80px;text-align:center;position:relative}
+        .hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:1200px;height:700px;pointer-events:none;z-index:-1;background:radial-gradient(circle at 30% 30%,rgba(99,91,255,0.18) 0%,transparent 45%),radial-gradient(circle at 70% 40%,rgba(255,90,160,0.12) 0%,transparent 50%),radial-gradient(circle at 50% 80%,rgba(0,210,255,0.10) 0%,transparent 50%);filter:blur(40px);animation:meshShift 18s ease-in-out infinite}
+        .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(99,91,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(99,91,255,0.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 70% 50% at 50% 30%,black 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 70% 50% at 50% 30%,black 0%,transparent 70%);pointer-events:none;z-index:-1}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:rgba(99,91,255,0.08);border:1px solid rgba(99,91,255,0.2);font-size:12px;font-weight:600;letter-spacing:0.02em;color:#635BFF;text-transform:uppercase;margin-bottom:24px}
+        .badge-dot{width:6px;height:6px;border-radius:50%;background:#635BFF;animation:blink 2s infinite;box-shadow:0 0 8px rgba(99,91,255,0.6)}
+        .hero-title{font-family:'Inter',sans-serif;font-size:clamp(36px,5.5vw,64px);font-weight:700;line-height:1.1;letter-spacing:-0.025em;margin-bottom:20px;color:#0A2540;background:linear-gradient(135deg,#0A2540 0%,#635BFF 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+        .hero-sub{color:#425466;font-size:18px;line-height:1.55;max-width:620px;margin:0 auto 36px;font-weight:400}
+        .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+
+        /* ── BUTTONS ── */
+        .btn-p{padding:13px 26px;border-radius:8px;background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);color:#FFFFFF;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;transition:all 0.18s ease;box-shadow:0 1px 3px rgba(99,91,255,0.3),0 4px 12px rgba(99,91,255,0.18);display:inline-flex;align-items:center;gap:8px}
+        .btn-p:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(99,91,255,0.35),0 8px 24px rgba(99,91,255,0.25)}
+        .btn-p:disabled{opacity:0.55;cursor:not-allowed;transform:none}
+        .btn-s{padding:13px 26px;border-radius:8px;background:#FFFFFF;color:#0A2540;border:1px solid #E6EBF1;cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;transition:all 0.18s ease;box-shadow:0 1px 3px rgba(0,0,0,0.04);display:inline-flex;align-items:center;gap:8px}
+        .btn-s:hover{border-color:#635BFF;color:#635BFF;transform:translateY(-1px);box-shadow:0 2px 6px rgba(99,91,255,0.12)}
+
+        /* ── HERO DASHBOARD MOCKUP ── */
+        .hero-mock{max-width:920px;margin:0 auto;border-radius:16px;background:#FFFFFF;border:1px solid #E6EBF1;box-shadow:0 50px 100px -20px rgba(50,50,93,0.18),0 30px 60px -30px rgba(0,0,0,0.3);overflow:hidden;animation:float 6s ease-in-out infinite}
+        .mock-bar{display:flex;align-items:center;gap:6px;padding:12px 16px;background:#F6F9FC;border-bottom:1px solid #E6EBF1}
+        .mock-dot{width:11px;height:11px;border-radius:50%}
+        .mock-dot.r{background:#FF5F57}.mock-dot.y{background:#FEBC2E}.mock-dot.g{background:#28C840}
+        .mock-url{margin-left:14px;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:6px;padding:4px 12px;font-size:11px;color:#697386;font-family:'Inter',sans-serif}
+        .mock-body{padding:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;background:linear-gradient(180deg,#FAFBFD 0%,#FFFFFF 100%)}
+        .mock-stat{padding:14px;border:1px solid #E6EBF1;border-radius:10px;background:#FFFFFF;text-align:left}
+        .mock-stat-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#8898AA;margin-bottom:6px}
+        .mock-stat-val{font-size:20px;font-weight:700;color:#0A2540;letter-spacing:-0.02em}
+        .mock-stat-bar{height:4px;background:#F0F4F8;border-radius:2px;margin-top:10px;overflow:hidden}
+        .mock-stat-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#635BFF 0%,#7A73FF 100%)}
+        .mock-chart{grid-column:1/-1;height:120px;border:1px solid #E6EBF1;border-radius:10px;padding:14px;background:#FFFFFF;display:flex;align-items:flex-end;gap:8px}
+        .mock-chart-bar{flex:1;background:linear-gradient(180deg,#635BFF 0%,#7A73FF 100%);border-radius:4px 4px 0 0;opacity:0.85;transition:opacity 0.2s ease}
+        .mock-chart-bar:hover{opacity:1}
+
+        /* ── TRUST BAND ── */
+        .trust-band{padding:48px 0 40px;text-align:center;border-top:1px solid #E6EBF1;border-bottom:1px solid #E6EBF1;margin:24px 0 80px;background:#FAFBFD;border-radius:16px}
+        .trust-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#8898AA;margin-bottom:24px}
+        .trust-logos{display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap;padding:0 24px}
+        .trust-item{font-family:'Inter',sans-serif;font-weight:700;font-size:15px;color:#697386;letter-spacing:-0.01em;opacity:0.85;transition:opacity 0.2s ease;display:inline-flex;align-items:center;gap:6px}
+        .trust-item:hover{opacity:1;color:#0A2540}
+
+        /* ── FEATURE CARDS ── */
+        .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:80px}
+        .feat-card{background:#FFFFFF;border:1px solid #E6EBF1;border-radius:14px;padding:32px;cursor:pointer;transition:all 0.2s ease;position:relative;text-align:left;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+        .feat-card::after{display:none}
+        .feat-card:hover{border-color:#635BFF;transform:translateY(-3px);box-shadow:0 12px 30px rgba(99,91,255,0.12),0 4px 8px rgba(50,50,93,0.06)}
+        .feat-icon{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,rgba(99,91,255,0.12) 0%,rgba(122,115,255,0.06) 100%);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;border:1px solid rgba(99,91,255,0.15)}
+
+        /* ── STATS ── */
+        .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:14px;padding:28px 0;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+        .stat-c{text-align:center;background:transparent;border:none;border-right:1px solid #E6EBF1;padding:8px 16px}
+        .stat-c:last-child{border-right:none}
+
+        /* ── SECTION HEADING ── */
+        .sec-head{text-align:center;margin-bottom:48px;padding-top:64px}
+        .sec-title{font-family:'Inter',sans-serif;font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.025em;color:#0A2540;margin-bottom:12px;line-height:1.15}
+        .sec-sub{color:#425466;font-size:16px;font-weight:400;max-width:600px;margin:0 auto}
+
+        /* ── DIAGNOSTIC ── */
+        .diag-card{max-width:680px;margin:0 auto;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:16px;padding:40px;box-shadow:0 4px 12px rgba(50,50,93,0.06)}
+        .diag-opt{width:100%;text-align:left;padding:16px 20px;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:10px;color:#0A2540;cursor:pointer;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:500;transition:all 0.15s ease;margin-bottom:10px;display:block}
+        .diag-opt:hover{border-color:#635BFF;background:rgba(99,91,255,0.04);color:#0A2540;transform:translateX(2px)}
+        .score-ring{transition:stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1)}
+
+        /* ── CHAT / ASSISTANT ── */
+        .chat-box{background:#FAFBFD;border:1px solid #E6EBF1;border-radius:14px;padding:24px;height:480px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;margin-bottom:14px;box-shadow:inset 0 1px 3px rgba(50,50,93,0.04)}
+        .ai-av{width:34px;height:34px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,#635BFF 0%,#7A73FF 100%);display:flex;align-items:center;justify-content:center;font-size:15px;color:#FFFFFF;margin-top:2px;box-shadow:0 2px 6px rgba(99,91,255,0.3)}
+        .bub-u{background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);color:#FFFFFF;padding:13px 17px;border-radius:14px 14px 4px 14px;max-width:75%;font-size:14px;line-height:1.55;box-shadow:0 2px 8px rgba(99,91,255,0.18)}
+        .bub-a{background:#FFFFFF;border:1px solid #E6EBF1;color:#0A2540;padding:13px 17px;border-radius:14px 14px 14px 4px;max-width:75%;font-size:14px;line-height:1.55;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+        .tdot{width:6px;height:6px;border-radius:50%;background:#635BFF;display:inline-block;margin:0 2px}
+        .tdot:nth-child(1){animation:bounce 1.2s infinite 0s}
+        .tdot:nth-child(2){animation:bounce 1.2s infinite 0.2s}
+        .tdot:nth-child(3){animation:bounce 1.2s infinite 0.4s}
+        .sug-pill{background:#FFFFFF;border:1px solid #E6EBF1;color:#425466;padding:7px 14px;border-radius:100px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s ease;white-space:nowrap;box-shadow:0 1px 2px rgba(50,50,93,0.04)}
+        .sug-pill:hover{border-color:#635BFF;color:#635BFF;background:rgba(99,91,255,0.04)}
+        .chat-in{flex:1;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:10px;padding:13px 16px;color:#0A2540;font-size:14.5px;font-family:'Inter',sans-serif;transition:all 0.15s ease;box-shadow:inset 0 1px 2px rgba(50,50,93,0.04)}
+        .chat-in:focus{border-color:#635BFF;box-shadow:0 0 0 3px rgba(99,91,255,0.12)}
+        .chat-in::placeholder{color:#8898AA}
+        .send-btn{padding:13px 22px;border-radius:10px;background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);color:#FFFFFF;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;transition:all 0.18s ease;flex-shrink:0;box-shadow:0 2px 6px rgba(99,91,255,0.25)}
+        .send-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(99,91,255,0.35)}
+        .send-btn:disabled{opacity:0.55;cursor:not-allowed;transform:none}
+
+        /* ── GRANTS ── */
+        .grants-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+        .grant-card{background:#FFFFFF;border:1px solid #E6EBF1;border-radius:14px;padding:28px;transition:all 0.2s ease;box-shadow:0 1px 3px rgba(50,50,93,0.04);display:flex;flex-direction:column}
+        .grant-card:hover{border-color:#635BFF;transform:translateY(-3px);box-shadow:0 12px 30px rgba(99,91,255,0.10),0 4px 8px rgba(50,50,93,0.05)}
+        .filter-row{display:flex;gap:8px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
+        .fpill{padding:9px 20px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #E6EBF1;background:#FFFFFF;color:#425466;font-family:'Inter',sans-serif;transition:all 0.15s ease;box-shadow:0 1px 2px rgba(50,50,93,0.04)}
+        .fpill.active{background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);color:#FFFFFF;border-color:transparent;box-shadow:0 2px 6px rgba(99,91,255,0.25)}
+        .fpill:not(.active):hover{border-color:#635BFF;color:#635BFF}
+        .chip{display:inline-block;background:#F6F9FC;border:1px solid #E6EBF1;color:#697386;font-size:11px;font-weight:500;padding:3px 10px;border-radius:6px}
+        .grant-lnk{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 18px;background:#FFFFFF;color:#635BFF;border:1px solid #635BFF;border-radius:8px;text-decoration:none;font-size:13.5px;font-weight:600;transition:all 0.15s ease;margin-top:auto}
+        .grant-lnk:hover{background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);color:#FFFFFF;box-shadow:0 4px 12px rgba(99,91,255,0.25);transform:translateY(-1px)}
+
+        /* ── PLAN ── */
+        .phase-block{border-left:none;padding:28px 32px;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:14px;margin-bottom:14px;transition:all 0.2s ease;box-shadow:0 1px 3px rgba(50,50,93,0.04);position:relative;overflow:hidden}
+        .phase-block::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:linear-gradient(180deg,#635BFF 0%,#7A73FF 100%)}
+        .phase-block:hover{border-color:#635BFF;transform:translateX(4px);box-shadow:0 6px 16px rgba(99,91,255,0.10)}
+        .impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:14px;padding:28px 0;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+        .impact-card{text-align:center;background:transparent;border:none;border-right:1px solid #E6EBF1;padding:8px 16px}
+        .impact-card:last-child{border-right:none}
+
+        /* ── MOBILE BOTTOM NAV ── */
+        .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:saturate(180%) blur(20px);border-top:1px solid #E6EBF1;padding:8px 0 env(safe-area-inset-bottom,8px);box-shadow:0 -2px 16px rgba(50,50,93,0.06)}
         .mob-nav-inner{display:flex;justify-content:space-around;align-items:center}
-        .mob-tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;border:none;background:transparent;cursor:pointer;transition:all 0.18s;border-radius:10px;min-width:52px}
-        .mob-tab-icon{font-size:20px;line-height:1}
-        .mob-tab-lbl{font-size:9px;font-weight:600;letter-spacing:0.3px;color:#4B5A7A;font-family:'DM Sans',sans-serif;transition:color 0.18s}
-        .mob-tab.active .mob-tab-lbl{color:#4F8EF7}
-        .mob-tab.active .mob-tab-icon{filter:drop-shadow(0 0 6px #4F8EF7)}
+        .mob-tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;border:none;background:transparent;cursor:pointer;transition:all 0.15s ease;border-radius:8px;min-width:54px}
+        .mob-tab-icon{font-size:19px;line-height:1;opacity:0.55;transition:all 0.15s ease}
+        .mob-tab-lbl{font-size:10px;font-weight:600;letter-spacing:0.02em;color:#8898AA;font-family:'Inter',sans-serif;transition:color 0.15s ease}
+        .mob-tab.active .mob-tab-lbl{color:#635BFF}
+        .mob-tab.active .mob-tab-icon{opacity:1;transform:scale(1.05)}
 
-        /* ── MEDIA QUERIES ── */
-        @media(max-width:768px){
-          .nav{padding:0 16px;height:56px}
-          .nav nav{display:none}
-          .nav-lang{padding:6px 10px;font-size:11px}
-          .mob-nav{display:block}
-          .main{padding:0 16px 90px}
-          .hero{padding:48px 0 40px}
-          .hero-glow{width:100%;height:300px}
-          .hero-badge{font-size:9px;letter-spacing:1.5px;padding:5px 12px}
-          .hero-sub{font-size:13px;max-width:100%}
-          .hero-btns{flex-direction:column;align-items:center}
-          .btn-p,.btn-s{width:100%;max-width:320px;text-align:center;padding:14px 20px;font-size:15px}
-          .feat-grid{grid-template-columns:1fr}
-          .feat-card{padding:20px}
-          .stats-row{grid-template-columns:repeat(2,1fr)}
-          .sec-head{padding-top:28px;margin-bottom:24px}
-          .sec-title{font-size:22px}
-          .diag-card{padding:24px 20px;border-radius:16px}
-          .diag-opt{padding:14px 16px;font-size:14px}
-          .chat-box{height:52vh;padding:16px;border-radius:14px}
-          .bub-u,.bub-a{max-width:88%;font-size:13px}
-          .sug-pill{font-size:11px;padding:6px 11px}
-          .chat-in{font-size:14px;padding:12px 14px}
-          .send-btn{padding:12px 16px;font-size:13px}
-          .grants-grid{grid-template-columns:1fr}
-          .filter-row{flex-wrap:wrap}
-          .phase-block{padding:16px 18px}
-          .impact-grid{grid-template-columns:repeat(2,1fr)}
-        }
-        @media(max-width:400px){
-          .stats-row{grid-template-columns:repeat(2,1fr)}
-          .impact-grid{grid-template-columns:repeat(2,1fr)}
-        }
-        /* ── LEGAL PAGE ── */
-        .legal-wrap{max-width:760px;margin:0 auto;padding:48px 0 32px}
-        .legal-back{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:#8B97B4;font-size:12.5px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.18s;margin-bottom:28px}
-        .legal-back:hover{border-color:#4F8EF7;color:#4F8EF7}
-        .legal-title{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;letter-spacing:-0.8px;margin-bottom:8px}
-        .legal-date{font-size:12.5px;color:#4B5A7A;margin-bottom:36px}
-        .legal-section{background:#0D1526;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 24px;margin-bottom:12px}
-        .legal-h{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#E8EBF4;margin-bottom:8px}
-        .legal-p{font-size:13.5px;color:#8B97B4;line-height:1.7}
+        /* ── LEGAL ── */
+        .legal-wrap{max-width:840px;margin:0 auto;padding:64px 0 48px}
+        .legal-back{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:8px;background:#FFFFFF;border:1px solid #E6EBF1;color:#425466;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s ease;margin-bottom:32px;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+        .legal-back:hover{border-color:#635BFF;color:#635BFF}
+        .legal-title{font-family:'Inter',sans-serif;font-size:clamp(32px,5vw,48px);font-weight:700;letter-spacing:-0.025em;color:#0A2540;margin-bottom:8px;line-height:1.15}
+        .legal-date{font-size:13px;color:#8898AA;margin-bottom:36px;font-weight:500}
+        .legal-section{background:#FFFFFF;border:1px solid #E6EBF1;border-radius:12px;padding:28px 32px;margin-bottom:14px;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+        .legal-h{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:#0A2540;margin-bottom:10px;letter-spacing:-0.01em}
+        .legal-p{font-size:14.5px;color:#425466;line-height:1.7}
 
         /* ── FOOTER ── */
-        .footer{background:#0A0F1C;border-top:1px solid rgba(255,255,255,0.07);padding:48px 24px 32px;margin-top:80px}
-        .footer-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
-        .footer-brand{display:flex;flex-direction:column;gap:12px}
-        .footer-logo{display:flex;align-items:center;gap:10px}
-        .footer-tag{color:#4B5A7A;font-size:12.5px;line-height:1.65;max-width:280px}
-        .footer-social{display:flex;gap:8px;margin-top:6px}
-        .footer-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;color:#8B97B4;text-decoration:none;transition:all 0.18s;font-size:13px}
-        .footer-icon:hover{border-color:#4F8EF7;color:#4F8EF7;background:rgba(79,142,247,0.06)}
-        .footer-col h4{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#E8EBF4;margin-bottom:14px}
-        .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-        .footer-col a,.footer-col li{font-size:12.5px;color:#4B5A7A;text-decoration:none;transition:color 0.18s;cursor:pointer}
-        .footer-col a:hover{color:#4F8EF7}
-        .footer-contact{font-size:12.5px;color:#4B5A7A;line-height:1.7}
-        .footer-contact strong{color:#8B97B4;font-weight:500}
-        .footer-bottom{max-width:960px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-        .footer-copy{font-size:11.5px;color:#4B5A7A}
-        .footer-legal{display:flex;gap:18px;font-size:11.5px}
-        .footer-legal a{color:#4B5A7A;text-decoration:none;transition:color 0.18s}
-        .footer-legal a:hover{color:#8B97B4}
-        @media(max-width:768px){
-          .footer{padding:36px 16px 100px}
-          .footer-inner{grid-template-columns:1fr;gap:28px}
-          .footer-bottom{flex-direction:column;text-align:center;gap:10px}
-          .footer-legal{flex-wrap:wrap;justify-content:center}
-        }
+        .footer{background:#0A2540;color:#A3ACBA;border-top:none;padding:72px 32px 36px;margin-top:120px}
+        .footer-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px}
+        .footer-brand{display:flex;flex-direction:column;gap:14px}
+        .footer-brand .logo-mark{background:linear-gradient(135deg,#635BFF 0%,#7A73FF 100%)}
+        .footer-logo{display:flex;align-items:center;gap:12px}
+        .footer-tag{color:#8898AA;font-size:13.5px;line-height:1.65;max-width:300px}
+        .footer-social{display:flex;gap:8px;margin-top:8px}
+        .footer-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);display:flex;align-items:center;justify-content:center;color:#A3ACBA;text-decoration:none;transition:all 0.15s ease;font-size:13px}
+        .footer-icon:hover{background:#635BFF;color:#FFFFFF;border-color:#635BFF;transform:translateY(-1px)}
+        .footer-col h4{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#FFFFFF;margin-bottom:18px}
+        .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;padding:0}
+        .footer-col a,.footer-col li{font-size:13.5px;color:#A3ACBA;text-decoration:none;transition:color 0.15s ease;cursor:pointer}
+        .footer-col a:hover{color:#FFFFFF}
+        .footer-contact{font-size:13.5px;color:#A3ACBA;line-height:1.75}
+        .footer-contact strong{color:#FFFFFF;font-weight:600}
+        .footer-bottom{max-width:1180px;margin:48px auto 0;padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+        .footer-copy{font-size:12.5px;color:#8898AA}
+        .footer-legal{display:flex;gap:20px;font-size:12.5px}
+        .footer-legal a{color:#8898AA;text-decoration:none;transition:color 0.15s ease}
+        .footer-legal a:hover{color:#FFFFFF}
 
+        /* ── MEDIA QUERIES ── */
+        @media(max-width:1024px){
+          .hero-mock{max-width:100%}
+          .mock-body{padding:18px;gap:10px}
+        }
+        @media(max-width:768px){
+          .nav{padding:0 16px;height:60px}
+          .nav nav{display:none}
+          .nav-lang{padding:7px 12px;font-size:12px}
+          .mob-nav{display:block}
+          .main{padding:0 16px 96px}
+          .hero{padding:48px 0 40px}
+          .hero-glow{width:100%;height:500px;top:-60px}
+          .hero-badge{font-size:10.5px;padding:5px 12px}
+          .hero-sub{font-size:15.5px;max-width:100%;margin-bottom:28px}
+          .hero-btns{flex-direction:column;align-items:stretch;width:100%;max-width:340px;margin:0 auto 40px}
+          .btn-p,.btn-s{width:100%;justify-content:center;padding:14px 20px;font-size:14.5px}
+          .hero-mock{border-radius:12px}
+          .mock-bar{padding:9px 12px}
+          .mock-dot{width:9px;height:9px}
+          .mock-url{font-size:10px;padding:3px 10px}
+          .mock-body{padding:14px;grid-template-columns:repeat(2,1fr);gap:8px}
+          .mock-stat{padding:10px}
+          .mock-stat-val{font-size:16px}
+          .mock-chart{height:80px;padding:10px}
+          .trust-band{padding:32px 0 28px;margin:24px 0 56px;border-radius:12px}
+          .trust-lbl{font-size:10px;margin-bottom:18px}
+          .trust-logos{gap:24px}
+          .trust-item{font-size:13px}
+          .feat-grid{grid-template-columns:1fr;gap:14px;margin-bottom:56px}
+          .feat-card{padding:24px}
+          .feat-icon{width:42px;height:42px;font-size:20px;margin-bottom:14px}
+          .stats-row{grid-template-columns:repeat(2,1fr);padding:18px 0;border-radius:12px}
+          .stat-c{border-right:none;padding:14px 12px;border-bottom:1px solid #E6EBF1}
+          .stat-c:nth-child(2n){border-right:none}
+          .stat-c:nth-last-child(-n+2){border-bottom:none}
+          .sec-head{padding-top:48px;margin-bottom:36px}
+          .sec-title{font-size:clamp(26px,7vw,36px)}
+          .sec-sub{font-size:14.5px}
+          .diag-card{padding:28px 22px;border-radius:12px}
+          .diag-opt{padding:14px 16px;font-size:14px}
+          .chat-box{height:56vh;padding:18px;border-radius:12px}
+          .bub-u,.bub-a{max-width:88%;font-size:13.5px;padding:11px 14px}
+          .sug-pill{font-size:11.5px;padding:6px 12px}
+          .chat-in{font-size:14px;padding:12px 14px}
+          .send-btn{padding:12px 16px;font-size:13px}
+          .grants-grid{grid-template-columns:1fr;gap:14px}
+          .grant-card{padding:24px}
+          .filter-row{flex-wrap:wrap;margin-bottom:28px}
+          .phase-block{padding:22px 24px;border-radius:12px}
+          .phase-block:hover{transform:none}
+          .impact-grid{grid-template-columns:repeat(2,1fr);padding:18px 0;border-radius:12px;margin-top:32px}
+          .impact-card{border-right:none;border-bottom:1px solid #E6EBF1;padding:14px 12px}
+          .impact-card:nth-child(2n){border-right:none}
+          .impact-card:nth-last-child(-n+2){border-bottom:none}
+          .legal-wrap{padding:40px 0 32px}
+          .legal-section{padding:22px 22px;border-radius:12px}
+          .footer{padding:48px 20px 28px;margin-top:64px}
+          .footer-inner{grid-template-columns:1fr;gap:32px}
+          .footer-bottom{flex-direction:column;text-align:center;gap:10px}
+          .footer-legal{flex-wrap:wrap;justify-content:center;gap:14px}
+        }
+        @media(max-width:480px){
+          .hero-title{font-size:clamp(28px,9vw,40px)}
+          .hero{padding:36px 0 32px}
+          .nav{padding:0 14px}
+          .main{padding:0 14px 96px}
+        }
         @supports(padding:env(safe-area-inset-bottom)){
           .mob-nav{padding-bottom:calc(8px + env(safe-area-inset-bottom))}
         }
+
+        /* ── BODY BACKGROUND (subtle global) ── */
+        body{background:#FAFBFD}
+        body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(99,91,255,0.06) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 100% 30%,rgba(255,90,160,0.04) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 0% 60%,rgba(0,180,255,0.04) 0%,transparent 60%)}
+
+        /* ── HERO VISUAL (photo + dashboard mockup overlay) ── */
+        .hero-visual{position:relative;max-width:1080px;margin:0 auto;border-radius:24px;overflow:visible}
+        .hero-photo-wrap{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:21/9;box-shadow:0 30px 80px -20px rgba(50,50,93,0.25),0 18px 36px -18px rgba(0,0,0,0.20);background:#0A2540}
+        .hero-photo{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:transform 0.6s ease}
+        .hero-photo-wrap:hover .hero-photo{transform:scale(1.06)}
+        .hero-photo-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,91,255,0.20) 0%,rgba(10,37,64,0.45) 100%);pointer-events:none}
+        .hero-mock{position:relative;max-width:780px;margin:-90px auto 0;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:14px;box-shadow:0 30px 60px -15px rgba(50,50,93,0.30),0 12px 30px -10px rgba(0,0,0,0.18);overflow:hidden;animation:float 6s ease-in-out infinite;z-index:2}
+
+        /* ── SECTION HERO IMAGE ── */
+        .section-hero{position:relative;width:100%;max-width:1080px;margin:0 auto 0;border-radius:20px;overflow:hidden;aspect-ratio:32/9;background:#0A2540;box-shadow:0 18px 50px -18px rgba(50,50,93,0.20)}
+        .section-hero img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s ease}
+        .section-hero:hover img{transform:scale(1.04)}
+        .section-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,91,255,0.55) 0%,rgba(10,37,64,0.75) 100%);display:flex;align-items:center;padding:0 56px}
+        .section-hero-tag{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.85);margin-bottom:10px}
+        .section-hero-title{font-family:'Inter',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-0.025em;color:#FFFFFF;line-height:1.1;max-width:600px}
+
+        /* ── ALTERNATING SECTION BACKGROUND ── */
+        .sec-band{background:#FFFFFF;border:1px solid #E6EBF1;border-radius:20px;padding:48px 40px;margin-top:24px;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+
+        /* Mobile imagery */
+        @media(max-width:768px){
+          .hero-photo-wrap{aspect-ratio:16/10;border-radius:14px}
+          .hero-mock{margin-top:-50px;max-width:calc(100% - 24px);border-radius:10px}
+          .section-hero{aspect-ratio:5/3;border-radius:14px}
+          .section-hero-overlay{padding:0 24px}
+          .section-hero-title{font-size:clamp(20px,5vw,28px)}
+          .section-hero-tag{font-size:10px;margin-bottom:6px}
+          .sec-band{padding:32px 22px;border-radius:14px}
+        }
+
       `}</style>
 
       {/* NAV */}
       <header className="nav">
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div className="logo-mark">
-            <div className="logo-bars">
-              {[6,10,14,9].map((h,i) => <div key={i} className="logo-bar" style={{ height: h }} />)}
-            </div>
+        <div
+          style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}
+          onClick={() => setActiveTab("home")}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveTab("home"); } }}
+          aria-label={lang === "fr" ? "Aller à l'accueil" : "Go to home"}
+        >
+          <div className="logo-mark" aria-label="NuMérik PME">
+            <svg className="logo-svg" viewBox="0 0 24 24" fill="none">
+              <defs>
+                <linearGradient id="nGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#FFFFFF" />
+                  <stop offset="55%" stopColor="#F5F3FF" />
+                  <stop offset="100%" stopColor="#D9D2FF" />
+                </linearGradient>
+                <linearGradient id="dotGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#FFE680" />
+                  <stop offset="100%" stopColor="#FFB347" />
+                </linearGradient>
+              </defs>
+              {/* Bold filled "N" with diagonal — premium geometry */}
+              <path
+                d="M4 21 L4 3 L7.6 3 L16.4 14.5 L16.4 3 L20 3 L20 21 L16.4 21 L7.6 9.5 L7.6 21 Z"
+                fill="url(#nGrad)"
+                stroke="rgba(255,255,255,0.35)"
+                strokeWidth="0.3"
+                strokeLinejoin="round"
+              />
+              {/* Ascending accent dot (data point / growth) */}
+              <circle className="logo-accent" cx="20" cy="3" r="2.1" fill="url(#dotGrad)" />
+              <circle cx="19.4" cy="2.4" r="0.6" fill="#FFFFFF" opacity="0.85" />
+            </svg>
           </div>
           <div>
-            <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 17, letterSpacing: "-0.3px" }}>{t.appTitle}</div>
-            <div style={{ fontSize: 9, color: "#4B5A7A", letterSpacing: "2.5px", textTransform: "uppercase", marginTop: 1 }}>{t.region}</div>
+            <div style={{ fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif", fontWeight: 700, fontSize: 18, letterSpacing: "-0.022em", lineHeight: 1.1, display: "flex", alignItems: "baseline", gap: 4 }}>
+              <span style={{ color: "#0A2540" }}>NuMérik</span>
+              <span style={{ background: "linear-gradient(135deg,#635BFF 0%,#5046E5 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", fontWeight: 800 }}>PME</span>
+            </div>
+            <div style={{ fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif", fontSize: 9.5, color: "#697386", letterSpacing: "0.18em", textTransform: "uppercase", marginTop: 2, fontWeight: 600 }}>{t.region}</div>
           </div>
         </div>
 
@@ -641,36 +801,89 @@ export default function App() {
               </h1>
               <p className="hero-sub">{t.hero.subtitle}</p>
               <div className="hero-btns">
-                <button className="btn-p" onClick={() => setActiveTab("diagnostic")}>🔍 {t.hero.cta}</button>
-                <button className="btn-s" onClick={() => setActiveTab("assistant")}>🤖 {t.hero.cta2}</button>
+                <button className="btn-p" onClick={() => setActiveTab("diagnostic")}>{t.hero.cta} →</button>
+                <button className="btn-s" onClick={() => setActiveTab("assistant")}>{t.hero.cta2}</button>
+              </div>
+
+              {/* HERO IMAGE + DASHBOARD MOCKUP */}
+              <div className="hero-visual">
+                <div className="hero-photo-wrap">
+                  <img
+                    className="hero-photo"
+                    src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1600&q=80"
+                    alt={lang === "fr" ? "Équipe PME en réunion de travail" : "SME team working together"}
+                    loading="eager"
+                  />
+                  <div className="hero-photo-overlay" />
+                </div>
+                <div className="hero-mock">
+                  <div className="mock-bar">
+                    <span className="mock-dot r" /><span className="mock-dot y" /><span className="mock-dot g" />
+                    <div className="mock-url">numerikpme.ca/dashboard</div>
+                  </div>
+                  <div className="mock-body">
+                    {[
+                      { lbl: lang === "fr" ? "Maturité" : "Maturity", val: "78%", w: "78%" },
+                      { lbl: lang === "fr" ? "Subventions" : "Grants", val: "$125K", w: "62%" },
+                      { lbl: lang === "fr" ? "Productivité" : "Productivity", val: "+22%", w: "84%" },
+                      { lbl: "ROI", val: "3.2x", w: "70%" },
+                    ].map((m) => (
+                      <div key={m.lbl} className="mock-stat">
+                        <div className="mock-stat-lbl">{m.lbl}</div>
+                        <div className="mock-stat-val">{m.val}</div>
+                        <div className="mock-stat-bar"><div className="mock-stat-fill" style={{ width: m.w }} /></div>
+                      </div>
+                    ))}
+                    <div className="mock-chart">
+                      {[42, 58, 51, 73, 68, 82, 79, 91, 85, 96, 88, 100].map((h, i) => (
+                        <div key={i} className="mock-chart-bar" style={{ height: `${h}%` }} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* TRUST BAND */}
+            <div className="trust-band">
+              <div className="trust-lbl">
+                {lang === "fr" ? "Programmes officiels supportés" : "Official programs supported"}
+              </div>
+              <div className="trust-logos">
+                {["BDC", "ESSOR", "ADRIQ", "IRAP-NRC", "PROMPT", "Réseau PME"].map((name) => (
+                  <span key={name} className="trust-item">{name}</span>
+                ))}
               </div>
             </div>
 
             <div className="feat-grid">
               {[
-                { key: "diagnostic", icon: "🔍", ac: "#4F8EF7", title: t.nav.diagnostic, desc: lang === "fr" ? "Évaluez votre niveau numérique en 5 minutes chrono" : "Assess your digital level in 5 minutes" },
-                { key: "assistant",  icon: "🤖", ac: "#6366F1", title: t.nav.assistant,  desc: lang === "fr" ? "Posez vos questions 24h/24 à notre IA spécialisée" : "Ask 24/7 questions to our specialized AI" },
-                { key: "grants",     icon: "💰", ac: "#10B981", title: t.nav.subventions, desc: lang === "fr" ? "7 programmes gouvernementaux actifs en 2026" : "7 active government programs in 2026" },
-                { key: "plan",       icon: "📋", ac: "#F59E0B", title: t.nav.plan,        desc: lang === "fr" ? "Votre feuille de route personnalisée sur 12 mois" : "Your personalized 12-month roadmap" },
+                { key: "diagnostic", icon: "🔍", ac: "#635BFF", title: t.nav.diagnostic, desc: lang === "fr" ? "Évaluez votre niveau numérique en 5 minutes chrono" : "Assess your digital level in 5 minutes" },
+                { key: "assistant",  icon: "🤖", ac: "#635BFF", title: t.nav.assistant,  desc: lang === "fr" ? "Posez vos questions 24h/24 à notre IA spécialisée" : "Ask 24/7 questions to our specialized AI" },
+                { key: "grants",     icon: "💰", ac: "#635BFF", title: t.nav.subventions, desc: lang === "fr" ? "7 programmes gouvernementaux actifs en 2026" : "7 active government programs in 2026" },
+                { key: "plan",       icon: "📋", ac: "#635BFF", title: t.nav.plan,        desc: lang === "fr" ? "Votre feuille de route personnalisée sur 12 mois" : "Your personalized 12-month roadmap" },
               ].map((f) => (
                 <div key={f.key} className="feat-card" style={{ "--ac": f.ac }} onClick={() => setActiveTab(f.key)}>
-                  <div style={{ fontSize: 28, marginBottom: 14 }}>{f.icon}</div>
-                  <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: 15, color: f.ac, marginBottom: 6 }}>{f.title}</div>
-                  <div style={{ fontSize: 12.5, color: "#4B5A7A", lineHeight: 1.6 }}>{f.desc}</div>
+                  <div className="feat-icon">{f.icon}</div>
+                  <div style={{ fontFamily: "'Inter',sans-serif", fontWeight: 700, fontSize: 17, color: "#0A2540", marginBottom: 8, letterSpacing: "-0.01em" }}>{f.title}</div>
+                  <div style={{ fontSize: 14, color: "#425466", lineHeight: 1.55 }}>{f.desc}</div>
+                  <div style={{ marginTop: 16, fontSize: 13, fontWeight: 600, color: "#635BFF", display: "inline-flex", alignItems: "center", gap: 4 }}>
+                    {lang === "fr" ? "Découvrir" : "Discover"} →
+                  </div>
                 </div>
               ))}
             </div>
 
             <div className="stats-row">
               {[
-                { v: "+22%", l: lang === "fr" ? "Productivité" : "Productivity", c: "#10B981" },
-                { v: "7",    l: lang === "fr" ? "Programmes actifs" : "Active programs", c: "#4F8EF7" },
-                { v: "500M$",l: lang === "fr" ? "Budget PME Québec" : "Québec SME Budget", c: "#6366F1" },
-                { v: "+30%", l: lang === "fr" ? "Prime valorisation" : "Valuation premium", c: "#F59E0B" },
+                { v: "+22%", l: lang === "fr" ? "Productivité" : "Productivity", c: "#635BFF" },
+                { v: "7",    l: lang === "fr" ? "Programmes actifs" : "Active programs", c: "#635BFF" },
+                { v: "500M$",l: lang === "fr" ? "Budget PME Québec" : "Québec SME Budget", c: "#635BFF" },
+                { v: "+30%", l: lang === "fr" ? "Prime valorisation" : "Valuation premium", c: "#635BFF" },
               ].map((s) => (
                 <div key={s.l} className="stat-c">
-                  <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 24, fontWeight: 700, color: s.c, letterSpacing: "-0.5px" }}>{s.v}</div>
-                  <div style={{ fontSize: 10, color: "#4B5A7A", marginTop: 4, lineHeight: 1.4 }}>{s.l}</div>
+                  <div style={{ fontFamily: "'Inter',sans-serif", fontSize: 32, fontWeight: 700, background: "linear-gradient(135deg,#635BFF 0%,#0A2540 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", letterSpacing: "-0.025em" }}>{s.v}</div>
+                  <div style={{ fontSize: 12, color: "#697386", marginTop: 6, lineHeight: 1.4, fontWeight: 500 }}>{s.l}</div>
                 </div>
               ))}
             </div>
@@ -680,6 +893,15 @@ export default function App() {
         {/* DIAGNOSTIC */}
         {activeTab === "diagnostic" && (
           <div className="fade-up">
+            <div className="section-hero" style={{ marginTop: 32 }}>
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80" alt={lang === "fr" ? "Analyse de données et tableaux de bord" : "Data analysis dashboard"} loading="lazy" />
+              <div className="section-hero-overlay">
+                <div>
+                  <div className="section-hero-tag">{lang === "fr" ? "Évaluation gratuite" : "Free assessment"}</div>
+                  <div className="section-hero-title">{lang === "fr" ? "Mesurez votre maturité numérique en 5 minutes" : "Measure your digital maturity in 5 minutes"}</div>
+                </div>
+              </div>
+            </div>
             <div className="sec-head">
               <h2 className="sec-title">{t.diagnostic.title}</h2>
               <p className="sec-sub">{t.diagnostic.subtitle}</p>
@@ -688,15 +910,15 @@ export default function App() {
             {!diagResult ? (
               <div className="diag-card">
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                  <span style={{ color: "#4B5A7A", fontSize: 12 }}>{t.diagnostic.step} {diagStep + 1} {t.diagnostic.of} {t.diagnostic.questions.length}</span>
-                  <span style={{ color: "#4F8EF7", fontSize: 12, fontWeight: 600 }}>{Math.round(((diagStep + 1) / t.diagnostic.questions.length) * 100)}%</span>
+                  <span style={{ color: "#697386", fontSize: 12 }}>{t.diagnostic.step} {diagStep + 1} {t.diagnostic.of} {t.diagnostic.questions.length}</span>
+                  <span style={{ color: "#635BFF", fontSize: 12, fontWeight: 600 }}>{Math.round(((diagStep + 1) / t.diagnostic.questions.length) * 100)}%</span>
                 </div>
                 <div style={{ display: "flex", gap: 5, marginBottom: 24 }}>
                   {t.diagnostic.questions.map((_, i) => (
-                    <div key={i} style={{ height: 4, flex: 1, borderRadius: 2, background: i <= diagStep ? "#4F8EF7" : "rgba(255,255,255,0.07)", transition: "background 0.3s" }} />
+                    <div key={i} style={{ height: 4, flex: 1, borderRadius: 2, background: i <= diagStep ? "linear-gradient(90deg,#635BFF,#7A73FF)" : "#E6EBF1", transition: "background 0.3s" }} />
                   ))}
                 </div>
-                <h3 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 17, fontWeight: 600, lineHeight: 1.45, marginBottom: 22 }}>{t.diagnostic.questions[diagStep].q}</h3>
+                <h3 style={{ fontFamily: "'Inter',sans-serif", fontSize: 17, fontWeight: 600, lineHeight: 1.45, marginBottom: 22 }}>{t.diagnostic.questions[diagStep].q}</h3>
                 {t.diagnostic.questions[diagStep].options.map((opt) => (
                   <button key={opt} className="diag-opt" onClick={() => handleDiagAnswer(opt)}>{opt}</button>
                 ))}
@@ -708,61 +930,61 @@ export default function App() {
                 )}
               </div>
             ) : (
-              <div style={{ maxWidth: 560, margin: "0 auto", background: "#0D1526", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 20, padding: 40, textAlign: "center" }}>
-                <p style={{ color: "#4B5A7A", fontSize: 13, marginBottom: 24 }}>{t.diagnostic.resultTitle}</p>
+              <div style={{ maxWidth: 560, margin: "0 auto", background: "#FFFFFF", border: "1px solid #E6EBF1", borderRadius: 20, padding: 40, textAlign: "center" }}>
+                <p style={{ color: "#697386", fontSize: 13, marginBottom: 24 }}>{t.diagnostic.resultTitle}</p>
                 <svg width="160" height="160" viewBox="0 0 160 160" style={{ margin: "0 auto 20px", display: "block" }}>
-                  <circle cx="80" cy="80" r="65" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="10" />
+                  <circle cx="80" cy="80" r="65" fill="none" stroke="#E6EBF1" strokeWidth="10" />
                   <circle cx="80" cy="80" r="65" fill="none" stroke={scoreColor} strokeWidth="10"
                     strokeDasharray={`${2 * Math.PI * 65}`}
                     strokeDashoffset={`${2 * Math.PI * 65 * (1 - diagResult.score / 100)}`}
                     strokeLinecap="round" transform="rotate(-90 80 80)" className="score-ring"
-                    style={{ filter: `drop-shadow(0 0 8px ${scoreColor}55)` }} />
-                  <text x="80" y="76" textAnchor="middle" fill="#E8EBF4" fontSize="30" fontWeight="700" fontFamily="Space Grotesk">{diagResult.score}%</text>
-                  <text x="80" y="96" textAnchor="middle" fill="#4B5A7A" fontSize="11" fontFamily="DM Sans">{t.diagnostic.levels[diagResult.level]}</text>
+                    style={{ filter: `drop-shadow(0 4px 8px ${scoreColor}33)` }} />
+                  <text x="80" y="76" textAnchor="middle" fill="#0A2540" fontSize="30" fontWeight="700" fontFamily="Inter">{diagResult.score}%</text>
+                  <text x="80" y="96" textAnchor="middle" fill="#697386" fontSize="11" fontFamily="Inter">{t.diagnostic.levels[diagResult.level]}</text>
                 </svg>
-                <p style={{ color: "#8B97B4", fontSize: 13.5, lineHeight: 1.7, marginBottom: 28 }}>{t.diagnostic.levelDesc[diagResult.level]}</p>
+                <p style={{ color: "#425466", fontSize: 13.5, lineHeight: 1.7, marginBottom: 28 }}>{t.diagnostic.levelDesc[diagResult.level]}</p>
                 <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 16 }}>
-                  <button className="btn-p" style={{ fontSize: 13, background: "linear-gradient(135deg,#F59E0B,#EA580C)" }} onClick={() => { setShowInscription(true); setInscStatus(null); }}>
+                  <button className="btn-p" style={{ fontSize: 13, background: "linear-gradient(135deg,#FF8A4C 0%,#FF5F3D 100%)" }} onClick={() => { setShowInscription(true); setInscStatus(null); }}>
                     📧 {lang === "fr" ? "Recevoir mon rapport complet" : "Get my full report"}
                   </button>
                 </div>
                 <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
                   <button className="btn-p" style={{ fontSize: 13 }} onClick={() => setActiveTab("plan")}>📋 {t.diagnostic.viewPlan}</button>
-                  <button className="btn-p" style={{ fontSize: 13, background: "linear-gradient(135deg,#10B981,#059669)" }} onClick={() => setActiveTab("grants")}>💰 {t.diagnostic.viewGrants}</button>
+                  <button className="btn-p" style={{ fontSize: 13, background: "linear-gradient(135deg,#00D27A 0%,#00A865 100%)" }} onClick={() => setActiveTab("grants")}>💰 {t.diagnostic.viewGrants}</button>
                   <button className="btn-s" style={{ fontSize: 13 }} onClick={resetDiag}>↺ Recommencer</button>
                 </div>
 
                 {/* INSCRIPTION MODAL */}
                 {showInscription && (
                   <div style={{
-                    position: "fixed", inset: 0, background: "rgba(6,10,20,0.85)",
-                    backdropFilter: "blur(8px)", zIndex: 1000,
+                    position: "fixed", inset: 0, background: "rgba(10,37,64,0.55)",
+                    backdropFilter: "saturate(180%) blur(8px)", zIndex: 1000,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     padding: 20, animation: "fadeUp 0.25s ease"
                   }} onClick={(e) => { if (e.target === e.currentTarget) setShowInscription(false); }}>
                     <div style={{
-                      background: "#0D1526", border: "1px solid rgba(255,255,255,0.1)",
+                      background: "#FFFFFF", border: "1px solid #E6EBF1",
                       borderRadius: 20, padding: 36, maxWidth: 500, width: "100%",
                       maxHeight: "90vh", overflowY: "auto",
-                      boxShadow: "0 30px 80px rgba(0,0,0,0.5)"
+                      boxShadow: "0 24px 60px rgba(50,50,93,0.18), 0 8px 24px rgba(50,50,93,0.10)"
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
-                        <h3 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px" }}>
+                        <h3 style={{ fontFamily: "'Inter',sans-serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px" }}>
                           {t.inscription.title}
                         </h3>
                         <button onClick={() => setShowInscription(false)} style={{
-                          background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
-                          color: "#8B97B4", width: 30, height: 30, borderRadius: 8,
+                          background: "#F6F9FC", border: "1px solid #E6EBF1",
+                          color: "#425466", width: 30, height: 30, borderRadius: 8,
                           cursor: "pointer", fontSize: 16, fontFamily: "inherit"
                         }}>✕</button>
                       </div>
-                      <p style={{ color: "#8B97B4", fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>
+                      <p style={{ color: "#425466", fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>
                         {t.inscription.subtitle}
                       </p>
 
                       <ul style={{ listStyle: "none", padding: 0, marginBottom: 24, display: "flex", flexDirection: "column", gap: 8 }}>
                         {t.inscription.benefits.map((b, i) => (
-                          <li key={i} style={{ fontSize: 13, color: "#8B97B4", display: "flex", alignItems: "center", gap: 8 }}>
+                          <li key={i} style={{ fontSize: 13, color: "#425466", display: "flex", alignItems: "center", gap: 8 }}>
                             <span>{b}</span>
                           </li>
                         ))}
@@ -778,14 +1000,14 @@ export default function App() {
                       </div>
 
                       {inscStatus === "success" && (
-                        <div style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)",
-                          borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#10B981" }}>
+                        <div style={{ background: "rgba(0,168,101,0.08)", border: "1px solid rgba(0,168,101,0.3)",
+                          borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#00A865" }}>
                           {t.inscription.success}
                         </div>
                       )}
                       {inscStatus === "error" && (
-                        <div style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)",
-                          borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#EF4444" }}>
+                        <div style={{ background: "rgba(255,90,90,0.08)", border: "1px solid rgba(255,90,90,0.3)",
+                          borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#E25C5C" }}>
                           {t.inscription.error}
                         </div>
                       )}
@@ -795,7 +1017,7 @@ export default function App() {
                         {inscLoading ? t.inscription.submitting : `✉️ ${t.inscription.submit}`}
                       </button>
 
-                      <p style={{ fontSize: 11, color: "#4B5A7A", textAlign: "center", lineHeight: 1.5 }}>
+                      <p style={{ fontSize: 11, color: "#697386", textAlign: "center", lineHeight: 1.5 }}>
                         🔒 {t.inscription.privacy}
                       </p>
                     </div>
@@ -809,15 +1031,24 @@ export default function App() {
         {/* ASSISTANT */}
         {activeTab === "assistant" && (
           <div className="fade-up">
+            <div className="section-hero" style={{ marginTop: 32 }}>
+              <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=1600&q=80" alt={lang === "fr" ? "Intelligence artificielle conversationnelle" : "Conversational AI"} loading="lazy" />
+              <div className="section-hero-overlay">
+                <div>
+                  <div className="section-hero-tag">{lang === "fr" ? "Disponible 24/7" : "Available 24/7"}</div>
+                  <div className="section-hero-title">{lang === "fr" ? "Conseils intelligents propulsés par l'IA Claude" : "Intelligent advice powered by Claude AI"}</div>
+                </div>
+              </div>
+            </div>
             <div className="sec-head">
               <h2 className="sec-title">{t.assistant.title}</h2>
               <p className="sec-sub">{t.assistant.subtitle}</p>
             </div>
             <div style={{ maxWidth: 720, margin: "0 auto" }}>
               {/* Status */}
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, padding: "8px 14px", background: "#0D1526", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10 }}>
-                <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#10B981", boxShadow: "0 0 6px #10B981" }} />
-                <span style={{ fontSize: 11.5, color: "#4B5A7A", fontWeight: 500 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, padding: "8px 14px", background: "#FFFFFF", border: "1px solid #E6EBF1", borderRadius: 10 }}>
+                <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#00A865", boxShadow: "none" }} />
+                <span style={{ fontSize: 11.5, color: "#697386", fontWeight: 500 }}>
                   {lang === "fr" ? "Assistant IA · Spécialisé PME Gatineau-Ottawa · En ligne" : "AI Assistant · Specialized SME Gatineau-Ottawa · Online"}
                 </span>
               </div>
@@ -863,6 +1094,15 @@ export default function App() {
         {/* GRANTS */}
         {activeTab === "grants" && (
           <div className="fade-up">
+            <div className="section-hero" style={{ marginTop: 32 }}>
+              <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80" alt={lang === "fr" ? "Financement et subventions gouvernementales" : "Government funding and grants"} loading="lazy" />
+              <div className="section-hero-overlay">
+                <div>
+                  <div className="section-hero-tag">{lang === "fr" ? "Programmes 2026" : "2026 Programs"}</div>
+                  <div className="section-hero-title">{lang === "fr" ? "Jusqu'à 200 000$ en aide gouvernementale" : "Up to $200,000 in government assistance"}</div>
+                </div>
+              </div>
+            </div>
             <div className="sec-head">
               <h2 className="sec-title">{t.grants.title}</h2>
               <p className="sec-sub">{t.grants.subtitle}</p>
@@ -878,20 +1118,20 @@ export default function App() {
               {filteredGrants.map((g) => (
                 <div key={g.name} className="grant-card">
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
-                    <h3 style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: 15, lineHeight: 1.3, flex: 1 }}>{g.name}</h3>
+                    <h3 style={{ fontFamily: "'Inter',sans-serif", fontWeight: 600, fontSize: 15, lineHeight: 1.3, flex: 1 }}>{g.name}</h3>
                     <span style={{ marginLeft: 10, flexShrink: 0, padding: "3px 10px", borderRadius: 6, fontSize: 10, fontWeight: 700,
-                      background: g.type === "quebec" ? "rgba(37,99,235,0.12)" : "rgba(239,68,68,0.1)",
-                      color: g.type === "quebec" ? "#60A5FA" : "#FCA5A5",
-                      border: `1px solid ${g.type === "quebec" ? "rgba(37,99,235,0.25)" : "rgba(239,68,68,0.2)"}` }}>
+                      background: g.type === "quebec" ? "rgba(99,91,255,0.10)" : "rgba(255,90,90,0.10)",
+                      color: g.type === "quebec" ? "#5046E5" : "#D63B3B",
+                      border: `1px solid ${g.type === "quebec" ? "rgba(99,91,255,0.25)" : "rgba(255,90,90,0.25)"}` }}>
                       {g.type === "quebec" ? "QC" : "CA"}
                     </span>
                   </div>
-                  <p style={{ color: "#4B5A7A", fontSize: 11.5, marginBottom: 14 }}>{g.org}</p>
-                  <div style={{ background: "rgba(0,0,0,0.2)", borderRadius: 10, padding: "12px 14px", marginBottom: 14 }}>
-                    <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 20, fontWeight: 700, color: "#10B981", letterSpacing: "-0.5px" }}>{g.amount}</div>
-                    <div style={{ fontSize: 10.5, color: "#4B5A7A", marginTop: 2 }}>{g.coverage}</div>
+                  <p style={{ color: "#697386", fontSize: 11.5, marginBottom: 14 }}>{g.org}</p>
+                  <div style={{ background: "#F6F9FC", borderRadius: 10, padding: "12px 14px", marginBottom: 14 }}>
+                    <div style={{ fontFamily: "'Inter',sans-serif", fontSize: 20, fontWeight: 700, color: "#635BFF", letterSpacing: "-0.02em" }}>{g.amount}</div>
+                    <div style={{ fontSize: 10.5, color: "#697386", marginTop: 2 }}>{g.coverage}</div>
                   </div>
-                  <p style={{ color: "#8B97B4", fontSize: 12.5, lineHeight: 1.65, marginBottom: 14 }}>{g.desc}</p>
+                  <p style={{ color: "#425466", fontSize: 12.5, lineHeight: 1.65, marginBottom: 14 }}>{g.desc}</p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 16 }}>
                     {g.tags.map((tag) => <span key={tag} className="chip">{tag}</span>)}
                   </div>
@@ -905,6 +1145,15 @@ export default function App() {
         {/* PLAN */}
         {activeTab === "plan" && (
           <div className="fade-up">
+            <div className="section-hero" style={{ marginTop: 32 }}>
+              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80" alt={lang === "fr" ? "Équipe en planification stratégique" : "Team strategic planning"} loading="lazy" />
+              <div className="section-hero-overlay">
+                <div>
+                  <div className="section-hero-tag">{lang === "fr" ? "Feuille de route 12 mois" : "12-month roadmap"}</div>
+                  <div className="section-hero-title">{lang === "fr" ? "Votre transformation, étape par étape" : "Your transformation, step by step"}</div>
+                </div>
+              </div>
+            </div>
             <div className="sec-head">
               <h2 className="sec-title">{t.plan.title}</h2>
               <p className="sec-sub">{t.plan.subtitle}</p>
@@ -917,13 +1166,13 @@ export default function App() {
                     <div>
                       <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                         <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: ph.color }}>{ph.phase}</span>
-                        <span style={{ fontSize: 10.5, color: "#4B5A7A", background: "rgba(255,255,255,0.04)", padding: "2px 8px", borderRadius: 4 }}>{ph.period}</span>
+                        <span style={{ fontSize: 10.5, color: "#697386", background: "#F6F9FC", padding: "2px 8px", borderRadius: 4 }}>{ph.period}</span>
                       </div>
-                      <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 16, fontWeight: 600, marginTop: 3 }}>{ph.title}</div>
+                      <div style={{ fontFamily: "'Inter',sans-serif", fontSize: 16, fontWeight: 600, marginTop: 3 }}>{ph.title}</div>
                     </div>
                   </div>
                   {ph.actions.map((a) => (
-                    <div key={a} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13, color: "#8B97B4", padding: "4px 0" }}>
+                    <div key={a} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13, color: "#425466", padding: "4px 0" }}>
                       <span style={{ color: ph.color, flexShrink: 0, marginTop: 1 }}>✓</span>
                       <span>{a}</span>
                     </div>
@@ -934,8 +1183,8 @@ export default function App() {
                 {t.plan.impacts.map((imp) => (
                   <div key={imp.label} className="impact-card">
                     <div style={{ fontSize: 26 }}>{imp.icon}</div>
-                    <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 24, fontWeight: 700, color: "#4F8EF7", letterSpacing: "-0.5px", margin: "10px 0 4px" }}>{imp.value}</div>
-                    <div style={{ fontSize: 10.5, color: "#4B5A7A" }}>{imp.label}</div>
+                    <div style={{ fontFamily: "'Inter',sans-serif", fontSize: 24, fontWeight: 700, color: "#635BFF", letterSpacing: "-0.5px", margin: "10px 0 4px" }}>{imp.value}</div>
+                    <div style={{ fontSize: 10.5, color: "#697386" }}>{imp.label}</div>
                   </div>
                 ))}
               </div>
@@ -964,28 +1213,28 @@ export default function App() {
       {/* CONTACT MODAL */}
       {showContact && (
         <div style={{
-          position: "fixed", inset: 0, background: "rgba(6,10,20,0.85)",
-          backdropFilter: "blur(8px)", zIndex: 1000,
+          position: "fixed", inset: 0, background: "rgba(10,37,64,0.55)",
+          backdropFilter: "saturate(180%) blur(8px)", zIndex: 1000,
           display: "flex", alignItems: "center", justifyContent: "center",
           padding: 20, animation: "fadeUp 0.25s ease"
         }} onClick={(e) => { if (e.target === e.currentTarget) setShowContact(false); }}>
           <div style={{
-            background: "#0D1526", border: "1px solid rgba(255,255,255,0.1)",
+            background: "#FFFFFF", border: "1px solid #E6EBF1",
             borderRadius: 20, padding: 36, maxWidth: 500, width: "100%",
             maxHeight: "90vh", overflowY: "auto",
-            boxShadow: "0 30px 80px rgba(0,0,0,0.5)"
+            boxShadow: "0 24px 60px rgba(50,50,93,0.18), 0 8px 24px rgba(50,50,93,0.10)"
           }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
-              <h3 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px" }}>
+              <h3 style={{ fontFamily: "'Inter',sans-serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px" }}>
                 {lang === "fr" ? "Contactez-nous" : "Contact us"}
               </h3>
               <button onClick={() => setShowContact(false)} style={{
-                background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
-                color: "#8B97B4", width: 30, height: 30, borderRadius: 8,
+                background: "#F6F9FC", border: "1px solid #E6EBF1",
+                color: "#425466", width: 30, height: 30, borderRadius: 8,
                 cursor: "pointer", fontSize: 16, fontFamily: "inherit"
               }}>✕</button>
             </div>
-            <p style={{ color: "#8B97B4", fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>
+            <p style={{ color: "#425466", fontSize: 13, lineHeight: 1.6, marginBottom: 20 }}>
               {lang === "fr"
                 ? "Une question? Un partenariat? Envoyez-nous un message et nous reviendrons vers vous rapidement."
                 : "A question? A partnership? Send us a message and we will get back to you quickly."}
@@ -1003,20 +1252,20 @@ export default function App() {
                 value={contactMessage}
                 onChange={(e) => setContactMessage(e.target.value)}
                 rows={4}
-                style={{ resize: "vertical", minHeight: 100, fontFamily: "'DM Sans',sans-serif" }} />
+                style={{ resize: "vertical", minHeight: 100, fontFamily: "'Inter',sans-serif" }} />
             </div>
 
             {contactStatus === "success" && (
-              <div style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)",
-                borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#10B981" }}>
+              <div style={{ background: "rgba(0,168,101,0.08)", border: "1px solid rgba(0,168,101,0.3)",
+                borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#00A865" }}>
                 {lang === "fr"
                   ? "✅ Message envoyé! Nous vous répondrons rapidement."
                   : "✅ Message sent! We will reply quickly."}
               </div>
             )}
             {contactStatus === "error" && (
-              <div style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)",
-                borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#EF4444" }}>
+              <div style={{ background: "rgba(255,90,90,0.08)", border: "1px solid rgba(255,90,90,0.3)",
+                borderRadius: 10, padding: 12, marginBottom: 14, fontSize: 13, color: "#E25C5C" }}>
                 {lang === "fr"
                   ? "❌ Veuillez remplir tous les champs."
                   : "❌ Please fill in all fields."}
@@ -1030,9 +1279,9 @@ export default function App() {
                 : `✉️ ${lang === "fr" ? "Envoyer le message" : "Send message"}`}
             </button>
 
-            <p style={{ fontSize: 11, color: "#4B5A7A", textAlign: "center", lineHeight: 1.5 }}>
+            <p style={{ fontSize: 11, color: "#697386", textAlign: "center", lineHeight: 1.5 }}>
               {lang === "fr" ? "Ou écrivez-nous directement à " : "Or write to us directly at "}
-              <a href="mailto:contact@numerikpme.ca" style={{ color: "#4F8EF7", textDecoration: "none" }}>
+              <a href="mailto:contact@numerikpme.ca" style={{ color: "#635BFF", textDecoration: "none" }}>
                 contact@numerikpme.ca
               </a>
             </p>
@@ -1045,12 +1294,34 @@ export default function App() {
         <div className="footer-inner">
           <div className="footer-brand">
             <div className="footer-logo">
-              <div className="logo-mark" style={{ width: 32, height: 32 }}>
-                <div className="logo-bars">
-                  {[5, 8, 11, 7].map((h, i) => <div key={i} className="logo-bar" style={{ height: h, width: 3 }} />)}
-                </div>
+              <div className="logo-mark" style={{ width: 34, height: 34 }} aria-label="NuMérik PME">
+                <svg className="logo-svg" viewBox="0 0 24 24" fill="none">
+                  <defs>
+                    <linearGradient id="nGradF" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#FFFFFF" />
+                      <stop offset="55%" stopColor="#F5F3FF" />
+                      <stop offset="100%" stopColor="#D9D2FF" />
+                    </linearGradient>
+                    <linearGradient id="dotGradF" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#FFE680" />
+                      <stop offset="100%" stopColor="#FFB347" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M4 21 L4 3 L7.6 3 L16.4 14.5 L16.4 3 L20 3 L20 21 L16.4 21 L7.6 9.5 L7.6 21 Z"
+                    fill="url(#nGradF)"
+                    stroke="rgba(255,255,255,0.35)"
+                    strokeWidth="0.3"
+                    strokeLinejoin="round"
+                  />
+                  <circle className="logo-accent" cx="20" cy="3" r="2.1" fill="url(#dotGradF)" />
+                  <circle cx="19.4" cy="2.4" r="0.6" fill="#FFFFFF" opacity="0.85" />
+                </svg>
               </div>
-              <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 16, color: "#E8EBF4" }}>NuMérik PME</span>
+              <span style={{ fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif", fontWeight: 700, fontSize: 17, letterSpacing: "-0.022em", display: "inline-flex", alignItems: "baseline", gap: 4 }}>
+                <span style={{ color: "#FFFFFF" }}>NuMérik</span>
+                <span style={{ background: "linear-gradient(135deg,#7A73FF 0%,#A89FFF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", fontWeight: 800 }}>PME</span>
+              </span>
             </div>
             <p className="footer-tag">
               {lang === "fr"
@@ -1100,7 +1371,7 @@ export default function App() {
           </div>
           <div className="footer-legal">
             <a onClick={() => setActiveTab("legal")}>{lang === "fr" ? "Confidentialité" : "Privacy"}</a>
-            <span style={{ color: "#4F8EF7" }}>🇨🇦 {lang === "fr" ? "Fait au Canada" : "Made in Canada"}</span>
+            <span style={{ color: "#FFFFFF", fontWeight: 500 }}>🇨🇦 {lang === "fr" ? "Fait au Canada" : "Made in Canada"}</span>
           </div>
         </div>
       </footer>
