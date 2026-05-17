@@ -193,6 +193,7 @@ export default function App() {
   const [diagStep, setDiagStep] = useState(0);
   const [diagAnswers, setDiagAnswers] = useState([]);
   const [diagResult, setDiagResult] = useState(null);
+  const [diagAnalyzing, setDiagAnalyzing] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -222,20 +223,115 @@ export default function App() {
 
   const switchLang = () => setLang(lang === "fr" ? "en" : "fr");
 
-  const handleDiagAnswer = (answer) => {
+  // Fallback local scoring (si AI echwe)
+  const computeLocalResult = (answers) => {
+    const score = answers.reduce((acc, ans, i) => acc + t.diagnostic.questions[i].options.indexOf(ans), 0);
+    const max = t.diagnostic.questions.reduce((acc, q) => acc + q.options.length - 1, 0);
+    const pct = Math.round((score / max) * 100);
+    return { score: pct, level: pct < 25 ? 0 : pct < 50 ? 1 : pct < 75 ? 2 : 3, ai: false };
+  };
+
+  // Analiz AI pèsonalize via /api/chat
+  const analyzeWithAI = async (answers) => {
+    const isEN = lang === "en";
+    const qa = answers.map((a, i) => `${i + 1}. ${t.diagnostic.questions[i].q} → ${a}`).join("\n");
+
+    const prompt = isEN
+      ? `You are an expert digital maturity consultant for SMEs in Quebec-Canada (Gatineau-Ottawa region).
+
+Here is a completed digital diagnostic:
+${qa}
+
+Analyze these responses and return ONLY a valid JSON object (no markdown fences, no explanation text, just the JSON):
+{
+  "score": <integer 0-100 reflecting true digital maturity>,
+  "summary": "<2-3 sentences personalized to their sector and size>",
+  "strengths": ["<short bullet>", "<short bullet>", "<short bullet>"],
+  "weaknesses": ["<short bullet>", "<short bullet>", "<short bullet>"],
+  "priorities": [
+    {"title": "<short title>", "description": "<1-2 sentence actionable description tailored to their sector>", "impact": "high|medium|low"},
+    {"title": "<short title>", "description": "<...>", "impact": "high|medium|low"},
+    {"title": "<short title>", "description": "<...>", "impact": "high|medium|low"}
+  ],
+  "recommended_grants": ["<grant name 1>", "<grant name 2>", "<grant name 3>"],
+  "next_action": "<one specific actionable next step they should take this week>"
+}
+
+Available grant programs to recommend from: Offensive Tr@ns Num, Programme ESSOR, CRIC, Plan PME 2025-2028, BDC - Prêt Technologie, SIPEM-PROMPT (manufacturing), PARI-CNRC.
+
+All text in English. Be specific to their actual responses — no generic advice.`
+      : `Tu es un consultant expert en maturité numérique pour les PME du Québec-Canada (région Gatineau-Ottawa).
+
+Voici un diagnostic numérique complété :
+${qa}
+
+Analyse ces réponses et retourne UNIQUEMENT un objet JSON valide (sans balises markdown, sans texte explicatif, juste le JSON) :
+{
+  "score": <entier 0-100 reflétant la vraie maturité numérique>,
+  "summary": "<2-3 phrases personnalisées selon leur secteur et taille>",
+  "strengths": ["<point court>", "<point court>", "<point court>"],
+  "weaknesses": ["<point court>", "<point court>", "<point court>"],
+  "priorities": [
+    {"title": "<titre court>", "description": "<1-2 phrases d'action concrète adaptées à leur secteur>", "impact": "high|medium|low"},
+    {"title": "<titre court>", "description": "<...>", "impact": "high|medium|low"},
+    {"title": "<titre court>", "description": "<...>", "impact": "high|medium|low"}
+  ],
+  "recommended_grants": ["<nom subvention 1>", "<nom subvention 2>", "<nom subvention 3>"],
+  "next_action": "<une étape concrète et spécifique à faire cette semaine>"
+}
+
+Programmes de subvention disponibles à recommander : Offensive Tr@ns Num, Programme ESSOR, CRIC, Plan PME 2025-2028, BDC - Prêt Technologie, SIPEM-PROMPT (manufacturier), PARI-CNRC.
+
+Tout le texte en français. Sois spécifique aux réponses données — pas de conseils génériques.`;
+
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: [{ role: "user", content: prompt }] }),
+    });
+    if (!res.ok) throw new Error("API non disponible");
+    const data = await res.json();
+    const reply = data.reply || "";
+    // Extract JSON object (Claude may add surrounding text despite instructions)
+    const match = reply.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error("JSON introuvable");
+    const parsed = JSON.parse(match[0]);
+    const score = Math.min(100, Math.max(0, parseInt(parsed.score, 10) || 0));
+    const level = score < 25 ? 0 : score < 50 ? 1 : score < 75 ? 2 : 3;
+    return {
+      score,
+      level,
+      ai: true,
+      summary: parsed.summary || "",
+      strengths: Array.isArray(parsed.strengths) ? parsed.strengths.slice(0, 5) : [],
+      weaknesses: Array.isArray(parsed.weaknesses) ? parsed.weaknesses.slice(0, 5) : [],
+      priorities: Array.isArray(parsed.priorities) ? parsed.priorities.slice(0, 5) : [],
+      recommended_grants: Array.isArray(parsed.recommended_grants) ? parsed.recommended_grants : [],
+      next_action: parsed.next_action || "",
+    };
+  };
+
+  const handleDiagAnswer = async (answer) => {
     const newAnswers = [...diagAnswers, answer];
     setDiagAnswers(newAnswers);
     if (diagStep < t.diagnostic.questions.length - 1) {
       setDiagStep(diagStep + 1);
-    } else {
-      const score = newAnswers.reduce((acc, ans, i) => acc + t.diagnostic.questions[i].options.indexOf(ans), 0);
-      const max = t.diagnostic.questions.reduce((acc, q) => acc + q.options.length - 1, 0);
-      const pct = Math.round((score / max) * 100);
-      setDiagResult({ score: pct, level: pct < 25 ? 0 : pct < 50 ? 1 : pct < 75 ? 2 : 3 });
+      return;
+    }
+    // Dènye repons — lanse analiz AI
+    setDiagAnalyzing(true);
+    try {
+      const aiResult = await analyzeWithAI(newAnswers);
+      setDiagResult(aiResult);
+    } catch (err) {
+      // Fallback: scoring local si AI echwe
+      setDiagResult(computeLocalResult(newAnswers));
+    } finally {
+      setDiagAnalyzing(false);
     }
   };
 
-  const resetDiag = () => { setDiagStep(0); setDiagAnswers([]); setDiagResult(null); };
+  const resetDiag = () => { setDiagStep(0); setDiagAnswers([]); setDiagResult(null); setDiagAnalyzing(false); };
 
   const submitContact = async () => {
     if (!contactName.trim() || !contactEmail.trim() || !contactMessage.trim()) {
@@ -699,6 +795,70 @@ export default function App() {
           .sec-band{padding:32px 22px;border-radius:14px}
         }
 
+
+        /* ── AI DIAGNOSTIC — LOADING ── */
+        @keyframes pulseRing{0%{transform:scale(0.7);opacity:0.8}100%{transform:scale(1.6);opacity:0}}
+        @keyframes stepFade{0%,40%{opacity:0.35;transform:translateX(-4px)}50%,90%{opacity:1;transform:translateX(0)}100%{opacity:0.35;transform:translateX(-4px)}}
+        .diag-analyzing{max-width:560px;margin:0 auto;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:20px;padding:56px 40px;text-align:center;box-shadow:0 4px 12px rgba(50,50,93,0.06)}
+        .ai-pulse{position:relative;width:80px;height:80px;margin:0 auto 24px;display:flex;align-items:center;justify-content:center}
+        .ai-pulse-ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(99,91,255,0.35) 0%,rgba(99,91,255,0) 70%);animation:pulseRing 2.2s ease-out infinite}
+        .ai-pulse-ring.d2{animation-delay:1.1s}
+        .ai-pulse-core{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 8px 24px rgba(99,91,255,0.45),0 0 0 1px rgba(255,255,255,0.15) inset;position:relative;z-index:1}
+        .analyzing-title{font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:#0A2540;letter-spacing:-0.02em;margin-bottom:10px}
+        .analyzing-sub{color:#697386;font-size:14px;line-height:1.6;max-width:420px;margin:0 auto 28px}
+        .analyzing-steps{display:flex;flex-direction:column;gap:10px;max-width:280px;margin:0 auto;text-align:left}
+        .analyzing-step{font-size:13px;color:#425466;font-weight:500;display:flex;align-items:center;gap:10px;animation:stepFade 2s ease-in-out infinite}
+        .analyzing-dot{width:6px;height:6px;border-radius:50%;background:#635BFF;flex-shrink:0;box-shadow:0 0 6px rgba(99,91,255,0.5)}
+
+        /* ── AI BADGE ── */
+        .ai-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;background:linear-gradient(135deg,rgba(99,91,255,0.10) 0%,rgba(122,115,255,0.05) 100%);border:1px solid rgba(99,91,255,0.20);font-size:11px;font-weight:700;color:#635BFF;letter-spacing:0.05em;text-transform:uppercase}
+
+        /* ── AI STRENGTHS / WEAKNESSES GRID ── */
+        .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+        .ai-card{background:#FFFFFF;border:1px solid #E6EBF1;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(50,50,93,0.04);text-align:left}
+        .ai-card-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+        .ai-card-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0}
+        .ai-card h4{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#0A2540;letter-spacing:-0.01em;margin:0}
+        .ai-card ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
+        .ai-card li{font-size:13.5px;color:#425466;line-height:1.55;padding-left:14px;position:relative}
+        .ai-card-strength li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:#00A865}
+        .ai-card-weakness li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:#FF6B2C}
+
+        /* ── AI PRIORITIES ── */
+        .ai-priorities{margin-top:24px;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:16px;padding:32px;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+        .ai-section-title{font-family:'Inter',sans-serif;font-size:18px;font-weight:700;color:#0A2540;letter-spacing:-0.02em;margin-bottom:20px;text-align:left}
+        .ai-priorities-list{display:flex;flex-direction:column;gap:14px}
+        .ai-priority{display:flex;gap:14px;align-items:flex-start;padding:18px;background:#FAFBFD;border:1px solid #E6EBF1;border-radius:12px;text-align:left;transition:all 0.18s ease}
+        .ai-priority:hover{border-color:#635BFF;background:#FFFFFF;box-shadow:0 4px 12px rgba(99,91,255,0.08)}
+        .ai-priority-num{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#635BFF,#5046E5);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;box-shadow:0 2px 6px rgba(99,91,255,0.25)}
+        .ai-priority-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+        .ai-priority h5{font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;color:#0A2540;letter-spacing:-0.01em;margin:0}
+        .ai-priority p{font-size:13px;color:#425466;line-height:1.6;margin:0}
+        .ai-impact{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:3px 9px;border-radius:100px;flex-shrink:0}
+        .ai-impact-high{background:rgba(226,92,92,0.10);color:#D63B3B;border:1px solid rgba(226,92,92,0.25)}
+        .ai-impact-medium{background:rgba(255,138,76,0.10);color:#FF6B2C;border:1px solid rgba(255,138,76,0.25)}
+        .ai-impact-low{background:rgba(0,168,101,0.10);color:#00A865;border:1px solid rgba(0,168,101,0.25)}
+
+        /* ── AI NEXT ACTION ── */
+        .ai-next{margin-top:24px;background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);border-radius:16px;padding:28px 32px;color:#FFFFFF;text-align:left;box-shadow:0 8px 24px rgba(99,91,255,0.25);position:relative;overflow:hidden}
+        .ai-next::before{content:'';position:absolute;top:-40%;right:-10%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,0.18) 0%,transparent 60%);pointer-events:none}
+        .ai-next-tag{font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:rgba(255,255,255,0.85);margin-bottom:8px}
+        .ai-next p{font-size:15px;line-height:1.6;color:#FFFFFF;margin:0;font-weight:500;position:relative;z-index:1}
+
+        /* Mobile */
+        @media(max-width:768px){
+          .diag-analyzing{padding:40px 24px}
+          .analyzing-title{font-size:17px}
+          .analyzing-sub{font-size:13px}
+          .ai-grid{grid-template-columns:1fr;gap:12px}
+          .ai-card{padding:20px}
+          .ai-priorities{padding:24px 20px}
+          .ai-priority{padding:16px;flex-direction:column;gap:10px}
+          .ai-priority-num{width:28px;height:28px;font-size:13px}
+          .ai-next{padding:22px 22px}
+          .ai-next p{font-size:14px}
+        }
+
       `}</style>
 
       {/* NAV */}
@@ -907,7 +1067,33 @@ export default function App() {
               <p className="sec-sub">{t.diagnostic.subtitle}</p>
             </div>
 
-            {!diagResult ? (
+            {diagAnalyzing ? (
+              <div className="diag-analyzing">
+                <div className="ai-pulse">
+                  <div className="ai-pulse-ring" />
+                  <div className="ai-pulse-ring d2" />
+                  <div className="ai-pulse-core">⚡</div>
+                </div>
+                <h3 className="analyzing-title">
+                  {lang === "fr" ? "Analyse personnalisée en cours" : "Personalized analysis in progress"}
+                </h3>
+                <p className="analyzing-sub">
+                  {lang === "fr"
+                    ? "Notre IA Claude analyse vos réponses pour générer un rapport adapté à votre PME…"
+                    : "Our Claude AI is analyzing your responses to generate a report tailored to your SME…"}
+                </p>
+                <div className="analyzing-steps">
+                  {(lang === "fr"
+                    ? ["Évaluation de la maturité", "Identification des forces", "Recommandations sur mesure", "Sélection des subventions"]
+                    : ["Maturity assessment", "Strengths identification", "Tailored recommendations", "Grant selection"]
+                  ).map((s, i) => (
+                    <div key={s} className="analyzing-step" style={{ animationDelay: `${i * 0.3}s` }}>
+                      <span className="analyzing-dot" />{s}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : !diagResult ? (
               <div className="diag-card">
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
                   <span style={{ color: "#697386", fontSize: 12 }}>{t.diagnostic.step} {diagStep + 1} {t.diagnostic.of} {t.diagnostic.questions.length}</span>
@@ -930,28 +1116,105 @@ export default function App() {
                 )}
               </div>
             ) : (
-              <div style={{ maxWidth: 560, margin: "0 auto", background: "#FFFFFF", border: "1px solid #E6EBF1", borderRadius: 20, padding: 40, textAlign: "center" }}>
-                <p style={{ color: "#697386", fontSize: 13, marginBottom: 24 }}>{t.diagnostic.resultTitle}</p>
-                <svg width="160" height="160" viewBox="0 0 160 160" style={{ margin: "0 auto 20px", display: "block" }}>
-                  <circle cx="80" cy="80" r="65" fill="none" stroke="#E6EBF1" strokeWidth="10" />
-                  <circle cx="80" cy="80" r="65" fill="none" stroke={scoreColor} strokeWidth="10"
-                    strokeDasharray={`${2 * Math.PI * 65}`}
-                    strokeDashoffset={`${2 * Math.PI * 65 * (1 - diagResult.score / 100)}`}
-                    strokeLinecap="round" transform="rotate(-90 80 80)" className="score-ring"
-                    style={{ filter: `drop-shadow(0 4px 8px ${scoreColor}33)` }} />
-                  <text x="80" y="76" textAnchor="middle" fill="#0A2540" fontSize="30" fontWeight="700" fontFamily="Inter">{diagResult.score}%</text>
-                  <text x="80" y="96" textAnchor="middle" fill="#697386" fontSize="11" fontFamily="Inter">{t.diagnostic.levels[diagResult.level]}</text>
-                </svg>
-                <p style={{ color: "#425466", fontSize: 13.5, lineHeight: 1.7, marginBottom: 28 }}>{t.diagnostic.levelDesc[diagResult.level]}</p>
-                <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 16 }}>
-                  <button className="btn-p" style={{ fontSize: 13, background: "linear-gradient(135deg,#FF8A4C 0%,#FF5F3D 100%)" }} onClick={() => { setShowInscription(true); setInscStatus(null); }}>
-                    📧 {lang === "fr" ? "Recevoir mon rapport complet" : "Get my full report"}
-                  </button>
+              <div style={{ maxWidth: 820, margin: "0 auto" }}>
+                {/* SCORE BLOCK */}
+                <div style={{ background: "#FFFFFF", border: "1px solid #E6EBF1", borderRadius: 20, padding: 40, textAlign: "center", boxShadow: "0 4px 12px rgba(50,50,93,0.06)" }}>
+                  {diagResult.ai && (
+                    <div className="ai-badge">
+                      <span>⚡</span> {lang === "fr" ? "Analyse IA personnalisée" : "Personalized AI analysis"}
+                    </div>
+                  )}
+                  <p style={{ color: "#697386", fontSize: 13, marginBottom: 16, marginTop: diagResult.ai ? 12 : 0 }}>{t.diagnostic.resultTitle}</p>
+                  <svg width="160" height="160" viewBox="0 0 160 160" style={{ margin: "0 auto 20px", display: "block" }}>
+                    <circle cx="80" cy="80" r="65" fill="none" stroke="#E6EBF1" strokeWidth="10" />
+                    <circle cx="80" cy="80" r="65" fill="none" stroke={scoreColor} strokeWidth="10"
+                      strokeDasharray={`${2 * Math.PI * 65}`}
+                      strokeDashoffset={`${2 * Math.PI * 65 * (1 - diagResult.score / 100)}`}
+                      strokeLinecap="round" transform="rotate(-90 80 80)" className="score-ring"
+                      style={{ filter: `drop-shadow(0 4px 8px ${scoreColor}33)` }} />
+                    <text x="80" y="76" textAnchor="middle" fill="#0A2540" fontSize="30" fontWeight="700" fontFamily="Inter">{diagResult.score}%</text>
+                    <text x="80" y="96" textAnchor="middle" fill="#697386" fontSize="11" fontFamily="Inter">{t.diagnostic.levels[diagResult.level]}</text>
+                  </svg>
+                  <p style={{ color: "#425466", fontSize: 14.5, lineHeight: 1.65, maxWidth: 560, margin: "0 auto 28px" }}>
+                    {diagResult.ai && diagResult.summary ? diagResult.summary : t.diagnostic.levelDesc[diagResult.level]}
+                  </p>
+                  <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+                    <button className="btn-p" style={{ fontSize: 13, background: "linear-gradient(135deg,#FF8A4C 0%,#FF5F3D 100%)" }} onClick={() => { setShowInscription(true); setInscStatus(null); }}>
+                      📧 {lang === "fr" ? "Recevoir mon rapport complet" : "Get my full report"}
+                    </button>
+                  </div>
                 </div>
-                <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+
+                {/* AI: Strengths + Weaknesses */}
+                {diagResult.ai && (diagResult.strengths.length > 0 || diagResult.weaknesses.length > 0) && (
+                  <div className="ai-grid">
+                    {diagResult.strengths.length > 0 && (
+                      <div className="ai-card ai-card-strength">
+                        <div className="ai-card-head">
+                          <span className="ai-card-icon" style={{ background: "rgba(0,168,101,0.10)", color: "#00A865" }}>✓</span>
+                          <h4>{lang === "fr" ? "Vos forces" : "Your strengths"}</h4>
+                        </div>
+                        <ul>
+                          {diagResult.strengths.map((s, i) => <li key={i}>{s}</li>)}
+                        </ul>
+                      </div>
+                    )}
+                    {diagResult.weaknesses.length > 0 && (
+                      <div className="ai-card ai-card-weakness">
+                        <div className="ai-card-head">
+                          <span className="ai-card-icon" style={{ background: "rgba(255,138,76,0.12)", color: "#FF6B2C" }}>!</span>
+                          <h4>{lang === "fr" ? "Axes d'amélioration" : "Areas to improve"}</h4>
+                        </div>
+                        <ul>
+                          {diagResult.weaknesses.map((w, i) => <li key={i}>{w}</li>)}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* AI: Priorities */}
+                {diagResult.ai && diagResult.priorities.length > 0 && (
+                  <div className="ai-priorities">
+                    <h3 className="ai-section-title">
+                      🎯 {lang === "fr" ? "Vos priorités recommandées" : "Your recommended priorities"}
+                    </h3>
+                    <div className="ai-priorities-list">
+                      {diagResult.priorities.map((p, i) => (
+                        <div key={i} className="ai-priority">
+                          <div className="ai-priority-num">{i + 1}</div>
+                          <div style={{ flex: 1 }}>
+                            <div className="ai-priority-head">
+                              <h5>{p.title}</h5>
+                              <span className={`ai-impact ai-impact-${(p.impact || "medium").toLowerCase()}`}>
+                                {(p.impact || "").toLowerCase() === "high" ? (lang === "fr" ? "Impact élevé" : "High impact")
+                                  : (p.impact || "").toLowerCase() === "low" ? (lang === "fr" ? "Impact faible" : "Low impact")
+                                  : (lang === "fr" ? "Impact moyen" : "Medium impact")}
+                              </span>
+                            </div>
+                            <p>{p.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* AI: Next action */}
+                {diagResult.ai && diagResult.next_action && (
+                  <div className="ai-next">
+                    <div className="ai-next-tag">
+                      ⚡ {lang === "fr" ? "Action immédiate" : "Immediate action"}
+                    </div>
+                    <p>{diagResult.next_action}</p>
+                  </div>
+                )}
+
+                {/* CTA buttons */}
+                <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginTop: 32 }}>
                   <button className="btn-p" style={{ fontSize: 13 }} onClick={() => setActiveTab("plan")}>📋 {t.diagnostic.viewPlan}</button>
                   <button className="btn-p" style={{ fontSize: 13, background: "linear-gradient(135deg,#00D27A 0%,#00A865 100%)" }} onClick={() => setActiveTab("grants")}>💰 {t.diagnostic.viewGrants}</button>
-                  <button className="btn-s" style={{ fontSize: 13 }} onClick={resetDiag}>↺ Recommencer</button>
+                  <button className="btn-s" style={{ fontSize: 13 }} onClick={resetDiag}>↺ {lang === "fr" ? "Recommencer" : "Restart"}</button>
                 </div>
 
                 {/* INSCRIPTION MODAL */}
