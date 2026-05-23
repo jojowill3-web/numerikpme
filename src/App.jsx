@@ -347,11 +347,10 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
         mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({
+          type: "contact",
           email: contactEmail,
           nom: contactName,
-          entreprise: "[CONTACT] " + contactMessage.substring(0, 200),
-          secteur: "Contact form",
-          score: "",
+          message: contactMessage,
           langue: lang.toUpperCase(),
         }),
       });
