@@ -233,6 +233,13 @@ export default function App() {
     setMessages([{ role: "assistant", content: t.assistant.welcome }]);
   }, [lang]);
 
+  // Sync <html lang> ak lang aktyèl (a11y + SEO)
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = lang === "fr" ? "fr-CA" : "en-CA";
+    }
+  }, [lang]);
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -695,14 +702,17 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
         .footer-col h4{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#FFFFFF;margin-bottom:18px}
         .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;padding:0}
         .footer-col a,.footer-col li{font-size:13.5px;color:#A3ACBA;text-decoration:none;transition:color 0.15s ease;cursor:pointer}
+        .footer-link{font-family:inherit;font-size:13.5px;color:#A3ACBA;background:none;border:none;padding:0;cursor:pointer;text-align:left;transition:color 0.15s ease}
+        .footer-link:hover,.footer-link:focus-visible{color:#FFFFFF;outline:none}
+        .footer-link:focus-visible{text-decoration:underline;text-underline-offset:3px}
         .footer-col a:hover{color:#FFFFFF}
         .footer-contact{font-size:13.5px;color:#A3ACBA;line-height:1.75}
         .footer-contact strong{color:#FFFFFF;font-weight:600}
         .footer-bottom{max-width:1180px;margin:48px auto 0;padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
         .footer-copy{font-size:12.5px;color:#8898AA}
         .footer-legal{display:flex;gap:20px;font-size:12.5px}
-        .footer-legal a{color:#8898AA;text-decoration:none;transition:color 0.15s ease}
-        .footer-legal a:hover{color:#FFFFFF}
+        .footer-legal a,.footer-legal .footer-link{color:#8898AA;text-decoration:none;transition:color 0.15s ease;font-size:12.5px}
+        .footer-legal a:hover,.footer-legal .footer-link:hover,.footer-legal .footer-link:focus-visible{color:#FFFFFF}
 
         /* ── MEDIA QUERIES ── */
         @media(max-width:1024px){
@@ -1644,10 +1654,10 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
           <div className="footer-col">
             <h4>{lang === "fr" ? "Produit" : "Product"}</h4>
             <ul>
-              <li><a onClick={() => setActiveTab("diagnostic")}>{t.nav.diagnostic}</a></li>
-              <li><a onClick={() => setActiveTab("assistant")}>{t.nav.assistant}</a></li>
-              <li><a onClick={() => setActiveTab("grants")}>{t.nav.subventions}</a></li>
-              <li><a onClick={() => setActiveTab("plan")}>{t.nav.plan}</a></li>
+              <li><button type="button" className="footer-link" onClick={() => setActiveTab("diagnostic")}>{t.nav.diagnostic}</button></li>
+              <li><button type="button" className="footer-link" onClick={() => setActiveTab("assistant")}>{t.nav.assistant}</button></li>
+              <li><button type="button" className="footer-link" onClick={() => setActiveTab("grants")}>{t.nav.subventions}</button></li>
+              <li><button type="button" className="footer-link" onClick={() => setActiveTab("plan")}>{t.nav.plan}</button></li>
             </ul>
           </div>
 
@@ -1678,7 +1688,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
             © 2026 NuMérik PME. {lang === "fr" ? "Tous droits réservés." : "All rights reserved."}
           </div>
           <div className="footer-legal">
-            <a onClick={() => setActiveTab("legal")}>{lang === "fr" ? "Confidentialité" : "Privacy"}</a>
+            <button type="button" className="footer-link" onClick={() => setActiveTab("legal")}>{lang === "fr" ? "Confidentialité" : "Privacy"}</button>
             <span style={{ color: "#FFFFFF", fontWeight: 500 }}>🇨🇦 {lang === "fr" ? "Fait au Canada" : "Made in Canada"}</span>
           </div>
         </div>
