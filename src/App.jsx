@@ -111,7 +111,7 @@ const translations = {
   },
   en: {
     appTitle: "NuMérik PME", appSubtitle: "Your AI assistant for digital transformation", region: "Gatineau · Ottawa",
-    nav: { diagnostic: "Diagnostic", assistant: "AI Assistant", subventions: "Grants", plan: "Action Plan" },
+    nav: { diagnostic: "Assessment", assistant: "AI Assistant", subventions: "Grants", plan: "Action Plan" },
     hero: { title: "Power your SME\ninto the digital age", subtitle: "Smart Diagnostic · Government Grants · Personalized Action Plan · 24/7 AI Assistant", cta: "Start Diagnostic", cta2: "Talk to Assistant", badge: "Gatineau · Ottawa · 2026" },
     mission: {
       label: "Our Mission",
@@ -413,6 +413,20 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
           secteur: secteur,
           score: diagResult ? diagResult.score + "%" : "",
           langue: lang.toUpperCase(),
+          // Personalized AI analysis (when available)
+          ai: !!(diagResult && diagResult.ai),
+          summary: diagResult && diagResult.summary ? diagResult.summary : "",
+          strengths: diagResult && diagResult.strengths ? diagResult.strengths : [],
+          weaknesses: diagResult && diagResult.weaknesses ? diagResult.weaknesses : [],
+          priorities: diagResult && diagResult.priorities ? diagResult.priorities : [],
+          next_action: diagResult && diagResult.next_action ? diagResult.next_action : "",
+          recommended_grants: diagResult && diagResult.recommended_grants ? diagResult.recommended_grants : [],
+          level_label: diagResult ? t.diagnostic.levels[diagResult.level] : "",
+          // Full Q&A for context
+          answers: diagAnswers.map((a, i) => ({
+            q: t.diagnostic.questions[i] ? t.diagnostic.questions[i].q : "",
+            a: a
+          })),
         }),
       });
       setInscStatus("success");
@@ -974,7 +988,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
         <div className="mob-nav-inner">
           {[
             { key: "home",       icon: "🏠", label: lang === "fr" ? "Accueil"    : "Home" },
-            { key: "diagnostic", icon: "🔍", label: lang === "fr" ? "Diagnostic" : "Diagnostic" },
+            { key: "diagnostic", icon: "🔍", label: lang === "fr" ? "Diagnostic" : "Assess" },
             { key: "assistant",  icon: "🤖", label: lang === "fr" ? "Assistant"  : "Assistant" },
             { key: "grants",     icon: "💰", label: lang === "fr" ? "Aides"      : "Grants" },
             { key: "plan",       icon: "📋", label: lang === "fr" ? "Plan"       : "Plan" },
