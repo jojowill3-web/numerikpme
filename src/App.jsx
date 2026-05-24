@@ -277,10 +277,18 @@ Analyze these responses and return ONLY a valid JSON object (no markdown fences,
     {"title": "<short title>", "description": "<...>", "impact": "high|medium|low"}
   ],
   "recommended_grants": ["<grant name 1>", "<grant name 2>", "<grant name 3>"],
-  "next_action": "<one specific actionable next step they should take this week>"
+  "next_action": "<one specific actionable next step they should take this week>",
+  "action_plan": [
+    {"phase": "Phase 1", "period": "Months 1-2", "title": "<phase title adapted to their context>", "icon": "🔍", "actions": ["<specific action 1>", "<specific action 2>", "<specific action 3>", "<specific action 4>"]},
+    {"phase": "Phase 2", "period": "Months 3-4", "title": "<phase title>", "icon": "💰", "actions": ["<specific action 1>", "<specific action 2>", "<specific action 3>", "<specific action 4>"]},
+    {"phase": "Phase 3", "period": "Months 5-8", "title": "<phase title>", "icon": "⚡", "actions": ["<specific action 1>", "<specific action 2>", "<specific action 3>", "<specific action 4>"]},
+    {"phase": "Phase 4", "period": "Months 9-12", "title": "<phase title>", "icon": "🤖", "actions": ["<specific action 1>", "<specific action 2>", "<specific action 3>", "<specific action 4>"]}
+  ]
 }
 
 Available grant programs to recommend from: Offensive Tr@ns Num, Programme ESSOR, CRIC, Plan PME 2025-2028, BDC - Prêt Technologie, SIPEM-PROMPT (manufacturing), PARI-CNRC.
+
+For the action_plan: each phase's actions MUST be specific to their sector, employee count, current tools, and budget level. Avoid generic advice. Reference real tools (e.g., "Implement Shopify for X" not "Implement an e-commerce platform"). Reference real grant programs by name when relevant. Reference their actual budget level for feasibility.
 
 All text in English. Be specific to their actual responses — no generic advice.`
       : `Tu es un consultant expert en maturité numérique pour les PME du Québec-Canada (région Gatineau-Ottawa).
@@ -300,10 +308,18 @@ Analyse ces réponses et retourne UNIQUEMENT un objet JSON valide (sans balises 
     {"title": "<titre court>", "description": "<...>", "impact": "high|medium|low"}
   ],
   "recommended_grants": ["<nom subvention 1>", "<nom subvention 2>", "<nom subvention 3>"],
-  "next_action": "<une étape concrète et spécifique à faire cette semaine>"
+  "next_action": "<une étape concrète et spécifique à faire cette semaine>",
+  "action_plan": [
+    {"phase": "Phase 1", "period": "Mois 1-2", "title": "<titre adapté à leur contexte>", "icon": "🔍", "actions": ["<action spécifique 1>", "<action spécifique 2>", "<action spécifique 3>", "<action spécifique 4>"]},
+    {"phase": "Phase 2", "period": "Mois 3-4", "title": "<titre>", "icon": "💰", "actions": ["<action spécifique 1>", "<action spécifique 2>", "<action spécifique 3>", "<action spécifique 4>"]},
+    {"phase": "Phase 3", "period": "Mois 5-8", "title": "<titre>", "icon": "⚡", "actions": ["<action spécifique 1>", "<action spécifique 2>", "<action spécifique 3>", "<action spécifique 4>"]},
+    {"phase": "Phase 4", "period": "Mois 9-12", "title": "<titre>", "icon": "🤖", "actions": ["<action spécifique 1>", "<action spécifique 2>", "<action spécifique 3>", "<action spécifique 4>"]}
+  ]
 }
 
 Programmes de subvention disponibles à recommander : Offensive Tr@ns Num, Programme ESSOR, CRIC, Plan PME 2025-2028, BDC - Prêt Technologie, SIPEM-PROMPT (manufacturier), PARI-CNRC.
+
+Pour action_plan : chaque action DOIT être spécifique à leur secteur, nombre d'employés, outils actuels et budget. Évite les conseils génériques. Réfère-toi à de vrais outils (ex: "Implanter Shopify pour X" pas "Implanter une plateforme e-commerce"). Cite les vrais programmes de subvention par nom quand pertinent. Tiens compte de leur niveau de budget réel pour la faisabilité.
 
 Tout le texte en français. Sois spécifique aux réponses données — pas de conseils génériques.`;
 
@@ -321,6 +337,19 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
     const parsed = JSON.parse(match[0]);
     const score = Math.min(100, Math.max(0, parseInt(parsed.score, 10) || 0));
     const level = score < 25 ? 0 : score < 50 ? 1 : score < 75 ? 2 : 3;
+    // Normalize action_plan (4 phases with title, period, icon, actions)
+    let actionPlan = [];
+    if (Array.isArray(parsed.action_plan)) {
+      actionPlan = parsed.action_plan.slice(0, 4).map((p, i) => ({
+        phase: p.phase || `Phase ${i + 1}`,
+        period: p.period || "",
+        title: p.title || "",
+        icon: p.icon || ["🔍", "💰", "⚡", "🤖"][i] || "📌",
+        color: "#635BFF",
+        actions: Array.isArray(p.actions) ? p.actions.slice(0, 6) : [],
+      }));
+    }
+
     return {
       score,
       level,
@@ -331,6 +360,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
       priorities: Array.isArray(parsed.priorities) ? parsed.priorities.slice(0, 5) : [],
       recommended_grants: Array.isArray(parsed.recommended_grants) ? parsed.recommended_grants : [],
       next_action: parsed.next_action || "",
+      action_plan: actionPlan,
     };
   };
 
@@ -421,6 +451,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
           priorities: diagResult && diagResult.priorities ? diagResult.priorities : [],
           next_action: diagResult && diagResult.next_action ? diagResult.next_action : "",
           recommended_grants: diagResult && diagResult.recommended_grants ? diagResult.recommended_grants : [],
+          action_plan: diagResult && diagResult.action_plan ? diagResult.action_plan : [],
           level_label: diagResult ? t.diagnostic.levels[diagResult.level] : "",
           // Full Q&A for context
           answers: diagAnswers.map((a, i) => ({
@@ -864,6 +895,13 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
         .ai-card-weakness li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:#FF6B2C}
 
         /* ── AI PRIORITIES ── */
+        /* ── AI PLAN BANNER ── */
+        .ai-plan-banner{display:flex;align-items:center;gap:14px;padding:16px 20px;margin-bottom:20px;background:linear-gradient(135deg,rgba(99,91,255,0.08) 0%,rgba(122,115,255,0.04) 100%);border:1px solid rgba(99,91,255,0.18);border-radius:12px;box-shadow:0 1px 3px rgba(99,91,255,0.06)}
+        .ai-plan-banner-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#635BFF,#5046E5);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 4px 12px rgba(99,91,255,0.30)}
+        .ai-plan-banner-text{flex:1}
+        .ai-plan-banner-title{font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;color:#0A2540;letter-spacing:-0.01em;margin-bottom:2px}
+        .ai-plan-banner-sub{font-size:12.5px;color:#697386;line-height:1.4}
+        @media(max-width:600px){.ai-plan-banner{padding:14px;gap:12px}.ai-plan-banner-icon{width:32px;height:32px;font-size:16px}.ai-plan-banner-title{font-size:13.5px}.ai-plan-banner-sub{font-size:12px}}
         .ai-priorities{margin-top:24px;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:16px;padding:32px;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
         .ai-section-title{font-family:'Inter',sans-serif;font-size:18px;font-weight:700;color:#0A2540;letter-spacing:-0.02em;margin-bottom:20px;text-align:left}
         .ai-priorities-list{display:flex;flex-direction:column;gap:14px}
@@ -1491,26 +1529,59 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
               <p className="sec-sub">{t.plan.subtitle}</p>
             </div>
             <div style={{ maxWidth: 700, margin: "0 auto" }}>
-              {t.plan.phases.map((ph) => (
-                <div key={ph.phase} className="phase-block" style={{ borderLeftColor: ph.color }}>
+              {/* Personalized plan banner if AI diagnostic done */}
+              {diagResult && diagResult.ai && diagResult.action_plan && diagResult.action_plan.length > 0 && (
+                <div className="ai-plan-banner">
+                  <div className="ai-plan-banner-icon">⚡</div>
+                  <div className="ai-plan-banner-text">
+                    <div className="ai-plan-banner-title">
+                      {lang === "fr" ? "Plan personnalisé pour votre PME" : "Personalized plan for your SME"}
+                    </div>
+                    <div className="ai-plan-banner-sub">
+                      {lang === "fr"
+                        ? "Généré par IA selon vos réponses au diagnostic"
+                        : "AI-generated based on your diagnostic responses"}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {/* Show AI plan if available, else static plan */}
+              {(diagResult && diagResult.ai && diagResult.action_plan && diagResult.action_plan.length > 0
+                ? diagResult.action_plan
+                : t.plan.phases
+              ).map((ph) => (
+                <div key={ph.phase} className="phase-block" style={{ borderLeftColor: ph.color || "#635BFF" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
                     <span style={{ fontSize: 26 }}>{ph.icon}</span>
                     <div>
                       <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: ph.color }}>{ph.phase}</span>
+                        <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: ph.color || "#635BFF" }}>{ph.phase}</span>
                         <span style={{ fontSize: 10.5, color: "#697386", background: "#F6F9FC", padding: "2px 8px", borderRadius: 4 }}>{ph.period}</span>
                       </div>
                       <div style={{ fontFamily: "'Inter',sans-serif", fontSize: 16, fontWeight: 600, marginTop: 3 }}>{ph.title}</div>
                     </div>
                   </div>
-                  {ph.actions.map((a) => (
-                    <div key={a} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13, color: "#425466", padding: "4px 0" }}>
-                      <span style={{ color: ph.color, flexShrink: 0, marginTop: 1 }}>✓</span>
+                  {(ph.actions || []).map((a, ai) => (
+                    <div key={typeof a === "string" ? a + ai : ai} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13, color: "#425466", padding: "4px 0" }}>
+                      <span style={{ color: ph.color || "#635BFF", flexShrink: 0, marginTop: 1 }}>✓</span>
                       <span>{a}</span>
                     </div>
                   ))}
                 </div>
               ))}
+              {/* CTA if no diagnostic done */}
+              {!(diagResult && diagResult.ai) && (
+                <div style={{ textAlign: "center", marginTop: 20, padding: 20, background: "#F6F9FC", border: "1px solid #E6EBF1", borderRadius: 12 }}>
+                  <p style={{ color: "#425466", fontSize: 13.5, marginBottom: 14 }}>
+                    {lang === "fr"
+                      ? "💡 Faites le diagnostic pour obtenir un plan 100% personnalisé selon votre PME."
+                      : "💡 Take the diagnostic to get a 100% personalized plan for your SME."}
+                  </p>
+                  <button className="btn-p" style={{ fontSize: 13 }} onClick={() => setActiveTab("diagnostic")}>
+                    🔍 {lang === "fr" ? "Commencer le diagnostic" : "Start diagnostic"}
+                  </button>
+                </div>
+              )}
               <div className="impact-grid">
                 {t.plan.impacts.map((imp) => (
                   <div key={imp.label} className="impact-card">
