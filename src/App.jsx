@@ -14,6 +14,14 @@ const translations = {
       cta2: "Parler à l'assistant",
       badge: "Gatineau · Ottawa · 2026",
     },
+    mission: {
+      label: "Notre Mission",
+      title: "Démocratiser la transformation numérique des PME de Gatineau-Ottawa.",
+      point1pre: "", point1bold: "5 minutes", point1post: " pour diagnostiquer.",
+      point2pre: "", point2bold: "275 000 $", point2post: " de subventions à identifier.",
+      point3pre: "", point3bold: "Un plan", point3post: " d'action concret sur 12 mois.",
+      tagline: "Bilingue · Local · Intelligent",
+    },
     diagnostic: {
       title: "Diagnostic Numérique",
       subtitle: "Évaluez votre maturité numérique en 5 minutes",
@@ -105,6 +113,14 @@ const translations = {
     appTitle: "NuMérik PME", appSubtitle: "Your AI assistant for digital transformation", region: "Gatineau · Ottawa",
     nav: { diagnostic: "Diagnostic", assistant: "AI Assistant", subventions: "Grants", plan: "Action Plan" },
     hero: { title: "Power your SME\ninto the digital age", subtitle: "Smart Diagnostic · Government Grants · Personalized Action Plan · 24/7 AI Assistant", cta: "Start Diagnostic", cta2: "Talk to Assistant", badge: "Gatineau · Ottawa · 2026" },
+    mission: {
+      label: "Our Mission",
+      title: "Democratizing the digital transformation of SMEs in Gatineau-Ottawa.",
+      point1pre: "", point1bold: "5 minutes", point1post: " to diagnose.",
+      point2pre: "", point2bold: "$275,000", point2post: " in grants to identify.",
+      point3pre: "", point3bold: "A concrete plan", point3post: " over 12 months.",
+      tagline: "Bilingual · Local · Intelligent",
+    },
     diagnostic: {
       title: "Digital Diagnostic", subtitle: "Assess your digital maturity in 5 minutes",
       step: "Step", of: "of", next: "Next", prev: "Previous", submit: "See my results",
@@ -858,6 +874,24 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
           .ai-next p{font-size:14px}
         }
 
+
+        /* ── MISSION SECTION ── */
+        .mission-section{padding:96px 0 64px;text-align:center;border-top:1px solid #E6EBF1;margin-top:32px;position:relative}
+        .mission-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:1px;background:linear-gradient(90deg,transparent,#635BFF,transparent)}
+        .mission-label{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#635BFF;margin-bottom:20px;display:inline-flex;align-items:center;gap:8px}
+        .mission-label::before,.mission-label::after{content:'';width:18px;height:1px;background:rgba(99,91,255,0.4)}
+        .mission-title{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:clamp(28px,4.5vw,44px);font-weight:700;line-height:1.2;letter-spacing:-0.025em;color:#0A2540;max-width:780px;margin:0 auto 44px;background:linear-gradient(135deg,#0A2540 0%,#635BFF 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+        .mission-points{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;max-width:640px;margin-left:auto;margin-right:auto}
+        .mission-point{font-family:'Inter',sans-serif;font-size:clamp(17px,2.5vw,22px);font-weight:500;color:#425466;letter-spacing:-0.015em;line-height:1.45}
+        .mission-point span{background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+        .mission-tagline{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#697386;display:inline-block;padding:9px 22px;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:100px;margin-top:8px;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+        @media(max-width:768px){
+          .mission-section{padding:56px 0 40px;margin-top:24px}
+          .mission-title{margin-bottom:28px}
+          .mission-points{gap:10px;margin-bottom:24px}
+          .mission-tagline{font-size:11px;padding:8px 18px;letter-spacing:0.14em}
+        }
+
       `}</style>
 
       {/* NAV */}
@@ -1002,6 +1036,18 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                 </div>
               </div>
             </div>
+
+            {/* MISSION SECTION */}
+            <section className="mission-section">
+              <span className="mission-label">{t.mission.label}</span>
+              <h2 className="mission-title">{t.mission.title}</h2>
+              <div className="mission-points">
+                <div className="mission-point"><span>{t.mission.point1bold}</span>{t.mission.point1post}</div>
+                <div className="mission-point"><span>{t.mission.point2bold}</span>{t.mission.point2post}</div>
+                <div className="mission-point"><span>{t.mission.point3bold}</span>{t.mission.point3post}</div>
+              </div>
+              <div className="mission-tagline">{t.mission.tagline}</div>
+            </section>
 
             {/* TRUST BAND */}
             <div className="trust-band">
