@@ -427,8 +427,11 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
     setInscLoading(true);
     setInscStatus(null);
     try {
-      // Get sector from first diagnostic answer if available
-      const secteur = diagAnswers[0] || "";
+      // Get profile from diagnostic answers
+      const _profile = getDiagProfile(diagAnswers) || {};
+      const secteur = _profile.secteur || diagAnswers[0] || "";
+      const taille = _profile.taille || "";
+      const niveau = diagResult ? t.diagnostic.levels[diagResult.level] : "";
       const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkjq5nN5wWtYOX4iYNOr6DwkIuTT2qg8EIQO7FltXUBrcgN5FHfSpPE8RatM0rig/exec";
 
       // Apps Script needs no-cors mode (returns opaque response but request still sent)
@@ -450,9 +453,11 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
           weaknesses: diagResult && diagResult.weaknesses ? diagResult.weaknesses : [],
           priorities: diagResult && diagResult.priorities ? diagResult.priorities : [],
           next_action: diagResult && diagResult.next_action ? diagResult.next_action : "",
+          taille: taille,
+          niveau: niveau,
           recommended_grants: diagResult && diagResult.recommended_grants ? diagResult.recommended_grants : [],
           action_plan: diagResult && diagResult.action_plan ? diagResult.action_plan : [],
-          level_label: diagResult ? t.diagnostic.levels[diagResult.level] : "",
+          level_label: niveau,
           // Full Q&A for context
           answers: diagAnswers.map((a, i) => ({
             q: t.diagnostic.questions[i] ? t.diagnostic.questions[i].q : "",
@@ -561,7 +566,169 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
     setLoading(false);
   };
 
-  const filteredGrants = t.grants.programs.filter((p) => grantFilter === "all" || p.type === grantFilter);
+  // ═══════════════════════════════════════════════════════════════
+  // PWOFIL + MATCHING SUBVANSYON (rule-based, baze sou repons dyagnostik)
+  // ═══════════════════════════════════════════════════════════════
+  // Konvèti diagAnswers (array nan lòd kesyon) an objè estriktire — pa nouvo state
+  const getDiagProfile = (answers) => {
+    if (!answers || answers.length < 7) return null;
+    return {
+      secteur: answers[0],         // ex: "Commerce de détail" / "Manufacturier"
+      taille: answers[1],          // ex: "1–4 (Micro)"
+      erp: answers[2],             // ex: "Non, tout est manuel"
+      presenceWeb: answers[3],     // ex: "Page Facebook seulement"
+      donneesClients: answers[4],  // ex: "Cahiers / papier"
+      ia: answers[5],              // ex: "Pas du tout"
+      budget: answers[6],          // ex: "Moins de 5 000$"
+    };
+  };
+
+  // Detekte si yon repons sektè se manifaktire (bileng FR/EN)
+  const isManufacturier = (s) => {
+    if (!s) return false;
+    const x = s.toLowerCase();
+    return x.indexOf("manuf") >= 0;
+  };
+
+  // Detekte nivo bidjè (0=<5K, 1=5-15K, 2=15-50K, 3=>50K)
+  const getBudgetLevel = (b) => {
+    if (!b) return 0;
+    const x = b.toLowerCase();
+    if (x.indexOf("plus") >= 0 || x.indexOf("more") >= 0 || x.indexOf("50 000") >= 0 && x.indexOf("plus") >= 0) return 3;
+    if (x.indexOf("15 000") >= 0 && x.indexOf("50 000") >= 0) return 2;
+    if (x.indexOf("5 000") >= 0 && x.indexOf("15 000") >= 0) return 1;
+    if (x.indexOf("moins") >= 0 || x.indexOf("less") >= 0) return 0;
+    return 0;
+  };
+
+  // Detekte nivo prezans web (0=okenn, 3=full)
+  const getWebLevel = (w) => {
+    if (!w) return 0;
+    const x = w.toLowerCase();
+    if (x.indexOf("e-commerce") >= 0 || x.indexOf("réseaux") >= 0 || x.indexOf("social media") >= 0) return 3;
+    if (x.indexOf("basique") >= 0 || x.indexOf("basic") >= 0) return 2;
+    if (x.indexOf("facebook") >= 0) return 1;
+    return 0;
+  };
+
+  // Detekte si gen ERP entegre
+  const hasFullERP = (e) => {
+    if (!e) return false;
+    const x = e.toLowerCase();
+    return x.indexOf("intégré") >= 0 || x.indexOf("integrated") >= 0;
+  };
+
+  // Detekte si IA byen entegre
+  const hasFullAI = (a) => {
+    if (!a) return false;
+    const x = a.toLowerCase();
+    return x.indexOf("intégrée dans") >= 0 || x.indexOf("integrated into") >= 0;
+  };
+
+  // Filtraj + priyorite + rezon pou chak subvansyon
+  const getMatchingGrants = (profile, allGrants, isFR) => {
+    if (!profile) return allGrants.map(g => ({ ...g, priorite: 2, raison: "" }));
+
+    const isManuf = isManufacturier(profile.secteur);
+    const budgetLvl = getBudgetLevel(profile.budget);
+    const webLvl = getWebLevel(profile.presenceWeb);
+    const erpOK = hasFullERP(profile.erp);
+    const aiOK = hasFullAI(profile.ia);
+    const score = (diagResult && diagResult.score) || 0;
+
+    const matches = [];
+    for (const g of allGrants) {
+      const name = g.name.toLowerCase();
+      let admissible = false;
+      let priorite = 2; // default = mwayen
+      let raison = "";
+
+      // Plan PME 2025-2028 — toujou admisib
+      if (name.indexOf("plan pme") >= 0) {
+        admissible = true;
+        priorite = 1;
+        raison = isFR
+          ? "Accompagnement gratuit disponible pour toutes les PME du Québec"
+          : "Free guidance available for all SMEs in Québec";
+      }
+      // SIPEM-PROMPT — sèlman manifaktire
+      else if (name.indexOf("sipem") >= 0 || name.indexOf("prompt") >= 0) {
+        if (isManuf) {
+          admissible = true;
+          priorite = 1;
+          raison = isFR
+            ? "Programme dédié aux PME manufacturières (votre secteur)"
+            : "Program dedicated to manufacturing SMEs (your sector)";
+        }
+      }
+      // BDC — pa pou bidjè twò ba
+      else if (name.indexOf("bdc") >= 0) {
+        if (budgetLvl >= 1) {
+          admissible = true;
+          priorite = budgetLvl >= 2 ? 1 : 2;
+          raison = isFR
+            ? "Prêt 0% adapté à votre niveau de budget"
+            : "0% loan adapted to your budget level";
+        }
+      }
+      // Offensive Tr@ns Num / ADRIQ — pou PME san ERP entegre
+      else if (name.indexOf("offensive") >= 0 || name.indexOf("adriq") >= 0 || name.indexOf("tr@ns num") >= 0) {
+        if (!erpOK) {
+          admissible = true;
+          priorite = (score < 50) ? 1 : 2;
+          raison = isFR
+            ? "Accompagnement complet pour implanter ERP/CRM (pertinent pour votre niveau actuel)"
+            : "Complete guidance to implement ERP/CRM (relevant to your current level)";
+        }
+      }
+      // ESSOR — pou PME ki bezwen plan numerik (skò < 75)
+      else if (name.indexOf("essor") >= 0) {
+        if (score < 75 || score === 0) {
+          admissible = true;
+          priorite = (score < 50 || score === 0) ? 1 : 2;
+          raison = isFR
+            ? "Financement pour planifier votre stratégie numérique"
+            : "Funding to plan your digital strategy";
+        }
+      }
+      // CRIC — pou bidjè wo (R&D)
+      else if (name.indexOf("cric") >= 0) {
+        if (budgetLvl >= 2) {
+          admissible = true;
+          priorite = budgetLvl === 3 ? 1 : 2;
+          raison = isFR
+            ? "Crédit d'impôt R&D adapté à votre budget significatif"
+            : "R&D tax credit suited to your significant budget";
+        }
+      }
+      // PARI-CNRC / IRAP — pou inovasyon (pa pou sa ki gen IA entegre deja)
+      else if (name.indexOf("pari") >= 0 || name.indexOf("irap") >= 0) {
+        if (!aiOK) {
+          admissible = true;
+          priorite = 2;
+          raison = isFR
+            ? "Conseil expert pour intégrer innovation et IA dans vos opérations"
+            : "Expert advice to integrate innovation and AI into your operations";
+        }
+      }
+      // Default: si pa gen règ espesifik, admisib
+      else {
+        admissible = true;
+        priorite = 2;
+      }
+
+      if (admissible) matches.push({ ...g, priorite, raison });
+    }
+    // Trie: priyorite 1 anvan, apre type filter respekte
+    return matches.sort((a, b) => a.priorite - b.priorite);
+  };
+
+  const diagProfile = getDiagProfile(diagAnswers);
+  const personalizedGrants = diagProfile
+    ? getMatchingGrants(diagProfile, t.grants.programs, lang === "fr")
+    : null;
+  const baseGrantsList = personalizedGrants || t.grants.programs.map(g => ({ ...g, priorite: 2, raison: "" }));
+  const filteredGrants = baseGrantsList.filter((p) => grantFilter === "all" || p.type === grantFilter);
   const renderMarkdown = (text) =>
     text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
         .replace(/\n\n/g, "</p><p>").replace(/\n/g, "<br/>")
@@ -895,6 +1062,12 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
         .ai-card-weakness li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:#FF6B2C}
 
         /* ── AI PRIORITIES ── */
+        /* ── GRANT RECO BADGE + REASON ── */
+        .grant-reco-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);color:#FFFFFF;font-size:10.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px;box-shadow:0 3px 10px rgba(99,91,255,0.30);align-self:flex-start}
+        .grant-reason{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:rgba(99,91,255,0.05);border:1px solid rgba(99,91,255,0.18);border-radius:8px;margin-bottom:14px;font-size:12px;color:#0A2540;line-height:1.5}
+        .grant-reason-icon{color:#635BFF;font-weight:800;flex-shrink:0;margin-top:1px}
+        .grant-reason strong{color:#635BFF;font-weight:700}
+
         /* ── AI PLAN BANNER ── */
         .ai-plan-banner{display:flex;align-items:center;gap:14px;padding:16px 20px;margin-bottom:20px;background:linear-gradient(135deg,rgba(99,91,255,0.08) 0%,rgba(122,115,255,0.04) 100%);border:1px solid rgba(99,91,255,0.18);border-radius:12px;box-shadow:0 1px 3px rgba(99,91,255,0.06)}
         .ai-plan-banner-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#635BFF,#5046E5);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 4px 12px rgba(99,91,255,0.30)}
@@ -1474,9 +1647,40 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
               </div>
             </div>
             <div className="sec-head">
-              <h2 className="sec-title">{t.grants.title}</h2>
-              <p className="sec-sub">{t.grants.subtitle}</p>
+              <h2 className="sec-title">
+                {personalizedGrants
+                  ? (lang === "fr" ? "Vos subventions personnalisées" : "Your personalized grants")
+                  : t.grants.title}
+              </h2>
+              <p className="sec-sub">
+                {personalizedGrants
+                  ? (lang === "fr"
+                      ? `${personalizedGrants.length} programme${personalizedGrants.length > 1 ? "s" : ""} adapté${personalizedGrants.length > 1 ? "s" : ""} à votre profil PME`
+                      : `${personalizedGrants.length} program${personalizedGrants.length > 1 ? "s" : ""} matched to your SME profile`)
+                  : t.grants.subtitle}
+              </p>
             </div>
+
+            {/* CTA banner if no diagnostic done yet */}
+            {!personalizedGrants && (
+              <div className="ai-plan-banner" style={{ maxWidth: 720, margin: "0 auto 32px" }}>
+                <div className="ai-plan-banner-icon">🔍</div>
+                <div className="ai-plan-banner-text">
+                  <div className="ai-plan-banner-title">
+                    {lang === "fr" ? "Voir uniquement les subventions adaptées à votre PME" : "See only the grants adapted to your SME"}
+                  </div>
+                  <div className="ai-plan-banner-sub">
+                    {lang === "fr"
+                      ? "Faites le diagnostic en 5 minutes pour filtrer automatiquement"
+                      : "Take the 5-minute diagnostic to filter automatically"}
+                  </div>
+                </div>
+                <button className="btn-p" style={{ fontSize: 12.5, padding: "10px 18px" }} onClick={() => setActiveTab("diagnostic")}>
+                  {lang === "fr" ? "Commencer" : "Start"} →
+                </button>
+              </div>
+            )}
+
             <div className="filter-row">
               {["all","quebec","federal"].map((f) => (
                 <button key={f} className={`fpill${grantFilter === f ? " active" : ""}`} onClick={() => setGrantFilter(f)}>
@@ -1486,7 +1690,12 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
             </div>
             <div className="grants-grid">
               {filteredGrants.map((g) => (
-                <div key={g.name} className="grant-card">
+                <div key={g.name} className="grant-card" style={g.priorite === 1 && personalizedGrants ? { borderColor: "#635BFF", boxShadow: "0 4px 14px rgba(99,91,255,0.12)" } : {}}>
+                  {g.priorite === 1 && personalizedGrants && (
+                    <div className="grant-reco-badge">
+                      ⭐ {lang === "fr" ? "Recommandé pour vous" : "Recommended for you"}
+                    </div>
+                  )}
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
                     <h3 style={{ fontFamily: "'Inter',sans-serif", fontWeight: 600, fontSize: 15, lineHeight: 1.3, flex: 1 }}>{g.name}</h3>
                     <span style={{ marginLeft: 10, flexShrink: 0, padding: "3px 10px", borderRadius: 6, fontSize: 10, fontWeight: 700,
@@ -1502,6 +1711,12 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                     <div style={{ fontSize: 10.5, color: "#697386", marginTop: 2 }}>{g.coverage}</div>
                   </div>
                   <p style={{ color: "#425466", fontSize: 12.5, lineHeight: 1.65, marginBottom: 14 }}>{g.desc}</p>
+                  {g.raison && personalizedGrants && (
+                    <div className="grant-reason">
+                      <span className="grant-reason-icon">✓</span>
+                      <span><strong>{lang === "fr" ? "Pourquoi : " : "Why: "}</strong>{g.raison}</span>
+                    </div>
+                  )}
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 16 }}>
                     {g.tags.map((tag) => <span key={tag} className="chip">{tag}</span>)}
                   </div>
