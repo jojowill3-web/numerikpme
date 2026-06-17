@@ -91,6 +91,46 @@ const translations = {
       impact: "Impact attendu",
       impacts: [{ label: "Hausse productivité", value: "+22%", icon: "📈" },{ label: "Prime de valorisation", value: "+30%", icon: "💎" },{ label: "Réduction coûts opérationnels", value: "-15%", icon: "💰" },{ label: "Temps économisé / semaine", value: "8h", icon: "⏱️" }],
     },
+    howItWorks: {
+      label: "Comment ça marche",
+      title: "Votre transformation numérique en 3 étapes simples",
+      subtitle: "Aucune expertise technique requise. En quelques minutes, vous savez exactement par où commencer.",
+      steps: [
+        { icon: "🔍", title: "1. Faites le diagnostic", desc: "Répondez à 7 questions en 5 minutes. Notre IA évalue la maturité numérique de votre PME." },
+        { icon: "🎯", title: "2. Recevez vos recommandations", desc: "Forces, faiblesses, priorités et subventions gouvernementales adaptées à votre profil." },
+        { icon: "🚀", title: "3. Passez à l'action", desc: "Suivez votre plan personnalisé sur 12 mois, épaulé par l'assistant IA disponible 24/7." },
+      ],
+      cta: "Commencer maintenant",
+    },
+    why: {
+      label: "Pourquoi NuMérik PME",
+      title: "Conçu pour les PME d'ici",
+      items: [
+        { icon: "📍", title: "100 % local", desc: "Pensé pour la réalité des PME de Gatineau, d'Ottawa et de l'Outaouais." },
+        { icon: "🇨🇦", title: "Bilingue", desc: "Une expérience complète en français et en anglais, comme votre région." },
+        { icon: "🔒", title: "Conforme Loi 25", desc: "Vos données sont protégées et ne sont jamais vendues à des tiers." },
+        { icon: "⚡", title: "Propulsé par l'IA", desc: "Des analyses et recommandations générées par l'IA Claude d'Anthropic." },
+        { icon: "🏛️", title: "Programmes officiels", desc: "Basé sur les vrais programmes BDC, ESSOR, ADRIQ, IRAP-CNRC et PROMPT." },
+        { icon: "🎁", title: "Diagnostic gratuit", desc: "Aucun frais, aucun engagement pour évaluer votre maturité numérique." },
+      ],
+    },
+    faq: {
+      label: "Questions fréquentes",
+      title: "Vos questions, nos réponses",
+      items: [
+        { q: "Le diagnostic numérique est-il vraiment gratuit ?", a: "Oui, entièrement gratuit et sans engagement. En 5 minutes, vous obtenez un score, vos forces et faiblesses, des priorités et les subventions adaptées à votre PME." },
+        { q: "Quelles subventions sont disponibles pour ma PME à Gatineau ou Ottawa ?", a: "Plusieurs programmes québécois et fédéraux sont actifs en 2026 : Offensive Tr@ns Num, ESSOR, crédit d'impôt CRIC, Plan PME 2025-2028, prêt technologie BDC à 0 %, SIPEM-PROMPT et PARI-CNRC. Nous identifions ceux qui correspondent à votre profil." },
+        { q: "Combien de temps prend le diagnostic ?", a: "Environ 5 minutes. Sept questions sur votre secteur, votre taille, vos outils et votre budget suffisent à générer un rapport personnalisé par IA." },
+        { q: "Pour quelles entreprises NuMérik PME est-il conçu ?", a: "Pour les PME de la région de Gatineau, d'Ottawa et de l'Outaouais, dans tous les secteurs : commerce, services, manufacturier, construction, restauration, technologie et santé." },
+        { q: "Mes données sont-elles protégées ?", a: "Oui. Nous respectons la Loi 25 du Québec et la LPRPDE du Canada. Vos données ne sont jamais vendues et servent uniquement à générer votre diagnostic et vos recommandations." },
+      ],
+    },
+    finalCta: {
+      title: "Prêt à propulser votre PME ?",
+      subtitle: "Obtenez gratuitement votre diagnostic numérique et découvrez les subventions auxquelles vous avez droit.",
+      cta: "Faire mon diagnostic gratuit",
+      cta2: "Nous contacter",
+    },
     lang: "EN",
     legal: {
       title: "Politique de Confidentialité",
@@ -183,6 +223,46 @@ const translations = {
       impact: "Expected Impact",
       impacts: [{ label: "Productivity increase", value: "+22%", icon: "📈" },{ label: "Valuation premium", value: "+30%", icon: "💎" },{ label: "Operating cost reduction", value: "-15%", icon: "💰" },{ label: "Time saved / week", value: "8h", icon: "⏱️" }],
     },
+    howItWorks: {
+      label: "How it works",
+      title: "Your digital transformation in 3 simple steps",
+      subtitle: "No technical expertise required. In minutes, you know exactly where to start.",
+      steps: [
+        { icon: "🔍", title: "1. Take the diagnostic", desc: "Answer 7 questions in 5 minutes. Our AI assesses your SME's digital maturity." },
+        { icon: "🎯", title: "2. Get your recommendations", desc: "Strengths, weaknesses, priorities and government grants matched to your profile." },
+        { icon: "🚀", title: "3. Take action", desc: "Follow your personalized 12-month plan, backed by the 24/7 AI assistant." },
+      ],
+      cta: "Start now",
+    },
+    why: {
+      label: "Why NuMérik PME",
+      title: "Built for local SMEs",
+      items: [
+        { icon: "📍", title: "100% local", desc: "Designed for the reality of SMEs in Gatineau, Ottawa and the Outaouais." },
+        { icon: "🇨🇦", title: "Bilingual", desc: "A full experience in French and English, just like your region." },
+        { icon: "🔒", title: "Law 25 compliant", desc: "Your data is protected and never sold to third parties." },
+        { icon: "⚡", title: "AI-powered", desc: "Analysis and recommendations generated by Anthropic's Claude AI." },
+        { icon: "🏛️", title: "Official programs", desc: "Based on the real BDC, ESSOR, ADRIQ, IRAP-NRC and PROMPT programs." },
+        { icon: "🎁", title: "Free diagnostic", desc: "No cost, no commitment to assess your digital maturity." },
+      ],
+    },
+    faq: {
+      label: "Frequently asked questions",
+      title: "Your questions, answered",
+      items: [
+        { q: "Is the digital diagnostic really free?", a: "Yes, completely free and with no commitment. In 5 minutes you get a score, your strengths and weaknesses, priorities and the grants matched to your SME." },
+        { q: "What grants are available for my SME in Gatineau or Ottawa?", a: "Several Quebec and federal programs are active in 2026: Offensive Tr@ns Num, ESSOR, CRIC tax credit, SME Plan 2025-2028, BDC 0% technology loan, SIPEM-PROMPT and IRAP-NRC. We identify the ones that fit your profile." },
+        { q: "How long does the diagnostic take?", a: "About 5 minutes. Seven questions about your sector, size, tools and budget are enough to generate an AI-personalized report." },
+        { q: "Who is NuMérik PME designed for?", a: "For SMEs in the Gatineau, Ottawa and Outaouais region, across all sectors: retail, services, manufacturing, construction, food, technology and healthcare." },
+        { q: "Is my data protected?", a: "Yes. We comply with Quebec's Law 25 and Canada's PIPEDA. Your data is never sold and is used only to generate your diagnostic and recommendations." },
+      ],
+    },
+    finalCta: {
+      title: "Ready to power up your SME?",
+      subtitle: "Get your digital diagnostic for free and discover the grants you're entitled to.",
+      cta: "Get my free diagnostic",
+      cta2: "Contact us",
+    },
     lang: "FR",
     legal: {
       title: "Privacy Policy",
@@ -210,10 +290,11 @@ export default function App() {
   const [diagAnswers, setDiagAnswers] = useState([]);
   const [diagResult, setDiagResult] = useState(null);
   const [diagAnalyzing, setDiagAnalyzing] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(() => [{ role: "assistant", content: translations.fr.assistant.welcome }]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [grantFilter, setGrantFilter] = useState("all");
+  const [openFaq, setOpenFaq] = useState(0);
   const [showInscription, setShowInscription] = useState(false);
   const [inscEmail, setInscEmail] = useState("");
   const [inscNom, setInscNom] = useState("");
@@ -227,11 +308,15 @@ export default function App() {
   const [contactStatus, setContactStatus] = useState(null);
   const [contactLoading, setContactLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const langMountRef = useRef(false);
   const t = translations[lang];
 
+  // Reyajiste mesaj akèy la sèlman lè lang lan chanje (pa nan premye rann nan —
+  // mesaj inisyal la deja mete via useState lazy init pou evite yon flash vid).
   useEffect(() => {
+    if (!langMountRef.current) { langMountRef.current = true; return; }
     setMessages([{ role: "assistant", content: t.assistant.welcome }]);
-  }, [lang]);
+  }, [lang, t.assistant.welcome]);
 
   // Sync <html lang> ak lang aktyèl (a11y + SEO)
   useEffect(() => {
@@ -376,7 +461,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
     try {
       const aiResult = await analyzeWithAI(newAnswers);
       setDiagResult(aiResult);
-    } catch (err) {
+    } catch {
       // Fallback: scoring local si AI echwe
       setDiagResult(computeLocalResult(newAnswers));
     } finally {
@@ -413,7 +498,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
         setContactName(""); setContactEmail(""); setContactMessage("");
         setContactStatus(null);
       }, 2500);
-    } catch (err) {
+    } catch {
       setContactStatus("error");
     }
     setContactLoading(false);
@@ -467,7 +552,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
       });
       setInscStatus("success");
       setTimeout(() => setShowInscription(false), 2500);
-    } catch (err) {
+    } catch {
       setInscStatus("error");
     }
     setInscLoading(false);
@@ -558,7 +643,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
 
       const reply = data.reply || (lang === "fr" ? "Réponse vide reçue." : "Empty response received.");
       setMessages([...newMessages, { role: "assistant", content: reply }]);
-    } catch (err) {
+    } catch {
       setMessages([...newMessages, { role: "assistant", content: lang === "fr"
         ? `❌ Erreur de connexion. Vérifiez votre connexion internet.`
         : `❌ Connection error. Check your internet connection.` }]);
@@ -601,16 +686,6 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
     return 0;
   };
 
-  // Detekte nivo prezans web (0=okenn, 3=full)
-  const getWebLevel = (w) => {
-    if (!w) return 0;
-    const x = w.toLowerCase();
-    if (x.indexOf("e-commerce") >= 0 || x.indexOf("réseaux") >= 0 || x.indexOf("social media") >= 0) return 3;
-    if (x.indexOf("basique") >= 0 || x.indexOf("basic") >= 0) return 2;
-    if (x.indexOf("facebook") >= 0) return 1;
-    return 0;
-  };
-
   // Detekte si gen ERP entegre
   const hasFullERP = (e) => {
     if (!e) return false;
@@ -631,7 +706,6 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
 
     const isManuf = isManufacturier(profile.secteur);
     const budgetLvl = getBudgetLevel(profile.budget);
-    const webLvl = getWebLevel(profile.presenceWeb);
     const erpOK = hasFullERP(profile.erp);
     const aiOK = hasFullAI(profile.ia);
     const score = (diagResult && diagResult.score) || 0;
@@ -1127,6 +1201,58 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
           .mission-tagline{font-size:11px;padding:8px 18px;letter-spacing:0.14em}
         }
 
+        /* ── HOW IT WORKS ── */
+        .hiw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+        .hiw-card{position:relative;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:16px;padding:32px 28px;text-align:left;box-shadow:0 1px 3px rgba(50,50,93,0.04);transition:all 0.2s ease}
+        .hiw-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(99,91,255,0.10)}
+        .hiw-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(99,91,255,0.12) 0%,rgba(122,115,255,0.06) 100%);border:1px solid rgba(99,91,255,0.15);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px}
+        .hiw-card h3{font-family:'Inter',sans-serif;font-size:17px;font-weight:700;color:#0A2540;letter-spacing:-0.01em;margin-bottom:8px}
+        .hiw-card p{font-size:14px;color:#425466;line-height:1.6}
+        .hiw-arrow{display:none}
+
+        /* ── WHY (trust values) ── */
+        .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+        .why-card{display:flex;gap:14px;align-items:flex-start;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:14px;padding:22px 24px;box-shadow:0 1px 3px rgba(50,50,93,0.04);transition:all 0.2s ease}
+        .why-card:hover{border-color:#635BFF;box-shadow:0 8px 20px rgba(99,91,255,0.08)}
+        .why-ic{font-size:24px;flex-shrink:0;line-height:1.2}
+        .why-card h3{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:#0A2540;letter-spacing:-0.01em;margin-bottom:4px}
+        .why-card p{font-size:13px;color:#425466;line-height:1.55}
+
+        /* ── FAQ ── */
+        .faq-wrap{max-width:780px;margin:0 auto}
+        .faq-item{background:#FFFFFF;border:1px solid #E6EBF1;border-radius:12px;margin-bottom:12px;overflow:hidden;transition:all 0.2s ease;box-shadow:0 1px 3px rgba(50,50,93,0.04)}
+        .faq-item.open{border-color:#635BFF;box-shadow:0 6px 16px rgba(99,91,255,0.08)}
+        .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 24px;background:transparent;border:none;cursor:pointer;text-align:left;font-family:'Inter',sans-serif;font-size:15.5px;font-weight:600;color:#0A2540;line-height:1.45}
+        .faq-q:hover{color:#635BFF}
+        .faq-icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(99,91,255,0.08);color:#635BFF;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;transition:transform 0.25s ease}
+        .faq-item.open .faq-icon{transform:rotate(45deg)}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s ease;padding:0 24px}
+        .faq-item.open .faq-a{max-height:320px;padding:0 24px 22px}
+        .faq-a p{font-size:14px;color:#425466;line-height:1.7}
+
+        /* ── FINAL CTA ── */
+        .final-cta{margin-top:96px;background:linear-gradient(135deg,#635BFF 0%,#5046E5 100%);border-radius:24px;padding:64px 48px;text-align:center;position:relative;overflow:hidden;box-shadow:0 24px 60px -20px rgba(99,91,255,0.45)}
+        .final-cta::before{content:'';position:absolute;top:-50%;right:-5%;width:380px;height:380px;background:radial-gradient(circle,rgba(255,255,255,0.16) 0%,transparent 60%);pointer-events:none}
+        .final-cta::after{content:'';position:absolute;bottom:-60%;left:-5%;width:380px;height:380px;background:radial-gradient(circle,rgba(255,255,255,0.10) 0%,transparent 60%);pointer-events:none}
+        .final-cta h2{font-family:'Inter',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:700;color:#FFFFFF;letter-spacing:-0.025em;margin-bottom:14px;position:relative;z-index:1}
+        .final-cta p{font-size:16px;color:rgba(255,255,255,0.9);line-height:1.6;max-width:560px;margin:0 auto 32px;position:relative;z-index:1}
+        .final-cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+        .btn-w{padding:14px 30px;border-radius:8px;background:#FFFFFF;color:#5046E5;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;transition:all 0.18s ease;box-shadow:0 4px 14px rgba(0,0,0,0.12)}
+        .btn-w:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,0.18)}
+        .btn-ghost{padding:14px 30px;border-radius:8px;background:rgba(255,255,255,0.10);color:#FFFFFF;border:1px solid rgba(255,255,255,0.35);cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;transition:all 0.18s ease}
+        .btn-ghost:hover{background:rgba(255,255,255,0.18);transform:translateY(-2px)}
+
+        @media(max-width:768px){
+          .hiw-grid{grid-template-columns:1fr;gap:14px}
+          .hiw-card{padding:24px 22px}
+          .why-grid{grid-template-columns:1fr;gap:12px}
+          .faq-q{font-size:14.5px;padding:16px 18px}
+          .faq-item.open .faq-a{max-height:420px}
+          .final-cta{margin-top:64px;padding:44px 24px;border-radius:18px}
+          .final-cta-btns{flex-direction:column;align-items:stretch;max-width:320px;margin:0 auto}
+          .btn-w,.btn-ghost{width:100%}
+        }
+
       `}</style>
 
       {/* NAV */}
@@ -1327,6 +1453,79 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                 </div>
               ))}
             </div>
+
+            {/* COMMENT ÇA MARCHE */}
+            <section>
+              <div className="sec-head">
+                <span className="mission-label">{t.howItWorks.label}</span>
+                <h2 className="sec-title">{t.howItWorks.title}</h2>
+                <p className="sec-sub">{t.howItWorks.subtitle}</p>
+              </div>
+              <div className="hiw-grid">
+                {t.howItWorks.steps.map((s) => (
+                  <div key={s.title} className="hiw-card">
+                    <div className="hiw-icon">{s.icon}</div>
+                    <h3>{s.title}</h3>
+                    <p>{s.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div style={{ textAlign: "center", marginTop: 32 }}>
+                <button className="btn-p" onClick={() => setActiveTab("diagnostic")}>{t.howItWorks.cta} →</button>
+              </div>
+            </section>
+
+            {/* POURQUOI NUMÉRIK */}
+            <section>
+              <div className="sec-head">
+                <span className="mission-label">{t.why.label}</span>
+                <h2 className="sec-title">{t.why.title}</h2>
+              </div>
+              <div className="why-grid">
+                {t.why.items.map((it) => (
+                  <div key={it.title} className="why-card">
+                    <span className="why-ic">{it.icon}</span>
+                    <div>
+                      <h3>{it.title}</h3>
+                      <p>{it.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* FAQ */}
+            <section>
+              <div className="sec-head">
+                <span className="mission-label">{t.faq.label}</span>
+                <h2 className="sec-title">{t.faq.title}</h2>
+              </div>
+              <div className="faq-wrap">
+                {t.faq.items.map((item, i) => (
+                  <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
+                    <button
+                      className="faq-q"
+                      onClick={() => setOpenFaq(openFaq === i ? -1 : i)}
+                      aria-expanded={openFaq === i}
+                    >
+                      <span>{item.q}</span>
+                      <span className="faq-icon">+</span>
+                    </button>
+                    <div className="faq-a"><p>{item.a}</p></div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* CTA FINAL */}
+            <section className="final-cta">
+              <h2>{t.finalCta.title}</h2>
+              <p>{t.finalCta.subtitle}</p>
+              <div className="final-cta-btns">
+                <button className="btn-w" onClick={() => setActiveTab("diagnostic")}>🔍 {t.finalCta.cta}</button>
+                <button className="btn-ghost" onClick={() => { setShowContact(true); setContactStatus(null); }}>{t.finalCta.cta2}</button>
+              </div>
+            </section>
           </div>
         )}
 

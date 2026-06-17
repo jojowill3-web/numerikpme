@@ -86,9 +86,126 @@
       }
     }
     </script>
+
+    <!-- Structured Data : Organisation locale -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "NuMérik PME",
+      "image": "https://numerikpme.ca/og-image.png",
+      "url": "https://numerikpme.ca",
+      "email": "contact@numerikpme.ca",
+      "priceRange": "Gratuit",
+      "description": "Accompagnement en transformation numérique pour les PME de Gatineau, Ottawa et l'Outaouais : diagnostic numérique gratuit, identification des subventions gouvernementales et plan d'action personnalisé.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Gatineau",
+        "addressRegion": "QC",
+        "addressCountry": "CA"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Gatineau" },
+        { "@type": "City", "name": "Ottawa" },
+        { "@type": "AdministrativeArea", "name": "Outaouais" }
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services NuMérik PME",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Diagnostic numérique", "description": "Évaluation de la maturité numérique de votre PME en 5 minutes." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Assistant IA 24/7", "description": "Réponses instantanées sur la transformation numérique et les subventions." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Identification de subventions", "description": "7 programmes gouvernementaux 2026 adaptés à votre profil." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan d'action 12 mois", "description": "Feuille de route numérique personnalisée." } }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Structured Data : FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Le diagnostic numérique est-il vraiment gratuit ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Oui. Le diagnostic de maturité numérique de NuMérik PME est entièrement gratuit et sans engagement. En 5 minutes, vous obtenez un score, vos forces et faiblesses, des priorités et les subventions adaptées à votre PME." }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelles subventions sont disponibles pour digitaliser ma PME à Gatineau ou Ottawa ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Plusieurs programmes québécois et fédéraux sont actifs en 2026 : Offensive Tr@ns Num (ADRIQ), Programme ESSOR (Investissement Québec), crédit d'impôt CRIC, Plan PME 2025-2028, prêt technologie BDC à 0%, SIPEM-PROMPT (manufacturier) et PARI-CNRC. NuMérik PME identifie ceux qui correspondent à votre profil." }
+        },
+        {
+          "@type": "Question",
+          "name": "Combien de temps prend le diagnostic ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Environ 5 minutes. Sept questions sur votre secteur, votre taille, vos outils et votre budget suffisent à générer un rapport personnalisé par intelligence artificielle." }
+        },
+        {
+          "@type": "Question",
+          "name": "Pour quelles entreprises NuMérik PME est-il conçu ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Pour les petites et moyennes entreprises (PME) de la région de Gatineau, d'Ottawa et de l'Outaouais, dans tous les secteurs : commerce de détail, services, manufacturier, construction, restauration, technologie et santé." }
+        },
+        {
+          "@type": "Question",
+          "name": "Mes données sont-elles protégées ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Oui. NuMérik PME respecte la Loi 25 du Québec et la LPRPDE du Canada. Vos données ne sont jamais vendues à des tiers et servent uniquement à générer votre diagnostic et vos recommandations." }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Contenu statique de repli : visible par les moteurs de recherche, les
+           réseaux sociaux et les robots qui n'exécutent pas JavaScript. Remplacé
+           par l'application React dès que le script se charge. -->
+      <noscript>
+        <header>
+          <h1>NuMérik PME — Accélérez la transformation numérique de votre PME à Gatineau-Ottawa</h1>
+          <p>Plateforme bilingue d'intelligence artificielle pour les PME de Gatineau, d'Ottawa et de l'Outaouais : diagnostic numérique gratuit, subventions gouvernementales 2026, assistant IA 24/7 et plan d'action personnalisé sur 12 mois.</p>
+        </header>
+        <main>
+          <section>
+            <h2>Notre mission</h2>
+            <p>Démocratiser la transformation numérique des PME de Gatineau-Ottawa. 5 minutes pour diagnostiquer, jusqu'à 275 000 $ de subventions à identifier, et un plan d'action concret sur 12 mois.</p>
+          </section>
+          <section>
+            <h2>Nos services</h2>
+            <ul>
+              <li><strong>Diagnostic numérique</strong> — Évaluez votre maturité numérique en 5 minutes et obtenez un score personnalisé.</li>
+              <li><strong>Assistant IA 24/7</strong> — Posez vos questions sur la transformation numérique et les subventions à notre IA spécialisée.</li>
+              <li><strong>Subventions</strong> — 7 programmes gouvernementaux actifs en 2026, filtrés selon votre profil.</li>
+              <li><strong>Plan d'action</strong> — Votre feuille de route numérique personnalisée sur 12 mois.</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Programmes de subventions 2026</h2>
+            <ul>
+              <li>Offensive Tr@ns Num (ADRIQ) — jusqu'à 25 000 $, 50 % des coûts</li>
+              <li>Programme ESSOR (Investissement Québec) — jusqu'à 50 000 $</li>
+              <li>CRIC — crédit d'impôt R&amp;D remboursable</li>
+              <li>Plan PME 2025-2028 — enveloppe de 500 M$</li>
+              <li>BDC — prêt technologie à 0 % d'intérêt</li>
+              <li>SIPEM-PROMPT — jusqu'à 200 000 $ pour les PME manufacturières</li>
+              <li>PARI-CNRC — financement et conseils experts en innovation</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Contact</h2>
+            <p>NuMérik PME · Gatineau, QC, Outaouais, Canada · <a href="mailto:contact@numerikpme.ca">contact@numerikpme.ca</a> · Lun-Ven 9 h-17 h</p>
+          </section>
+        </main>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
