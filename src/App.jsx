@@ -79,16 +79,31 @@ const translations = {
       supportLabel: "Type d'aide:",
       supportTypes: { subvention: "Subvention", pret: "Prêt", credit: "Crédit d'impôt" },
       statusOpen: "Ouvert en continu", statusDeadline: "Échéance", statusSoon: "Bientôt fermé",
+      detailToggle: "Voir les détails", detailHide: "Masquer les détails",
+      critLabel: "Critères d'admissibilité", depLabel: "Dépenses admissibles", etapesLabel: "Comment appliquer",
+      officialNote: "Critères indicatifs — vérifiez les conditions exactes sur le site officiel.",
+      alert: {
+        title: "Soyez alerté des nouvelles subventions",
+        sub: "Recevez un courriel dès qu'un nouveau programme s'ouvre pour les PME de Gatineau-Ottawa.",
+        placeholder: "Votre courriel professionnel",
+        button: "M'alerter",
+        sending: "Envoi...",
+        success: "✅ Inscrit ! Vous serez alerté des nouveaux programmes.",
+        error: "❌ Courriel invalide. Veuillez réessayer.",
+        privacy: "Pas de spam · désinscription en 1 clic · conforme Loi 25.",
+      },
       programs: [
-        { name: "Offensive Tr@ns Num", org: "ADRIQ – Gouvernement du Québec", amount: "Jusqu'à 25 000$", coverage: "50% des coûts", type: "quebec", support: "subvention", amountMax: 25000, deadline: null, needs: ["erp","cyber","automation","web"], tags: ["ERP","CRM","Automatisation","Cybersécurité"], desc: "Accompagnement complet dans votre virage numérique: diagnostic, implantation et formation.", url: "https://adriq.com" },
-        { name: "Programme ESSOR", org: "Investissement Québec", amount: "Jusqu'à 50 000$", coverage: "50% des coûts", type: "quebec", support: "subvention", amountMax: 50000, deadline: "2027-03-31", needs: ["web","ia","rd","ecommerce","manuf"], tags: ["Étude faisabilité","Plan numérique","Innovation"], desc: "Financement pour études préalables et plans d'investissement numérique.", url: "https://investquebec.com" },
-        { name: "CRIC – Crédit Impôt R&D", org: "Gouvernement du Québec", amount: "Variable (remboursable)", coverage: "Crédits sur dépenses R&D", type: "quebec", support: "credit", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["R&D","Innovation","IA","Commercialisation"], desc: "Nouveau programme 2025-2026 remplaçant 8 anciens crédits d'impôt. Applicable dès 2026.", url: "https://revenuquebec.ca" },
-        { name: "Plan PME 2025-2028", org: "Réseau Accès PME – Québec", amount: "Enveloppe de 500M$", coverage: "Accompagnement + financement", type: "quebec", support: "subvention", amountMax: null, deadline: null, needs: ["demarrage","erp","web"], tags: ["Démarrage","Croissance","Relève","Numérique"], desc: "Accompagnement personnalisé par 500+ professionnels partout au Québec.", url: "https://quebec.ca" },
-        { name: "BDC – Prêt Technologie", org: "Banque de Développement du Canada", amount: "Prêt à 0% intérêt", coverage: "90% du plan numérique", type: "federal", support: "pret", amountMax: 15000, deadline: null, needs: ["web","erp","ecommerce"], tags: ["Prêt 0%","Plan numérique","Conseiller"], desc: "Subvention jusqu'à 15 000$ pour un conseiller numérique + prêt sans intérêt pour l'acquisition.", url: "https://bdc.ca" },
-        { name: "SIPEM – PROMPT", org: "PROMPT – Gouvernement fédéral", amount: "Jusqu'à 200 000$", coverage: "50% des honoraires", type: "federal", support: "subvention", amountMax: 200000, deadline: null, needs: ["manuf","ia","automation"], tags: ["Manufacturier","4.0","Robotique","IA"], desc: "Programme spécial pour PME manufacturières. Volet 1: 10 000$, Volet 2: jusqu'à 200 000$.", url: "https://promptinnovation.ca" },
-        { name: "PARI – CNRC", org: "Conseil National de Recherches Canada", amount: "Variable", coverage: "Financement + conseils experts", type: "federal", support: "subvention", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["Innovation","R&D","Technologie","Conseil"], desc: "Programme fédéral avec conseillers en technologie industrielle et financement R&D.", url: "https://nrc-cnrc.gc.ca" },
-        { name: "Futurpreneur Canada", org: "Futurpreneur – Gouvernement fédéral", amount: "Prêt jusqu'à 60 000$", coverage: "Prêt + mentorat 2 ans", type: "federal", support: "pret", amountMax: 60000, deadline: null, needs: ["demarrage","web","ecommerce"], tags: ["Démarrage","18-39 ans","Mentorat"], desc: "Financement et mentorat pour les entrepreneurs de 18 à 39 ans qui démarrent ou rachètent une entreprise.", url: "https://futurpreneur.ca" },
-        { name: "MicroEntreprendre", org: "Réseau MicroEntreprendre – Québec", amount: "Microcrédit jusqu'à 50 000$", coverage: "Prêt + accompagnement", type: "quebec", support: "pret", amountMax: 50000, deadline: null, needs: ["demarrage","web"], tags: ["Microcrédit","Démarrage","Accompagnement"], desc: "Microcrédit et accompagnement pour les entrepreneurs ayant un accès limité au financement traditionnel.", url: "https://microentreprendre.ca" },
+        { name: "Offensive Tr@ns Num", org: "ADRIQ – Gouvernement du Québec", amount: "Jusqu'à 25 000$", coverage: "50% des coûts", type: "quebec", support: "subvention", amountMax: 25000, deadline: null, needs: ["erp","cyber","automation","web"], tags: ["ERP","CRM","Automatisation","Cybersécurité"], desc: "Accompagnement complet dans votre virage numérique: diagnostic, implantation et formation.", url: "https://adriq.com", crit: ["PME du Québec, tous secteurs","Projet de virage numérique (ERP, CRM, cybersécurité)"], dep: ["Honoraires de consultants et d'experts","Implantation et formation des employés"], etapes: ["Contacter l'ADRIQ","Réaliser un diagnostic numérique","Déposer la demande avant le début des travaux"] },
+        { name: "Programme ESSOR", org: "Investissement Québec", amount: "Jusqu'à 50 000$", coverage: "50% des coûts", type: "quebec", support: "subvention", amountMax: 50000, deadline: "2027-03-31", needs: ["web","ia","rd","ecommerce","manuf"], tags: ["Étude faisabilité","Plan numérique","Innovation"], desc: "Financement pour études préalables et plans d'investissement numérique.", url: "https://investquebec.com", crit: ["Entreprise québécoise avec projet d'investissement","Étude de faisabilité ou plan numérique"], dep: ["Études préalables et plans","Acquisition technologique admissible"], etapes: ["Contacter Investissement Québec","Monter le dossier de projet","Soumettre avant le 31 mars 2027"] },
+        { name: "CRIC – Crédit Impôt R&D", org: "Gouvernement du Québec", amount: "Variable (remboursable)", coverage: "Crédits sur dépenses R&D", type: "quebec", support: "credit", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["R&D","Innovation","IA","Commercialisation"], desc: "Nouveau programme 2025-2026 remplaçant 8 anciens crédits d'impôt. Applicable dès 2026.", url: "https://revenuquebec.ca", crit: ["Société ayant des dépenses de R&D au Québec","Activités de recherche admissibles"], dep: ["Salaires liés à la R&D","Contrats de recherche"], etapes: ["Documenter vos activités de R&D","Réclamer le crédit dans la déclaration 2026","Consulter un fiscaliste"] },
+        { name: "Plan PME 2025-2028", org: "Réseau Accès PME – Québec", amount: "Enveloppe de 500M$", coverage: "Accompagnement + financement", type: "quebec", support: "subvention", amountMax: null, deadline: null, needs: ["demarrage","erp","web"], tags: ["Démarrage","Croissance","Relève","Numérique"], desc: "Accompagnement personnalisé par 500+ professionnels partout au Québec.", url: "https://quebec.ca", crit: ["Toutes les PME du Québec","Projet de démarrage, croissance ou relève"], dep: ["Accompagnement-conseil","Financement selon les volets"], etapes: ["Contacter le Réseau Accès PME","Rencontrer un conseiller (gratuit)","Définir votre plan d'action"] },
+        { name: "BDC – Prêt Technologie", org: "Banque de Développement du Canada", amount: "Prêt à 0% intérêt", coverage: "90% du plan numérique", type: "federal", support: "pret", amountMax: 15000, deadline: null, needs: ["web","erp","ecommerce"], tags: ["Prêt 0%","Plan numérique","Conseiller"], desc: "Subvention jusqu'à 15 000$ pour un conseiller numérique + prêt sans intérêt pour l'acquisition.", url: "https://bdc.ca", crit: ["PME canadienne","Plan de transformation numérique"], dep: ["Honoraires d'un conseiller numérique","Acquisition de technologies (prêt)"], etapes: ["Contacter la BDC","Faire évaluer votre plan numérique","Demander la subvention conseiller + le prêt"] },
+        { name: "SIPEM – PROMPT", org: "PROMPT – Gouvernement fédéral", amount: "Jusqu'à 200 000$", coverage: "50% des honoraires", type: "federal", support: "subvention", amountMax: 200000, deadline: null, needs: ["manuf","ia","automation"], tags: ["Manufacturier","4.0","Robotique","IA"], desc: "Programme spécial pour PME manufacturières. Volet 1: 10 000$, Volet 2: jusqu'à 200 000$.", url: "https://promptinnovation.ca", crit: ["PME manufacturière","Projet d'innovation 4.0, robotique ou IA"], dep: ["Honoraires d'experts","Projets de R&D collaboratifs"], etapes: ["Contacter PROMPT","Définir le volet (1 ou 2)","Déposer la demande de projet"] },
+        { name: "PARI – CNRC", org: "Conseil National de Recherches Canada", amount: "Variable", coverage: "Financement + conseils experts", type: "federal", support: "subvention", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["Innovation","R&D","Technologie","Conseil"], desc: "Programme fédéral avec conseillers en technologie industrielle et financement R&D.", url: "https://nrc-cnrc.gc.ca", crit: ["PME canadienne axée sur l'innovation","Projet de R&D technologique"], dep: ["Salaires liés au projet","Contrats de sous-traitance"], etapes: ["Contacter un conseiller PARI-CNRC","Évaluer l'admissibilité du projet","Soumettre la proposition"] },
+        { name: "Futurpreneur Canada", org: "Futurpreneur – Gouvernement fédéral", amount: "Prêt jusqu'à 60 000$", coverage: "Prêt + mentorat 2 ans", type: "federal", support: "pret", amountMax: 60000, deadline: null, needs: ["demarrage","web","ecommerce"], tags: ["Démarrage","18-39 ans","Mentorat"], desc: "Financement et mentorat pour les entrepreneurs de 18 à 39 ans qui démarrent ou rachètent une entreprise.", url: "https://futurpreneur.ca", crit: ["Entrepreneur de 18 à 39 ans","Démarrage ou rachat d'entreprise"], dep: ["Financement de démarrage","Mentorat inclus"], etapes: ["Créer un compte sur futurpreneur.ca","Préparer un plan d'affaires","Soumettre la demande de prêt"] },
+        { name: "MicroEntreprendre", org: "Réseau MicroEntreprendre – Québec", amount: "Microcrédit jusqu'à 50 000$", coverage: "Prêt + accompagnement", type: "quebec", support: "pret", amountMax: 50000, deadline: null, needs: ["demarrage","web"], tags: ["Microcrédit","Démarrage","Accompagnement"], desc: "Microcrédit et accompagnement pour les entrepreneurs ayant un accès limité au financement traditionnel.", url: "https://microentreprendre.ca", crit: ["Accès limité au financement traditionnel","Projet de démarrage ou de croissance"], dep: ["Microcrédit","Accompagnement et formation"], etapes: ["Contacter MicroEntreprendre Outaouais","Présenter votre projet","Recevoir prêt + accompagnement"] },
+        { name: "ID Gatineau – Fonds Soutien aux entreprises", org: "ID Gatineau", amount: "Jusqu'à 25 000$", coverage: "Aide non remboursable", type: "quebec", support: "subvention", amountMax: 25000, deadline: null, needs: ["demarrage","manuf","ecommerce"], region: "Gatineau", tags: ["Local","Gatineau","Croissance","Démarrage"], desc: "Aide non remboursable pour les projets de croissance ou de démarrage des entreprises de Gatineau (recours à des experts, nouveaux marchés).", url: "https://idgatineau.ca", crit: ["Entreprise située à Gatineau","Projet de croissance ou de démarrage à valeur ajoutée"], dep: ["Recours à des experts","Développement de nouveaux marchés"], etapes: ["Contacter ID Gatineau (819-595-8002)","Présenter votre projet","Déposer une demande au Fonds"] },
+        { name: "SADC – Outaouais", org: "Réseau SADC/CAE – Outaouais", amount: "Prêt de 5 000$ à 300 000$", coverage: "Prêt + accompagnement", type: "quebec", support: "pret", amountMax: 300000, deadline: null, needs: ["demarrage","web","manuf"], region: "Outaouais", tags: ["Local","Outaouais","Prêt","Croissance"], desc: "Prêt et accompagnement pour les PME des MRC de l'Outaouais (Papineau, Collines, Pontiac, Vallée-de-la-Gatineau).", url: "https://www.sadcpapineau.ca", crit: ["PME située dans une MRC de l'Outaouais","Projet viable de démarrage ou de croissance"], dep: ["Fonds de roulement","Acquisition d'équipement ou de technologie"], etapes: ["Contacter votre SADC locale","Présenter votre plan d'affaires","Analyse et octroi du prêt"] },
       ],
     },
     plan: {
@@ -222,16 +237,31 @@ const translations = {
       supportLabel: "Support type:",
       supportTypes: { subvention: "Grant", pret: "Loan", credit: "Tax credit" },
       statusOpen: "Open (rolling)", statusDeadline: "Deadline", statusSoon: "Closing soon",
+      detailToggle: "View details", detailHide: "Hide details",
+      critLabel: "Eligibility criteria", depLabel: "Eligible expenses", etapesLabel: "How to apply",
+      officialNote: "Indicative criteria — verify exact conditions on the official website.",
+      alert: {
+        title: "Get alerted about new grants",
+        sub: "Receive an email as soon as a new program opens for SMEs in Gatineau-Ottawa.",
+        placeholder: "Your business email",
+        button: "Alert me",
+        sending: "Sending...",
+        success: "✅ Subscribed! You'll be alerted about new programs.",
+        error: "❌ Invalid email. Please try again.",
+        privacy: "No spam · 1-click unsubscribe · Law 25 compliant.",
+      },
       programs: [
-        { name: "Offensive Tr@ns Num", org: "ADRIQ – Government of Québec", amount: "Up to $25,000", coverage: "50% of costs", type: "quebec", support: "subvention", amountMax: 25000, deadline: null, needs: ["erp","cyber","automation","web"], tags: ["ERP","CRM","Automation","Cybersecurity"], desc: "Complete support in your digital transformation: diagnostic, implementation and training.", url: "https://adriq.com" },
-        { name: "ESSOR Program", org: "Investissement Québec", amount: "Up to $50,000", coverage: "50% of costs", type: "quebec", support: "subvention", amountMax: 50000, deadline: "2027-03-31", needs: ["web","ia","rd","ecommerce","manuf"], tags: ["Feasibility Study","Digital Plan","Innovation"], desc: "Funding for preliminary studies and digital investment plans.", url: "https://investquebec.com" },
-        { name: "CRIC – R&D Tax Credit", org: "Government of Québec", amount: "Variable (refundable)", coverage: "Credits on R&D expenses", type: "quebec", support: "credit", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["R&D","Innovation","AI","Commercialization"], desc: "New 2025-2026 program replacing 8 old tax credits. Applicable from 2026.", url: "https://revenuquebec.ca" },
-        { name: "SME Plan 2025-2028", org: "Réseau Accès PME – Québec", amount: "$500M envelope", coverage: "Guidance + funding", type: "quebec", support: "subvention", amountMax: null, deadline: null, needs: ["demarrage","erp","web"], tags: ["Startup","Growth","Succession","Digital"], desc: "Personalized support by 500+ professionals across Québec.", url: "https://quebec.ca" },
-        { name: "BDC – Technology Loan", org: "Business Development Bank of Canada", amount: "0% interest loan", coverage: "90% of digital plan", type: "federal", support: "pret", amountMax: 15000, deadline: null, needs: ["web","erp","ecommerce"], tags: ["0% Loan","Digital Plan","Advisor"], desc: "Grant up to $15,000 for a digital advisor + interest-free loan for acquisition.", url: "https://bdc.ca" },
-        { name: "SIPEM – PROMPT", org: "PROMPT – Federal Government", amount: "Up to $200,000", coverage: "50% of fees", type: "federal", support: "subvention", amountMax: 200000, deadline: null, needs: ["manuf","ia","automation"], tags: ["Manufacturing","4.0","Robotics","AI"], desc: "Special program for manufacturing SMEs. Stream 1: $10,000, Stream 2: up to $200,000.", url: "https://promptinnovation.ca" },
-        { name: "IRAP – NRC", org: "National Research Council Canada", amount: "Variable", coverage: "Funding + expert advice", type: "federal", support: "subvention", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["Innovation","R&D","Technology","Advisory"], desc: "Federal program with industrial technology advisors and R&D funding.", url: "https://nrc-cnrc.gc.ca" },
-        { name: "Futurpreneur Canada", org: "Futurpreneur – Federal Government", amount: "Loan up to $60,000", coverage: "Loan + 2-year mentorship", type: "federal", support: "pret", amountMax: 60000, deadline: null, needs: ["demarrage","web","ecommerce"], tags: ["Startup","Ages 18-39","Mentorship"], desc: "Funding and mentorship for entrepreneurs aged 18 to 39 starting or buying a business.", url: "https://futurpreneur.ca" },
-        { name: "MicroEntreprendre", org: "Réseau MicroEntreprendre – Québec", amount: "Microloan up to $50,000", coverage: "Loan + guidance", type: "quebec", support: "pret", amountMax: 50000, deadline: null, needs: ["demarrage","web"], tags: ["Microloan","Startup","Guidance"], desc: "Microcredit and guidance for entrepreneurs with limited access to traditional financing.", url: "https://microentreprendre.ca" },
+        { name: "Offensive Tr@ns Num", org: "ADRIQ – Government of Québec", amount: "Up to $25,000", coverage: "50% of costs", type: "quebec", support: "subvention", amountMax: 25000, deadline: null, needs: ["erp","cyber","automation","web"], tags: ["ERP","CRM","Automation","Cybersecurity"], desc: "Complete support in your digital transformation: diagnostic, implementation and training.", url: "https://adriq.com", crit: ["Quebec SME, all sectors","Digital transformation project (ERP, CRM, cybersecurity)"], dep: ["Consultant and expert fees","Implementation and staff training"], etapes: ["Contact ADRIQ","Complete a digital diagnostic","Apply before work begins"] },
+        { name: "ESSOR Program", org: "Investissement Québec", amount: "Up to $50,000", coverage: "50% of costs", type: "quebec", support: "subvention", amountMax: 50000, deadline: "2027-03-31", needs: ["web","ia","rd","ecommerce","manuf"], tags: ["Feasibility Study","Digital Plan","Innovation"], desc: "Funding for preliminary studies and digital investment plans.", url: "https://investquebec.com", crit: ["Quebec business with an investment project","Feasibility study or digital plan"], dep: ["Preliminary studies and plans","Eligible technology acquisition"], etapes: ["Contact Investissement Québec","Build the project file","Submit before March 31, 2027"] },
+        { name: "CRIC – R&D Tax Credit", org: "Government of Québec", amount: "Variable (refundable)", coverage: "Credits on R&D expenses", type: "quebec", support: "credit", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["R&D","Innovation","AI","Commercialization"], desc: "New 2025-2026 program replacing 8 old tax credits. Applicable from 2026.", url: "https://revenuquebec.ca", crit: ["Corporation with R&D expenses in Québec","Eligible research activities"], dep: ["R&D-related salaries","Research contracts"], etapes: ["Document your R&D activities","Claim the credit in the 2026 return","Consult a tax specialist"] },
+        { name: "SME Plan 2025-2028", org: "Réseau Accès PME – Québec", amount: "$500M envelope", coverage: "Guidance + funding", type: "quebec", support: "subvention", amountMax: null, deadline: null, needs: ["demarrage","erp","web"], tags: ["Startup","Growth","Succession","Digital"], desc: "Personalized support by 500+ professionals across Québec.", url: "https://quebec.ca", crit: ["All Quebec SMEs","Startup, growth or succession project"], dep: ["Advisory support","Funding by stream"], etapes: ["Contact Réseau Accès PME","Meet an advisor (free)","Define your action plan"] },
+        { name: "BDC – Technology Loan", org: "Business Development Bank of Canada", amount: "0% interest loan", coverage: "90% of digital plan", type: "federal", support: "pret", amountMax: 15000, deadline: null, needs: ["web","erp","ecommerce"], tags: ["0% Loan","Digital Plan","Advisor"], desc: "Grant up to $15,000 for a digital advisor + interest-free loan for acquisition.", url: "https://bdc.ca", crit: ["Canadian SME","Digital transformation plan"], dep: ["Digital advisor fees","Technology acquisition (loan)"], etapes: ["Contact BDC","Have your digital plan assessed","Request the advisor grant + the loan"] },
+        { name: "SIPEM – PROMPT", org: "PROMPT – Federal Government", amount: "Up to $200,000", coverage: "50% of fees", type: "federal", support: "subvention", amountMax: 200000, deadline: null, needs: ["manuf","ia","automation"], tags: ["Manufacturing","4.0","Robotics","AI"], desc: "Special program for manufacturing SMEs. Stream 1: $10,000, Stream 2: up to $200,000.", url: "https://promptinnovation.ca", crit: ["Manufacturing SME","Industry 4.0, robotics or AI project"], dep: ["Expert fees","Collaborative R&D projects"], etapes: ["Contact PROMPT","Choose the stream (1 or 2)","Submit the project application"] },
+        { name: "IRAP – NRC", org: "National Research Council Canada", amount: "Variable", coverage: "Funding + expert advice", type: "federal", support: "subvention", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["Innovation","R&D","Technology","Advisory"], desc: "Federal program with industrial technology advisors and R&D funding.", url: "https://nrc-cnrc.gc.ca", crit: ["Innovation-driven Canadian SME","Technology R&D project"], dep: ["Project-related salaries","Subcontracting"], etapes: ["Contact an IRAP-NRC advisor","Assess project eligibility","Submit the proposal"] },
+        { name: "Futurpreneur Canada", org: "Futurpreneur – Federal Government", amount: "Loan up to $60,000", coverage: "Loan + 2-year mentorship", type: "federal", support: "pret", amountMax: 60000, deadline: null, needs: ["demarrage","web","ecommerce"], tags: ["Startup","Ages 18-39","Mentorship"], desc: "Funding and mentorship for entrepreneurs aged 18 to 39 starting or buying a business.", url: "https://futurpreneur.ca", crit: ["Entrepreneur aged 18 to 39","Starting or buying a business"], dep: ["Startup financing","Mentorship included"], etapes: ["Create an account on futurpreneur.ca","Prepare a business plan","Submit the loan application"] },
+        { name: "MicroEntreprendre", org: "Réseau MicroEntreprendre – Québec", amount: "Microloan up to $50,000", coverage: "Loan + guidance", type: "quebec", support: "pret", amountMax: 50000, deadline: null, needs: ["demarrage","web"], tags: ["Microloan","Startup","Guidance"], desc: "Microcredit and guidance for entrepreneurs with limited access to traditional financing.", url: "https://microentreprendre.ca", crit: ["Limited access to traditional financing","Startup or growth project"], dep: ["Microcredit","Guidance and training"], etapes: ["Contact MicroEntreprendre Outaouais","Present your project","Receive loan + guidance"] },
+        { name: "ID Gatineau – Business Support Fund", org: "ID Gatineau", amount: "Up to $25,000", coverage: "Non-repayable grant", type: "quebec", support: "subvention", amountMax: 25000, deadline: null, needs: ["demarrage","manuf","ecommerce"], region: "Gatineau", tags: ["Local","Gatineau","Growth","Startup"], desc: "Non-repayable support for growth or startup projects of Gatineau businesses (use of experts, new markets).", url: "https://idgatineau.ca", crit: ["Business located in Gatineau","Value-added growth or startup project"], dep: ["Use of experts","New market development"], etapes: ["Contact ID Gatineau (819-595-8002)","Present your project","Apply to the Fund"] },
+        { name: "SADC – Outaouais", org: "SADC/CAE Network – Outaouais", amount: "Loan $5,000 to $300,000", coverage: "Loan + guidance", type: "quebec", support: "pret", amountMax: 300000, deadline: null, needs: ["demarrage","web","manuf"], region: "Outaouais", tags: ["Local","Outaouais","Loan","Growth"], desc: "Loan and guidance for SMEs in the Outaouais RCMs (Papineau, Collines, Pontiac, Vallée-de-la-Gatineau).", url: "https://www.sadcpapineau.ca", crit: ["SME located in an Outaouais RCM","Viable startup or growth project"], dep: ["Working capital","Equipment or technology acquisition"], etapes: ["Contact your local SADC","Present your business plan","Review and loan approval"] },
       ],
     },
     plan: {
@@ -317,6 +347,10 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [grantFilter, setGrantFilter] = useState("all");
   const [supportFilter, setSupportFilter] = useState("all");
+  const [openGrants, setOpenGrants] = useState({});
+  const [alertEmail, setAlertEmail] = useState("");
+  const [alertStatus, setAlertStatus] = useState(null); // null | "success" | "error"
+  const [alertLoading, setAlertLoading] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [showInscription, setShowInscription] = useState(false);
   const [inscEmail, setInscEmail] = useState("");
@@ -528,6 +562,30 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
       setContactStatus("error");
     }
     setContactLoading(false);
+  };
+
+  // Inscription aux alertes de subventions (même endpoint Apps Script).
+  const submitAlert = async () => {
+    if (!alertEmail.trim() || !alertEmail.includes("@")) {
+      setAlertStatus("error");
+      return;
+    }
+    setAlertLoading(true);
+    setAlertStatus(null);
+    try {
+      const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxkjq5nN5wWtYOX4iYNOr6DwkIuTT2qg8EIQO7FltXUBrcgN5FHfSpPE8RatM0rig/exec";
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ type: "alert", email: alertEmail, langue: lang.toUpperCase() }),
+      });
+      setAlertStatus("success");
+      setAlertEmail("");
+    } catch {
+      setAlertStatus("error");
+    }
+    setAlertLoading(false);
   };
 
   const submitInscription = async () => {
@@ -2044,9 +2102,82 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 16 }}>
                     {g.tags.map((tag) => <span key={tag} className="chip">{tag}</span>)}
                   </div>
+
+                  {/* Détails d'admissibilité (pliable) */}
+                  {(g.crit || g.dep || g.etapes) && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => setOpenGrants((s) => ({ ...s, [g.name]: !s[g.name] }))}
+                        aria-expanded={!!openGrants[g.name]}
+                        style={{ background: "transparent", border: "none", color: "#635BFF", fontSize: 12.5, fontWeight: 700, cursor: "pointer", padding: "2px 0", marginBottom: 12, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter',sans-serif" }}
+                      >
+                        {openGrants[g.name] ? t.grants.detailHide : t.grants.detailToggle}
+                        <span style={{ transition: "transform 0.2s", transform: openGrants[g.name] ? "rotate(180deg)" : "none" }}>▾</span>
+                      </button>
+                      {openGrants[g.name] && (
+                        <div style={{ background: "#F6F9FC", border: "1px solid #E6EBF1", borderRadius: 10, padding: "14px 16px", marginBottom: 14 }}>
+                          {[["crit", t.grants.critLabel, "🎯"], ["dep", t.grants.depLabel, "💵"], ["etapes", t.grants.etapesLabel, "📝"]].map(([key, label, icon]) =>
+                            Array.isArray(g[key]) && g[key].length > 0 ? (
+                              <div key={key} style={{ marginBottom: 12 }}>
+                                <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em", color: "#5046E5", marginBottom: 6 }}>{icon} {label}</div>
+                                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 4 }}>
+                                  {g[key].map((item, ii) => (
+                                    <li key={ii} style={{ fontSize: 12.5, color: "#425466", lineHeight: 1.5, paddingLeft: 14, position: "relative" }}>
+                                      <span style={{ position: "absolute", left: 0, color: "#635BFF" }}>•</span>{item}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ) : null
+                          )}
+                          <div style={{ fontSize: 10.5, color: "#8898AA", fontStyle: "italic", borderTop: "1px solid #E6EBF1", paddingTop: 10, marginTop: 2 }}>
+                            ⚠️ {t.grants.officialNote}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
                   <a href={g.url} target="_blank" rel="noopener noreferrer" className="grant-lnk">{t.grants.apply} →</a>
                 </div>
               ))}
+            </div>
+
+            {/* ALERTE SUBVENTIONS */}
+            <div style={{
+              marginTop: 48, borderRadius: 20, padding: "36px 40px", textAlign: "center",
+              background: "linear-gradient(135deg,#0A2540 0%,#1A2F4E 100%)", color: "#FFFFFF",
+              boxShadow: "0 12px 30px -12px rgba(10,37,64,0.45)", position: "relative", overflow: "hidden"
+            }}>
+              <div style={{ position: "absolute", top: "-40%", right: "-5%", width: 280, height: 280, background: "radial-gradient(circle,rgba(99,91,255,0.25) 0%,transparent 60%)", pointerEvents: "none" }} />
+              <h3 style={{ fontFamily: "'Inter',sans-serif", fontSize: "clamp(20px,3vw,26px)", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: 10, position: "relative" }}>
+                🔔 {t.grants.alert.title}
+              </h3>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.55, maxWidth: 480, margin: "0 auto 22px", position: "relative" }}>
+                {t.grants.alert.sub}
+              </p>
+              <div style={{ display: "flex", gap: 10, maxWidth: 460, margin: "0 auto", flexWrap: "wrap", justifyContent: "center", position: "relative" }}>
+                <input
+                  className="chat-in"
+                  type="email"
+                  placeholder={t.grants.alert.placeholder}
+                  value={alertEmail}
+                  onChange={(e) => setAlertEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && submitAlert()}
+                  style={{ flex: "1 1 220px", minWidth: 0 }}
+                />
+                <button className="btn-p" onClick={submitAlert} disabled={alertLoading} style={{ flexShrink: 0 }}>
+                  {alertLoading ? t.grants.alert.sending : `🔔 ${t.grants.alert.button}`}
+                </button>
+              </div>
+              {alertStatus === "success" && (
+                <p style={{ marginTop: 14, fontSize: 13, color: "#5EE9A6", position: "relative" }}>{t.grants.alert.success}</p>
+              )}
+              {alertStatus === "error" && (
+                <p style={{ marginTop: 14, fontSize: 13, color: "#FF9B9B", position: "relative" }}>{t.grants.alert.error}</p>
+              )}
+              <p style={{ marginTop: 14, fontSize: 11, color: "rgba(255,255,255,0.6)", position: "relative" }}>🔒 {t.grants.alert.privacy}</p>
             </div>
           </div>
         )}
