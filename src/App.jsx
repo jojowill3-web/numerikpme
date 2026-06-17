@@ -34,7 +34,13 @@ const translations = {
         { q: "Comment gérez-vous vos données clients?", options: ["Cahiers / papier","Fichiers Excel","Logiciel CRM basique","CRM avancé avec automatisation"] },
         { q: "Utilisez-vous l'intelligence artificielle dans vos opérations?", options: ["Pas du tout","ChatGPT occasionnellement","Outils IA spécifiques (1-2)","IA intégrée dans nos processus"] },
         { q: "Quel est votre budget annuel pour le numérique?", options: ["Moins de 5 000$","5 000$ – 15 000$","15 000$ – 50 000$","Plus de 50 000$"] },
+        { q: "Quel est votre projet prioritaire pour les 12 prochains mois?", options: ["Créer ou refaire mon site web","Lancer une boutique en ligne (e-commerce)","Implanter un ERP/CRM","Automatiser mes processus","Intégrer l'intelligence artificielle","Améliorer ma cybersécurité","Démarrer mon entreprise","Moderniser ma production (manufacturier)"] },
       ],
+      estimationTitle: "Financement potentiel identifié",
+      estimationSub: "Selon votre profil et votre projet, voici une estimation du financement auquel vous pourriez être admissible.",
+      estimationUpTo: "Jusqu'à",
+      estimationFoot: "Montant indicatif basé sur les programmes correspondant à votre profil. Le montant final dépend de votre admissibilité et de votre projet.",
+      estimationPrograms: "programmes correspondent à votre profil",
       resultTitle: "Votre score de maturité numérique",
       levels: ["Débutant","En développement","Intermédiaire","Avancé"],
       levelDesc: [
@@ -70,14 +76,19 @@ const translations = {
     grants: {
       title: "Programmes de Subventions", subtitle: "Programmes gouvernementaux actifs en 2026 pour votre région",
       filter: "Filtrer par:", all: "Tous", quebec: "Québec", federal: "Fédéral", apply: "En savoir plus",
+      supportLabel: "Type d'aide:",
+      supportTypes: { subvention: "Subvention", pret: "Prêt", credit: "Crédit d'impôt" },
+      statusOpen: "Ouvert en continu", statusDeadline: "Échéance", statusSoon: "Bientôt fermé",
       programs: [
-        { name: "Offensive Tr@ns Num", org: "ADRIQ – Gouvernement du Québec", amount: "Jusqu'à 25 000$", coverage: "50% des coûts", type: "quebec", tags: ["ERP","CRM","Automatisation","Cybersécurité"], desc: "Accompagnement complet dans votre virage numérique: diagnostic, implantation et formation.", url: "https://adriq.com" },
-        { name: "Programme ESSOR", org: "Investissement Québec", amount: "Jusqu'à 50 000$", coverage: "50% des coûts", type: "quebec", tags: ["Étude faisabilité","Plan numérique","Innovation"], desc: "Financement pour études préalables et plans d'investissement numérique.", url: "https://investquebec.com" },
-        { name: "CRIC – Crédit Impôt R&D", org: "Gouvernement du Québec", amount: "Variable (remboursable)", coverage: "Crédits sur dépenses R&D", type: "quebec", tags: ["R&D","Innovation","IA","Commercialisation"], desc: "Nouveau programme 2025-2026 remplaçant 8 anciens crédits d'impôt. Applicable dès 2026.", url: "https://revenuquebec.ca" },
-        { name: "Plan PME 2025-2028", org: "Réseau Accès PME – Québec", amount: "Enveloppe de 500M$", coverage: "Accompagnement + financement", type: "quebec", tags: ["Démarrage","Croissance","Relève","Numérique"], desc: "Accompagnement personnalisé par 500+ professionnels partout au Québec.", url: "https://quebec.ca" },
-        { name: "BDC – Prêt Technologie", org: "Banque de Développement du Canada", amount: "Prêt à 0% intérêt", coverage: "90% du plan numérique", type: "federal", tags: ["Prêt 0%","Plan numérique","Conseiller"], desc: "Subvention jusqu'à 15 000$ pour un conseiller numérique + prêt sans intérêt pour l'acquisition.", url: "https://bdc.ca" },
-        { name: "SIPEM – PROMPT", org: "PROMPT – Gouvernement fédéral", amount: "Jusqu'à 200 000$", coverage: "50% des honoraires", type: "federal", tags: ["Manufacturier","4.0","Robotique","IA"], desc: "Programme spécial pour PME manufacturières. Volet 1: 10 000$, Volet 2: jusqu'à 200 000$.", url: "https://promptinnovation.ca" },
-        { name: "PARI – CNRC", org: "Conseil National de Recherches Canada", amount: "Variable", coverage: "Financement + conseils experts", type: "federal", tags: ["Innovation","R&D","Technologie","Conseil"], desc: "Programme fédéral avec conseillers en technologie industrielle et financement R&D.", url: "https://nrc-cnrc.gc.ca" },
+        { name: "Offensive Tr@ns Num", org: "ADRIQ – Gouvernement du Québec", amount: "Jusqu'à 25 000$", coverage: "50% des coûts", type: "quebec", support: "subvention", amountMax: 25000, deadline: null, needs: ["erp","cyber","automation","web"], tags: ["ERP","CRM","Automatisation","Cybersécurité"], desc: "Accompagnement complet dans votre virage numérique: diagnostic, implantation et formation.", url: "https://adriq.com" },
+        { name: "Programme ESSOR", org: "Investissement Québec", amount: "Jusqu'à 50 000$", coverage: "50% des coûts", type: "quebec", support: "subvention", amountMax: 50000, deadline: "2027-03-31", needs: ["web","ia","rd","ecommerce","manuf"], tags: ["Étude faisabilité","Plan numérique","Innovation"], desc: "Financement pour études préalables et plans d'investissement numérique.", url: "https://investquebec.com" },
+        { name: "CRIC – Crédit Impôt R&D", org: "Gouvernement du Québec", amount: "Variable (remboursable)", coverage: "Crédits sur dépenses R&D", type: "quebec", support: "credit", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["R&D","Innovation","IA","Commercialisation"], desc: "Nouveau programme 2025-2026 remplaçant 8 anciens crédits d'impôt. Applicable dès 2026.", url: "https://revenuquebec.ca" },
+        { name: "Plan PME 2025-2028", org: "Réseau Accès PME – Québec", amount: "Enveloppe de 500M$", coverage: "Accompagnement + financement", type: "quebec", support: "subvention", amountMax: null, deadline: null, needs: ["demarrage","erp","web"], tags: ["Démarrage","Croissance","Relève","Numérique"], desc: "Accompagnement personnalisé par 500+ professionnels partout au Québec.", url: "https://quebec.ca" },
+        { name: "BDC – Prêt Technologie", org: "Banque de Développement du Canada", amount: "Prêt à 0% intérêt", coverage: "90% du plan numérique", type: "federal", support: "pret", amountMax: 15000, deadline: null, needs: ["web","erp","ecommerce"], tags: ["Prêt 0%","Plan numérique","Conseiller"], desc: "Subvention jusqu'à 15 000$ pour un conseiller numérique + prêt sans intérêt pour l'acquisition.", url: "https://bdc.ca" },
+        { name: "SIPEM – PROMPT", org: "PROMPT – Gouvernement fédéral", amount: "Jusqu'à 200 000$", coverage: "50% des honoraires", type: "federal", support: "subvention", amountMax: 200000, deadline: null, needs: ["manuf","ia","automation"], tags: ["Manufacturier","4.0","Robotique","IA"], desc: "Programme spécial pour PME manufacturières. Volet 1: 10 000$, Volet 2: jusqu'à 200 000$.", url: "https://promptinnovation.ca" },
+        { name: "PARI – CNRC", org: "Conseil National de Recherches Canada", amount: "Variable", coverage: "Financement + conseils experts", type: "federal", support: "subvention", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["Innovation","R&D","Technologie","Conseil"], desc: "Programme fédéral avec conseillers en technologie industrielle et financement R&D.", url: "https://nrc-cnrc.gc.ca" },
+        { name: "Futurpreneur Canada", org: "Futurpreneur – Gouvernement fédéral", amount: "Prêt jusqu'à 60 000$", coverage: "Prêt + mentorat 2 ans", type: "federal", support: "pret", amountMax: 60000, deadline: null, needs: ["demarrage","web","ecommerce"], tags: ["Démarrage","18-39 ans","Mentorat"], desc: "Financement et mentorat pour les entrepreneurs de 18 à 39 ans qui démarrent ou rachètent une entreprise.", url: "https://futurpreneur.ca" },
+        { name: "MicroEntreprendre", org: "Réseau MicroEntreprendre – Québec", amount: "Microcrédit jusqu'à 50 000$", coverage: "Prêt + accompagnement", type: "quebec", support: "pret", amountMax: 50000, deadline: null, needs: ["demarrage","web"], tags: ["Microcrédit","Démarrage","Accompagnement"], desc: "Microcrédit et accompagnement pour les entrepreneurs ayant un accès limité au financement traditionnel.", url: "https://microentreprendre.ca" },
       ],
     },
     plan: {
@@ -172,7 +183,13 @@ const translations = {
         { q: "How do you manage your customer data?", options: ["Paper / notebooks","Excel files","Basic CRM software","Advanced CRM with automation"] },
         { q: "Do you use artificial intelligence in your operations?", options: ["Not at all","ChatGPT occasionally","Specific AI tools (1-2)","AI integrated into our processes"] },
         { q: "What is your annual digital budget?", options: ["Less than $5,000","$5,000 – $15,000","$15,000 – $50,000","More than $50,000"] },
+        { q: "What is your priority project for the next 12 months?", options: ["Create or rebuild my website","Launch an online store (e-commerce)","Implement an ERP/CRM","Automate my processes","Integrate artificial intelligence","Improve my cybersecurity","Start my business","Modernize my production (manufacturing)"] },
       ],
+      estimationTitle: "Potential funding identified",
+      estimationSub: "Based on your profile and project, here is an estimate of the funding you could be eligible for.",
+      estimationUpTo: "Up to",
+      estimationFoot: "Indicative amount based on the programs matching your profile. The final amount depends on your eligibility and your project.",
+      estimationPrograms: "programs match your profile",
       resultTitle: "Your digital maturity score",
       levels: ["Beginner","Developing","Intermediate","Advanced"],
       levelDesc: ["Your business has great digital growth potential. Significant grants are available to help you get started.","You've laid the groundwork. It's time to accelerate with more powerful tools and automations.","Good progress! Focus on AI and system integration to maximize your productivity.","You're a digital leader! Explore emerging technologies (generative AI, autonomous agents) to maintain your edge."],
@@ -202,14 +219,19 @@ const translations = {
     grants: {
       title: "Grant Programs", subtitle: "Active government programs in 2026 for your region",
       filter: "Filter by:", all: "All", quebec: "Québec", federal: "Federal", apply: "Learn more",
+      supportLabel: "Support type:",
+      supportTypes: { subvention: "Grant", pret: "Loan", credit: "Tax credit" },
+      statusOpen: "Open (rolling)", statusDeadline: "Deadline", statusSoon: "Closing soon",
       programs: [
-        { name: "Offensive Tr@ns Num", org: "ADRIQ – Government of Québec", amount: "Up to $25,000", coverage: "50% of costs", type: "quebec", tags: ["ERP","CRM","Automation","Cybersecurity"], desc: "Complete support in your digital transformation: diagnostic, implementation and training.", url: "https://adriq.com" },
-        { name: "ESSOR Program", org: "Investissement Québec", amount: "Up to $50,000", coverage: "50% of costs", type: "quebec", tags: ["Feasibility Study","Digital Plan","Innovation"], desc: "Funding for preliminary studies and digital investment plans.", url: "https://investquebec.com" },
-        { name: "CRIC – R&D Tax Credit", org: "Government of Québec", amount: "Variable (refundable)", coverage: "Credits on R&D expenses", type: "quebec", tags: ["R&D","Innovation","AI","Commercialization"], desc: "New 2025-2026 program replacing 8 old tax credits. Applicable from 2026.", url: "https://revenuquebec.ca" },
-        { name: "SME Plan 2025-2028", org: "Réseau Accès PME – Québec", amount: "$500M envelope", coverage: "Guidance + funding", type: "quebec", tags: ["Startup","Growth","Succession","Digital"], desc: "Personalized support by 500+ professionals across Québec.", url: "https://quebec.ca" },
-        { name: "BDC – Technology Loan", org: "Business Development Bank of Canada", amount: "0% interest loan", coverage: "90% of digital plan", type: "federal", tags: ["0% Loan","Digital Plan","Advisor"], desc: "Grant up to $15,000 for a digital advisor + interest-free loan for acquisition.", url: "https://bdc.ca" },
-        { name: "SIPEM – PROMPT", org: "PROMPT – Federal Government", amount: "Up to $200,000", coverage: "50% of fees", type: "federal", tags: ["Manufacturing","4.0","Robotics","AI"], desc: "Special program for manufacturing SMEs. Stream 1: $10,000, Stream 2: up to $200,000.", url: "https://promptinnovation.ca" },
-        { name: "IRAP – NRC", org: "National Research Council Canada", amount: "Variable", coverage: "Funding + expert advice", type: "federal", tags: ["Innovation","R&D","Technology","Advisory"], desc: "Federal program with industrial technology advisors and R&D funding.", url: "https://nrc-cnrc.gc.ca" },
+        { name: "Offensive Tr@ns Num", org: "ADRIQ – Government of Québec", amount: "Up to $25,000", coverage: "50% of costs", type: "quebec", support: "subvention", amountMax: 25000, deadline: null, needs: ["erp","cyber","automation","web"], tags: ["ERP","CRM","Automation","Cybersecurity"], desc: "Complete support in your digital transformation: diagnostic, implementation and training.", url: "https://adriq.com" },
+        { name: "ESSOR Program", org: "Investissement Québec", amount: "Up to $50,000", coverage: "50% of costs", type: "quebec", support: "subvention", amountMax: 50000, deadline: "2027-03-31", needs: ["web","ia","rd","ecommerce","manuf"], tags: ["Feasibility Study","Digital Plan","Innovation"], desc: "Funding for preliminary studies and digital investment plans.", url: "https://investquebec.com" },
+        { name: "CRIC – R&D Tax Credit", org: "Government of Québec", amount: "Variable (refundable)", coverage: "Credits on R&D expenses", type: "quebec", support: "credit", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["R&D","Innovation","AI","Commercialization"], desc: "New 2025-2026 program replacing 8 old tax credits. Applicable from 2026.", url: "https://revenuquebec.ca" },
+        { name: "SME Plan 2025-2028", org: "Réseau Accès PME – Québec", amount: "$500M envelope", coverage: "Guidance + funding", type: "quebec", support: "subvention", amountMax: null, deadline: null, needs: ["demarrage","erp","web"], tags: ["Startup","Growth","Succession","Digital"], desc: "Personalized support by 500+ professionals across Québec.", url: "https://quebec.ca" },
+        { name: "BDC – Technology Loan", org: "Business Development Bank of Canada", amount: "0% interest loan", coverage: "90% of digital plan", type: "federal", support: "pret", amountMax: 15000, deadline: null, needs: ["web","erp","ecommerce"], tags: ["0% Loan","Digital Plan","Advisor"], desc: "Grant up to $15,000 for a digital advisor + interest-free loan for acquisition.", url: "https://bdc.ca" },
+        { name: "SIPEM – PROMPT", org: "PROMPT – Federal Government", amount: "Up to $200,000", coverage: "50% of fees", type: "federal", support: "subvention", amountMax: 200000, deadline: null, needs: ["manuf","ia","automation"], tags: ["Manufacturing","4.0","Robotics","AI"], desc: "Special program for manufacturing SMEs. Stream 1: $10,000, Stream 2: up to $200,000.", url: "https://promptinnovation.ca" },
+        { name: "IRAP – NRC", org: "National Research Council Canada", amount: "Variable", coverage: "Funding + expert advice", type: "federal", support: "subvention", amountMax: null, deadline: null, needs: ["rd","ia"], tags: ["Innovation","R&D","Technology","Advisory"], desc: "Federal program with industrial technology advisors and R&D funding.", url: "https://nrc-cnrc.gc.ca" },
+        { name: "Futurpreneur Canada", org: "Futurpreneur – Federal Government", amount: "Loan up to $60,000", coverage: "Loan + 2-year mentorship", type: "federal", support: "pret", amountMax: 60000, deadline: null, needs: ["demarrage","web","ecommerce"], tags: ["Startup","Ages 18-39","Mentorship"], desc: "Funding and mentorship for entrepreneurs aged 18 to 39 starting or buying a business.", url: "https://futurpreneur.ca" },
+        { name: "MicroEntreprendre", org: "Réseau MicroEntreprendre – Québec", amount: "Microloan up to $50,000", coverage: "Loan + guidance", type: "quebec", support: "pret", amountMax: 50000, deadline: null, needs: ["demarrage","web"], tags: ["Microloan","Startup","Guidance"], desc: "Microcredit and guidance for entrepreneurs with limited access to traditional financing.", url: "https://microentreprendre.ca" },
       ],
     },
     plan: {
@@ -294,6 +316,7 @@ export default function App() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [grantFilter, setGrantFilter] = useState("all");
+  const [supportFilter, setSupportFilter] = useState("all");
   const [openFaq, setOpenFaq] = useState(0);
   const [showInscription, setShowInscription] = useState(false);
   const [inscEmail, setInscEmail] = useState("");
@@ -333,8 +356,11 @@ export default function App() {
 
   // Fallback local scoring (si AI echwe)
   const computeLocalResult = (answers) => {
-    const score = answers.reduce((acc, ans, i) => acc + t.diagnostic.questions[i].options.indexOf(ans), 0);
-    const max = t.diagnostic.questions.reduce((acc, q) => acc + q.options.length - 1, 0);
+    // La dernière question (« projet prioritaire ») est un choix, pas une échelle
+    // de maturité : on l'exclut du score ordinal.
+    const scored = t.diagnostic.questions.slice(0, t.diagnostic.questions.length - 1);
+    const score = scored.reduce((acc, q, i) => acc + q.options.indexOf(answers[i]), 0);
+    const max = scored.reduce((acc, q) => acc + q.options.length - 1, 0);
     const pct = Math.round((score / max) * 100);
     return { score: pct, level: pct < 25 ? 0 : pct < 50 ? 1 : pct < 75 ? 2 : 3, ai: false };
   };
@@ -656,7 +682,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
   // ═══════════════════════════════════════════════════════════════
   // Konvèti diagAnswers (array nan lòd kesyon) an objè estriktire — pa nouvo state
   const getDiagProfile = (answers) => {
-    if (!answers || answers.length < 7) return null;
+    if (!answers || answers.length < 8) return null;
     return {
       secteur: answers[0],         // ex: "Commerce de détail" / "Manufacturier"
       taille: answers[1],          // ex: "1–4 (Micro)"
@@ -665,7 +691,16 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
       donneesClients: answers[4],  // ex: "Cahiers / papier"
       ia: answers[5],              // ex: "Pas du tout"
       budget: answers[6],          // ex: "Moins de 5 000$"
+      projet: answers[7],          // ex: "Lancer une boutique en ligne (e-commerce)"
     };
+  };
+
+  // Convertit le « projet prioritaire » (Q8) en clé de besoin pour le matching.
+  // L'index de l'option choisie correspond à une clé fixe (ordre des options FR/EN).
+  const getProjectNeed = (projet) => {
+    if (!projet) return null;
+    const idx = t.diagnostic.questions[7]?.options.indexOf(projet);
+    return ["web","ecommerce","erp","automation","ia","cyber","demarrage","manuf"][idx] ?? null;
   };
 
   // Detekte si yon repons sektè se manifaktire (bileng FR/EN)
@@ -709,6 +744,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
     const erpOK = hasFullERP(profile.erp);
     const aiOK = hasFullAI(profile.ia);
     const score = (diagResult && diagResult.score) || 0;
+    const projectNeed = getProjectNeed(profile.projet); // matching par projet (façon helloDarwin)
 
     const matches = [];
     for (const g of allGrants) {
@@ -791,10 +827,26 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
         priorite = 2;
       }
 
+      // Boost selon le projet prioritaire : si le programme couvre le besoin
+      // correspondant au projet choisi, on le remonte en priorité 1.
+      if (admissible && projectNeed && Array.isArray(g.needs) && g.needs.includes(projectNeed)) {
+        priorite = 1;
+        raison = isFR
+          ? `Pertinent pour votre projet : ${profile.projet}`
+          : `Relevant to your project: ${profile.projet}`;
+      }
+
       if (admissible) matches.push({ ...g, priorite, raison });
     }
     // Trie: priyorite 1 anvan, apre type filter respekte
     return matches.sort((a, b) => a.priorite - b.priorite);
+  };
+
+  // Estimation du financement potentiel : somme des montants max des programmes
+  // correspondant au profil (matching). « Jusqu'à » = plafond indicatif.
+  const estimateFunding = (grantsList) => {
+    if (!grantsList) return 0;
+    return grantsList.reduce((sum, g) => sum + (typeof g.amountMax === "number" ? g.amountMax : 0), 0);
   };
 
   const diagProfile = getDiagProfile(diagAnswers);
@@ -802,7 +854,12 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
     ? getMatchingGrants(diagProfile, t.grants.programs, lang === "fr")
     : null;
   const baseGrantsList = personalizedGrants || t.grants.programs.map(g => ({ ...g, priorite: 2, raison: "" }));
-  const filteredGrants = baseGrantsList.filter((p) => grantFilter === "all" || p.type === grantFilter);
+  const filteredGrants = baseGrantsList.filter((p) =>
+    (grantFilter === "all" || p.type === grantFilter) &&
+    (supportFilter === "all" || p.support === supportFilter)
+  );
+  // Estimation du financement potentiel (programmes correspondant au profil)
+  const fundingEstimate = personalizedGrants ? estimateFunding(personalizedGrants) : 0;
   const renderMarkdown = (text) =>
     text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
         .replace(/\n\n/g, "</p><p>").replace(/\n/g, "<br/>")
@@ -811,6 +868,26 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
   const scoreColor = diagResult
     ? diagResult.score < 25 ? "#E25C5C" : diagResult.score < 50 ? "#FF8A4C" : diagResult.score < 75 ? "#635BFF" : "#00A865"
     : "#635BFF";
+
+  // Statut d'un programme (badge) : échéance proche, échéance datée, ou en continu.
+  const getGrantStatus = (g) => {
+    const fr = lang === "fr";
+    if (g.deadline) {
+      const days = Math.round((new Date(g.deadline) - new Date()) / 86400000);
+      if (days >= 0 && days <= 60) {
+        return { label: t.grants.statusSoon, color: "#D63B3B", bg: "rgba(226,92,92,0.10)", bd: "rgba(226,92,92,0.25)" };
+      }
+      const dateLbl = new Date(g.deadline + "T00:00:00").toLocaleDateString(fr ? "fr-CA" : "en-CA", { month: "long", year: "numeric" });
+      return { label: `${t.grants.statusDeadline} · ${dateLbl}`, color: "#B26A00", bg: "rgba(255,170,0,0.10)", bd: "rgba(255,170,0,0.30)" };
+    }
+    return { label: t.grants.statusOpen, color: "#00A865", bg: "rgba(0,168,101,0.10)", bd: "rgba(0,168,101,0.25)" };
+  };
+
+  // Couleur du badge « type d'aide ».
+  const supportColor = (s) =>
+    s === "pret" ? { color: "#B26A00", bg: "rgba(255,170,0,0.10)", bd: "rgba(255,170,0,0.30)" }
+    : s === "credit" ? { color: "#7A52CC", bg: "rgba(122,82,204,0.10)", bd: "rgba(122,82,204,0.28)" }
+    : { color: "#00A865", bg: "rgba(0,168,101,0.10)", bd: "rgba(0,168,101,0.25)" };
 
   return (
     <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", background: "#FFFFFF", minHeight: "100vh", color: "#0A2540" }}>
@@ -1624,6 +1701,35 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                   </div>
                 </div>
 
+                {/* ESTIMATION DU FINANCEMENT POTENTIEL */}
+                {personalizedGrants && fundingEstimate > 0 && (
+                  <div style={{
+                    marginTop: 24, borderRadius: 20, padding: "32px 36px", textAlign: "center",
+                    background: "linear-gradient(135deg,#00A865 0%,#00875A 100%)", color: "#FFFFFF",
+                    boxShadow: "0 12px 30px -10px rgba(0,168,101,0.45)", position: "relative", overflow: "hidden"
+                  }}>
+                    <div style={{ position: "absolute", top: "-40%", right: "-5%", width: 240, height: 240, background: "radial-gradient(circle,rgba(255,255,255,0.16) 0%,transparent 60%)", pointerEvents: "none" }} />
+                    <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.85)", marginBottom: 10, position: "relative" }}>
+                      💰 {t.diagnostic.estimationTitle}
+                    </div>
+                    <div style={{ fontFamily: "'Inter',sans-serif", fontWeight: 800, letterSpacing: "-0.03em", fontSize: "clamp(34px,6vw,52px)", lineHeight: 1.05, marginBottom: 8, position: "relative" }}>
+                      {t.diagnostic.estimationUpTo}{" "}
+                      {lang === "fr"
+                        ? `${fundingEstimate.toLocaleString("fr-CA")} $`
+                        : `$${fundingEstimate.toLocaleString("en-CA")}`}
+                    </div>
+                    <p style={{ fontSize: 14, color: "rgba(255,255,255,0.92)", lineHeight: 1.55, maxWidth: 480, margin: "0 auto 18px", position: "relative" }}>
+                      {t.diagnostic.estimationSub}
+                    </p>
+                    <button className="btn-w" style={{ color: "#00875A", position: "relative" }} onClick={() => setActiveTab("grants")}>
+                      💰 {t.diagnostic.viewGrants} →
+                    </button>
+                    <p style={{ fontSize: 10.5, color: "rgba(255,255,255,0.75)", lineHeight: 1.5, maxWidth: 460, margin: "14px auto 0", position: "relative" }}>
+                      {t.diagnostic.estimationFoot}
+                    </p>
+                  </div>
+                )}
+
                 {/* AI: Strengths + Weaknesses */}
                 {diagResult.ai && (diagResult.strengths.length > 0 || diagResult.weaknesses.length > 0) && (
                   <div className="ai-grid">
@@ -1887,6 +1993,13 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                 </button>
               ))}
             </div>
+            <div className="filter-row" style={{ marginTop: -20 }}>
+              {["all","subvention","pret","credit"].map((f) => (
+                <button key={f} className={`fpill${supportFilter === f ? " active" : ""}`} onClick={() => setSupportFilter(f)}>
+                  {f === "all" ? t.grants.all : t.grants.supportTypes[f]}
+                </button>
+              ))}
+            </div>
             <div className="grants-grid">
               {filteredGrants.map((g) => (
                 <div key={g.name} className="grant-card" style={g.priorite === 1 && personalizedGrants ? { borderColor: "#635BFF", boxShadow: "0 4px 14px rgba(99,91,255,0.12)" } : {}}>
@@ -1904,7 +2017,19 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                       {g.type === "quebec" ? "QC" : "CA"}
                     </span>
                   </div>
-                  <p style={{ color: "#697386", fontSize: 11.5, marginBottom: 14 }}>{g.org}</p>
+                  <p style={{ color: "#697386", fontSize: 11.5, marginBottom: 12 }}>{g.org}</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
+                    {g.support && (() => { const c = supportColor(g.support); return (
+                      <span style={{ padding: "3px 10px", borderRadius: 100, fontSize: 10.5, fontWeight: 700, color: c.color, background: c.bg, border: `1px solid ${c.bd}` }}>
+                        {t.grants.supportTypes[g.support]}
+                      </span>
+                    ); })()}
+                    {(() => { const s = getGrantStatus(g); return (
+                      <span style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "3px 10px", borderRadius: 100, fontSize: 10.5, fontWeight: 700, color: s.color, background: s.bg, border: `1px solid ${s.bd}` }}>
+                        <span style={{ width: 6, height: 6, borderRadius: "50%", background: s.color }} />{s.label}
+                      </span>
+                    ); })()}
+                  </div>
                   <div style={{ background: "#F6F9FC", borderRadius: 10, padding: "12px 14px", marginBottom: 14 }}>
                     <div style={{ fontFamily: "'Inter',sans-serif", fontSize: 20, fontWeight: 700, color: "#635BFF", letterSpacing: "-0.02em" }}>{g.amount}</div>
                     <div style={{ fontSize: 10.5, color: "#697386", marginTop: 2 }}>{g.coverage}</div>
