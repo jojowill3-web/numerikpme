@@ -157,6 +157,35 @@ const translations = {
       cta: "Faire mon diagnostic gratuit",
       cta2: "Nous contacter",
     },
+    services: {
+      label: "Nos services",
+      title: "Du diagnostic à la subvention obtenue",
+      subtitle: "Le diagnostic et l'information sont gratuits. Quand vous êtes prêt à passer à l'action, nous rédigeons et déposons vos demandes à votre place.",
+      tiers: [
+        {
+          name: "Diagnostic", price: "Gratuit", tag: "Pour commencer",
+          features: ["Diagnostic de maturité en 5 min", "Estimation du financement potentiel", "Subventions adaptées à votre profil", "Assistant IA + plan d'action"],
+          cta: "Faire le diagnostic", action: "diagnostic", highlight: false,
+        },
+        {
+          name: "Accompagnement subvention", price: "À partir de 1 500 $", unit: "/ dossier", tag: "Le plus populaire",
+          features: ["Validation de votre admissibilité", "Rédaction de la demande complète", "Montage du dossier et des annexes", "Dépôt et suivi auprès du bailleur"],
+          cta: "Demander un devis", action: "contact", highlight: true,
+        },
+        {
+          name: "Mandat clé en main", price: "Frais de succès", unit: "% du montant obtenu", tag: "Sans risque",
+          features: ["Stratégie de financement complète", "Plusieurs programmes combinés", "Vous payez seulement si vous obtenez", "Accompagnement de A à Z"],
+          cta: "Nous contacter", action: "contact", highlight: false,
+        },
+      ],
+      note: "Tarifs indicatifs — le prix final dépend du programme et de la complexité du dossier. Discutons-en sans engagement.",
+    },
+    eligibility: {
+      title: "Quels programmes pour vous ?",
+      qc: "PME du côté québécois (Gatineau / Outaouais) : admissible à tous les programmes ci-dessous (provinciaux + fédéraux).",
+      federal: "PME du côté ontarien (Ottawa) : admissible aux programmes fédéraux (BDC, IRAP-CNRC, Futurpreneur).",
+      verified: "Programmes vérifiés en juin 2026 · vérifiez toujours les conditions à jour sur le site officiel.",
+    },
     lang: "EN",
     legal: {
       title: "Politique de Confidentialité",
@@ -314,6 +343,35 @@ const translations = {
       subtitle: "Get your digital diagnostic for free and discover the grants you're entitled to.",
       cta: "Get my free diagnostic",
       cta2: "Contact us",
+    },
+    services: {
+      label: "Our services",
+      title: "From diagnostic to grant in hand",
+      subtitle: "The diagnostic and information are free. When you're ready to act, we write and submit your applications for you.",
+      tiers: [
+        {
+          name: "Diagnostic", price: "Free", tag: "To get started",
+          features: ["5-minute maturity diagnostic", "Potential funding estimate", "Grants matched to your profile", "AI assistant + action plan"],
+          cta: "Take the diagnostic", action: "diagnostic", highlight: false,
+        },
+        {
+          name: "Grant support", price: "From $1,500", unit: "/ application", tag: "Most popular",
+          features: ["Eligibility validation", "Full application writing", "File and appendices preparation", "Submission and follow-up with the funder"],
+          cta: "Request a quote", action: "contact", highlight: true,
+        },
+        {
+          name: "Turnkey mandate", price: "Success fee", unit: "% of amount obtained", tag: "Risk-free",
+          features: ["Complete funding strategy", "Multiple programs combined", "You pay only if you get funded", "End-to-end support"],
+          cta: "Contact us", action: "contact", highlight: false,
+        },
+      ],
+      note: "Indicative pricing — the final price depends on the program and the complexity of the file. Let's talk, no commitment.",
+    },
+    eligibility: {
+      title: "Which programs for you?",
+      qc: "SMEs on the Québec side (Gatineau / Outaouais): eligible for all programs below (provincial + federal).",
+      federal: "SMEs on the Ontario side (Ottawa): eligible for the federal programs (BDC, IRAP-NRC, Futurpreneur).",
+      verified: "Programs verified in June 2026 · always check current conditions on the official website.",
     },
     lang: "FR",
     legal: {
@@ -1398,10 +1456,26 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
         .btn-ghost{padding:14px 30px;border-radius:8px;background:rgba(255,255,255,0.10);color:#FFFFFF;border:1px solid rgba(255,255,255,0.35);cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;transition:all 0.18s ease}
         .btn-ghost:hover{background:rgba(255,255,255,0.18);transform:translateY(-2px)}
 
+        /* ── SERVICES / PRICING ── */
+        .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+        .svc-card{display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E6EBF1;border-radius:18px;padding:30px 26px;box-shadow:0 1px 3px rgba(50,50,93,0.04);transition:all 0.2s ease;position:relative}
+        .svc-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(99,91,255,0.10)}
+        .svc-card.feat{border-color:#635BFF;box-shadow:0 12px 36px -8px rgba(99,91,255,0.30)}
+        .svc-tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#635BFF,#5046E5);color:#FFFFFF;font-size:10.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:4px 14px;border-radius:100px;box-shadow:0 4px 10px rgba(99,91,255,0.30);white-space:nowrap}
+        .svc-card.feat .svc-name,.svc-card.feat .svc-price{color:#5046E5}
+        .svc-name{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:#0A2540;letter-spacing:-0.01em;margin-bottom:10px}
+        .svc-price{font-family:'Inter',sans-serif;font-size:28px;font-weight:800;color:#0A2540;letter-spacing:-0.03em;line-height:1.1}
+        .svc-unit{font-size:12.5px;color:#697386;font-weight:500;margin-left:4px}
+        .svc-feats{list-style:none;padding:0;margin:20px 0 24px;display:flex;flex-direction:column;gap:11px;flex:1}
+        .svc-feats li{font-size:13.5px;color:#425466;line-height:1.5;padding-left:24px;position:relative}
+        .svc-feats li::before{content:'✓';position:absolute;left:0;top:0;color:#00A865;font-weight:800}
+        .svc-note{text-align:center;font-size:12.5px;color:#697386;max-width:600px;margin:24px auto 0;line-height:1.6}
+
         @media(max-width:768px){
           .hiw-grid{grid-template-columns:1fr;gap:14px}
           .hiw-card{padding:24px 22px}
           .why-grid{grid-template-columns:1fr;gap:12px}
+          .svc-grid{grid-template-columns:1fr;gap:24px 14px}
           .faq-q{font-size:14.5px;padding:16px 18px}
           .faq-item.open .faq-a{max-height:420px}
           .final-cta{margin-top:64px;padding:44px 24px;border-radius:18px}
@@ -1671,6 +1745,38 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                   </div>
                 ))}
               </div>
+            </section>
+
+            {/* SERVICES / OFFRES */}
+            <section>
+              <div className="sec-head">
+                <span className="mission-label">{t.services.label}</span>
+                <h2 className="sec-title">{t.services.title}</h2>
+                <p className="sec-sub">{t.services.subtitle}</p>
+              </div>
+              <div className="svc-grid">
+                {t.services.tiers.map((tier) => (
+                  <div key={tier.name} className={`svc-card${tier.highlight ? " feat" : ""}`}>
+                    {tier.tag && <span className="svc-tag">{tier.tag}</span>}
+                    <div className="svc-name">{tier.name}</div>
+                    <div>
+                      <span className="svc-price">{tier.price}</span>
+                      {tier.unit && <span className="svc-unit">{tier.unit}</span>}
+                    </div>
+                    <ul className="svc-feats">
+                      {tier.features.map((f) => <li key={f}>{f}</li>)}
+                    </ul>
+                    <button
+                      className={tier.highlight ? "btn-p" : "btn-s"}
+                      style={{ width: "100%", justifyContent: "center" }}
+                      onClick={() => tier.action === "contact" ? (setShowContact(true), setContactStatus(null)) : setActiveTab(tier.action)}
+                    >
+                      {tier.cta}
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <p className="svc-note">💬 {t.services.note}</p>
             </section>
 
             {/* CTA FINAL */}
@@ -2085,6 +2191,25 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                 </button>
               ))}
             </div>
+
+            {/* CLÉ ADMISSIBILITÉ QUÉBEC vs ONTARIO */}
+            <div style={{ maxWidth: 820, margin: "0 auto 28px", background: "#FFFFFF", border: "1px solid #E6EBF1", borderRadius: 14, padding: "18px 22px", boxShadow: "0 1px 3px rgba(50,50,93,0.04)" }}>
+              <div style={{ fontFamily: "'Inter',sans-serif", fontWeight: 700, fontSize: 14, color: "#0A2540", marginBottom: 12 }}>📍 {t.eligibility.title}</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13, color: "#425466", lineHeight: 1.5 }}>
+                  <span style={{ flexShrink: 0, padding: "2px 8px", borderRadius: 6, fontSize: 10, fontWeight: 700, background: "rgba(99,91,255,0.10)", color: "#5046E5", border: "1px solid rgba(99,91,255,0.25)" }}>QC</span>
+                  <span>{t.eligibility.qc}</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13, color: "#425466", lineHeight: 1.5 }}>
+                  <span style={{ flexShrink: 0, padding: "2px 8px", borderRadius: 6, fontSize: 10, fontWeight: 700, background: "rgba(255,90,90,0.10)", color: "#D63B3B", border: "1px solid rgba(255,90,90,0.25)" }}>CA</span>
+                  <span>{t.eligibility.federal}</span>
+                </div>
+              </div>
+              <div style={{ fontSize: 11, color: "#8898AA", fontStyle: "italic", borderTop: "1px solid #E6EBF1", paddingTop: 10, marginTop: 12 }}>
+                🗓️ {t.eligibility.verified}
+              </div>
+            </div>
+
             <div className="grants-grid">
               {filteredGrants.map((g) => (
                 <div key={g.name} className="grant-card" style={g.priorite === 1 && personalizedGrants ? { borderColor: "#635BFF", boxShadow: "0 4px 14px rgba(99,91,255,0.12)" } : {}}>
