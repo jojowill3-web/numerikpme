@@ -186,6 +186,30 @@ const translations = {
       federal: "PME du côté ontarien (Ottawa) : admissible aux programmes fédéraux (BDC, IRAP-CNRC, Futurpreneur).",
       verified: "Programmes vérifiés en juin 2026 · vérifiez toujours les conditions à jour sur le site officiel.",
     },
+    about: {
+      link: "À propos",
+      back: "← Retour",
+      title: "À propos de NuMérik PME",
+      intro: "NuMérik PME est née d'un constat simple : trop de PME de notre région passent à côté de milliers de dollars en subventions et reportent leur virage numérique, faute de temps et d'information claire.",
+      missionTitle: "Notre mission",
+      mission: "Démocratiser la transformation numérique et l'accès aux subventions pour les PME de Gatineau, d'Ottawa et de l'Outaouais — en français comme en anglais.",
+      approachTitle: "Notre approche",
+      approach: [
+        "Commencer par un diagnostic gratuit et honnête de votre maturité numérique.",
+        "Identifier uniquement les programmes auxquels vous êtes réellement admissible.",
+        "Vous accompagner concrètement : de la rédaction de la demande jusqu'à son dépôt.",
+        "Rester local : nous connaissons les programmes et les réalités d'ici.",
+      ],
+      valuesTitle: "Nos valeurs",
+      values: [
+        { icon: "🤝", t: "Transparence", d: "Des informations vérifiées et des tarifs clairs, sans surprise." },
+        { icon: "📍", t: "Ancrage local", d: "Pensé pour les PME de l'Outaouais et de la région d'Ottawa." },
+        { icon: "🔒", t: "Confiance", d: "Vos données sont protégées (Loi 25) et ne sont jamais revendues." },
+      ],
+      founderTitle: "L'équipe",
+      founderPlaceholder: "Cette section présentera bientôt l'équipe derrière NuMérik PME. Vous voulez en savoir plus ou collaborer ? Écrivez-nous.",
+      cta: "Nous contacter",
+    },
     lang: "EN",
     legal: {
       title: "Politique de Confidentialité",
@@ -372,6 +396,30 @@ const translations = {
       qc: "SMEs on the Québec side (Gatineau / Outaouais): eligible for all programs below (provincial + federal).",
       federal: "SMEs on the Ontario side (Ottawa): eligible for the federal programs (BDC, IRAP-NRC, Futurpreneur).",
       verified: "Programs verified in June 2026 · always check current conditions on the official website.",
+    },
+    about: {
+      link: "About",
+      back: "← Back",
+      title: "About NuMérik PME",
+      intro: "NuMérik PME was born from a simple observation: too many SMEs in our region miss out on thousands of dollars in grants and delay their digital shift, for lack of time and clear information.",
+      missionTitle: "Our mission",
+      mission: "Democratize digital transformation and access to grants for SMEs in Gatineau, Ottawa and the Outaouais — in French and in English.",
+      approachTitle: "Our approach",
+      approach: [
+        "Start with a free, honest diagnostic of your digital maturity.",
+        "Identify only the programs you are genuinely eligible for.",
+        "Support you concretely: from writing the application to submitting it.",
+        "Stay local: we know the programs and the realities here.",
+      ],
+      valuesTitle: "Our values",
+      values: [
+        { icon: "🤝", t: "Transparency", d: "Verified information and clear pricing, no surprises." },
+        { icon: "📍", t: "Local roots", d: "Built for SMEs in the Outaouais and Ottawa region." },
+        { icon: "🔒", t: "Trust", d: "Your data is protected (Law 25) and never resold." },
+      ],
+      founderTitle: "The team",
+      founderPlaceholder: "This section will soon introduce the team behind NuMérik PME. Want to learn more or collaborate? Get in touch.",
+      cta: "Contact us",
     },
     lang: "FR",
     legal: {
@@ -2435,6 +2483,51 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
             ))}
           </div>
         )}
+
+        {/* À PROPOS */}
+        {activeTab === "about" && (
+          <div className="fade-up legal-wrap">
+            <button className="legal-back" onClick={() => setActiveTab("home")}>
+              {t.about.back}
+            </button>
+            <h1 className="legal-title">{t.about.title}</h1>
+            <p className="legal-p" style={{ fontSize: 16, marginBottom: 28, maxWidth: 720 }}>{t.about.intro}</p>
+
+            <div className="legal-section">
+              <h3 className="legal-h">🎯 {t.about.missionTitle}</h3>
+              <p className="legal-p">{t.about.mission}</p>
+            </div>
+
+            <div className="legal-section">
+              <h3 className="legal-h">🧭 {t.about.approachTitle}</h3>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
+                {t.about.approach.map((a, i) => (
+                  <li key={i} className="legal-p" style={{ paddingLeft: 24, position: "relative" }}>
+                    <span style={{ position: "absolute", left: 0, color: "#635BFF", fontWeight: 800 }}>✓</span>{a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="legal-section">
+              <h3 className="legal-h">💎 {t.about.valuesTitle}</h3>
+              <div className="why-grid" style={{ marginTop: 6 }}>
+                {t.about.values.map((v) => (
+                  <div key={v.t} className="why-card">
+                    <span className="why-ic">{v.icon}</span>
+                    <div><h3>{v.t}</h3><p>{v.d}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="legal-section">
+              <h3 className="legal-h">👥 {t.about.founderTitle}</h3>
+              <p className="legal-p" style={{ marginBottom: 16 }}>{t.about.founderPlaceholder}</p>
+              <button className="btn-p" onClick={() => { setShowContact(true); setContactStatus(null); }}>✉️ {t.about.cta}</button>
+            </div>
+          </div>
+        )}
       </main>
 
       {/* CONTACT MODAL */}
@@ -2601,6 +2694,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
             © 2026 NuMérik PME. {lang === "fr" ? "Tous droits réservés." : "All rights reserved."}
           </div>
           <div className="footer-legal">
+            <button type="button" className="footer-link" onClick={() => setActiveTab("about")}>{t.about.link}</button>
             <button type="button" className="footer-link" onClick={() => setActiveTab("legal")}>{lang === "fr" ? "Confidentialité" : "Privacy"}</button>
             <span style={{ color: "#FFFFFF", fontWeight: 500 }}>🇨🇦 {lang === "fr" ? "Fait au Canada" : "Made in Canada"}</span>
           </div>
