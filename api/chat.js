@@ -6,23 +6,31 @@ export const config = {
   runtime: "edge",
 };
 
-const SYSTEM_PROMPT = `You are a specialized AI assistant for SMEs (Small and Medium Enterprises) in the Gatineau-Ottawa region of Canada with deep expertise in:
+const SYSTEM_PROMPT = `You are a specialized AI assistant for SMEs (Small and Medium Enterprises) in the Gatineau–Ottawa / Outaouais region of Canada with deep expertise in:
 
 1. Digital transformation strategies for SMEs
-2. Canadian and Québec government grant programs (2025-2026):
-   - Offensive Tr@ns Num (ADRIQ) - up to $25,000
-   - Programme ESSOR (Investissement Québec) - up to $50,000
-   - CRIC tax credit (new 2026)
-   - Plan PME 2025-2028 ($500M envelope)
-   - BDC 0% technology loan - up to $15,000
-   - SIPEM-PROMPT for manufacturers - up to $200,000
-   - PARI-CNRC federal program
+2. Government grant programs active in 2026 (keep this list in sync with the website's "Subventions" page):
+   QUÉBEC / OUTAOUAIS:
+   - Offensive Tr@ns Num (ADRIQ) — up to $25,000, 50% of costs
+   - Programme ESSOR (Investissement Québec) — up to $50,000 (deadline March 31, 2027)
+   - CRIC R&D tax credit (new 2026, refundable)
+   - Plan PME 2025-2028 (Réseau Accès PME, $500M envelope, free guidance)
+   - MicroEntreprendre — microloan up to $50,000
+   - ID Gatineau – Fonds Soutien aux entreprises — up to $25,000 (Gatineau only)
+   - Réseau SADC/CAE Outaouais — loan $5,000 to $300,000
+   FEDERAL (apply in both Québec and Ontario):
+   - BDC technology loan — grant up to $15,000 for a digital advisor + 0% loan
+   - IRAP/PARI-CNRC — variable funding + expert advice
+   - Futurpreneur Canada — loan up to $60,000 + mentorship (ages 18-39)
+   - SIPEM-PROMPT — up to $200,000 for manufacturing SMEs
 3. AI and automation tools for SMEs
 4. ERP/CRM software recommendations
 5. Productivity improvement strategies
 6. Digital marketing and e-commerce
 
-The user is in the Gatineau-Ottawa region. Always give practical, actionable advice. When mentioning grants, be specific about amounts and eligibility. Respond in the same language as the user (French or English). Be warm, professional, and encouraging. Keep responses concise but comprehensive.`;
+IMPORTANT eligibility nuance: most Québec programs (ESSOR, ADRIQ, CRIC, Plan PME, MicroEntreprendre, ID Gatineau, SADC) apply ONLY to businesses on the Québec side (Gatineau/Outaouais). For Ottawa (Ontario) businesses, only the federal programs apply. Always clarify this when the user's location matters.
+
+Always give practical, actionable advice. When mentioning grants, be specific about amounts and eligibility, and tell the user to verify exact criteria on the official program website. Respond in the same language as the user (French or English). Be warm, professional, and encouraging. Keep responses concise but comprehensive.`;
 
 // Simple in-memory rate limit by IP (per Edge Function instance)
 const rateLimits = new Map();
@@ -142,7 +150,7 @@ export default async function handler(req) {
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-5",
+        model: "claude-sonnet-4-6",
         max_tokens: 1000,
         system: SYSTEM_PROMPT,
         messages: messages.map((m) => ({
@@ -179,7 +187,7 @@ export default async function handler(req) {
         headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
-  } catch (err) {
+  } catch {
     return new Response(
       JSON.stringify({ error: "Failed to reach AI service" }),
       { status: 502, headers: { "Content-Type": "application/json", ...corsHeaders } }

@@ -351,6 +351,7 @@ export default function App() {
   const [alertEmail, setAlertEmail] = useState("");
   const [alertStatus, setAlertStatus] = useState(null); // null | "success" | "error"
   const [alertLoading, setAlertLoading] = useState(false);
+  const [hp, setHp] = useState(""); // honeypot anti-spam (doit rester vide)
   const [openFaq, setOpenFaq] = useState(0);
   const [showInscription, setShowInscription] = useState(false);
   const [inscEmail, setInscEmail] = useState("");
@@ -532,6 +533,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
   const resetDiag = () => { setDiagStep(0); setDiagAnswers([]); setDiagResult(null); setDiagAnalyzing(false); };
 
   const submitContact = async () => {
+    if (hp) { setContactStatus("success"); return; } // honeypot rempli = bot, on ignore
     if (!contactName.trim() || !contactEmail.trim() || !contactMessage.trim()) {
       setContactStatus("error");
       return;
@@ -566,6 +568,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
 
   // Inscription aux alertes de subventions (même endpoint Apps Script).
   const submitAlert = async () => {
+    if (hp) { setAlertStatus("success"); return; } // honeypot rempli = bot, on ignore
     if (!alertEmail.trim() || !alertEmail.includes("@")) {
       setAlertStatus("error");
       return;
@@ -589,6 +592,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
   };
 
   const submitInscription = async () => {
+    if (hp) { setInscStatus("success"); return; } // honeypot rempli = bot, on ignore
     if (!inscEmail.trim() || !inscNom.trim()) {
       setInscStatus("error");
       return;
@@ -707,15 +711,17 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
       const data = await res.json();
 
       if (!res.ok) {
+        // Ne jamais exposer le message d'erreur brut du fournisseur (facturation,
+        // détails techniques). Message générique et utile à la place.
         let errMsg = "";
         if (res.status === 429 || data.error === "rate_limit") {
           errMsg = lang === "fr"
-            ? `⏳ ${data.message || "Trop de demandes. Veuillez réessayer plus tard."}`
-            : `⏳ ${data.message || "Too many requests. Please try again later."}`;
+            ? "⏳ Vous avez envoyé beaucoup de messages. Veuillez réessayer dans quelques minutes."
+            : "⏳ You've sent many messages. Please try again in a few minutes.";
         } else {
           errMsg = lang === "fr"
-            ? `❌ Erreur: ${data.message || data.error || res.status}`
-            : `❌ Error: ${data.message || data.error || res.status}`;
+            ? "🤖 L'assistant IA est momentanément indisponible. En attendant, faites le diagnostic gratuit ou écrivez-nous à contact@numerikpme.ca."
+            : "🤖 The AI assistant is temporarily unavailable. Meanwhile, try the free diagnostic or email us at contact@numerikpme.ca.";
         }
         setMessages([...newMessages, { role: "assistant", content: errMsg }]);
         setLoading(false);
@@ -946,6 +952,21 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
     s === "pret" ? { color: "#B26A00", bg: "rgba(255,170,0,0.10)", bd: "rgba(255,170,0,0.30)" }
     : s === "credit" ? { color: "#7A52CC", bg: "rgba(122,82,204,0.10)", bd: "rgba(122,82,204,0.28)" }
     : { color: "#00A865", bg: "rgba(0,168,101,0.10)", bd: "rgba(0,168,101,0.25)" };
+
+  // Champ honeypot anti-spam : invisible et hors-tabulation pour les humains,
+  // mais les bots le remplissent → on rejette la soumission.
+  const honeypot = (
+    <input
+      type="text"
+      name="website"
+      tabIndex={-1}
+      autoComplete="off"
+      aria-hidden="true"
+      value={hp}
+      onChange={(e) => setHp(e.target.value)}
+      style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0, pointerEvents: "none" }}
+    />
+  );
 
   return (
     <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", background: "#FFFFFF", minHeight: "100vh", color: "#0A2540" }}>
@@ -1897,11 +1918,12 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                       </ul>
 
                       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
-                        <input className="chat-in" type="email" placeholder={t.inscription.email}
+                        {honeypot}
+                        <input className="chat-in" type="email" placeholder={t.inscription.email} aria-label={t.inscription.email}
                           value={inscEmail} onChange={(e) => setInscEmail(e.target.value)} required />
-                        <input className="chat-in" type="text" placeholder={t.inscription.nom}
+                        <input className="chat-in" type="text" placeholder={t.inscription.nom} aria-label={t.inscription.nom}
                           value={inscNom} onChange={(e) => setInscNom(e.target.value)} required />
-                        <input className="chat-in" type="text" placeholder={t.inscription.entreprise}
+                        <input className="chat-in" type="text" placeholder={t.inscription.entreprise} aria-label={t.inscription.entreprise}
                           value={inscEntreprise} onChange={(e) => setInscEntreprise(e.target.value)} />
                       </div>
 
@@ -1963,8 +1985,13 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                 {messages.map((m, i) => (
                   <div key={i} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start", alignItems: "flex-start", gap: 10 }}>
                     {m.role === "assistant" && <div className="ai-av">⚡</div>}
-                    <div className={m.role === "user" ? "bub-u" : "bub-a"}
-                      dangerouslySetInnerHTML={{ __html: renderMarkdown(m.content) }} />
+                    {/* Mesaj asistan: markdown limite. Mesaj itilizatè: texte brut
+                        (React échappe le HTML) pour éviter toute injection (XSS). */}
+                    {m.role === "assistant" ? (
+                      <div className="bub-a" dangerouslySetInnerHTML={{ __html: renderMarkdown(m.content) }} />
+                    ) : (
+                      <div className="bub-u" style={{ whiteSpace: "pre-wrap" }}>{m.content}</div>
+                    )}
                   </div>
                 ))}
                 {loading && (
@@ -1985,7 +2012,7 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
               </div>
 
               <div style={{ display: "flex", gap: 10 }}>
-                <input className="chat-in" value={input}
+                <input className="chat-in" value={input} aria-label={t.assistant.placeholder}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
                   placeholder={t.assistant.placeholder} />
@@ -2158,10 +2185,12 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
                 {t.grants.alert.sub}
               </p>
               <div style={{ display: "flex", gap: 10, maxWidth: 460, margin: "0 auto", flexWrap: "wrap", justifyContent: "center", position: "relative" }}>
+                {honeypot}
                 <input
                   className="chat-in"
                   type="email"
                   placeholder={t.grants.alert.placeholder}
+                  aria-label={t.grants.alert.placeholder}
                   value={alertEmail}
                   onChange={(e) => setAlertEmail(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && submitAlert()}
@@ -2314,14 +2343,18 @@ Tout le texte en français. Sois spécifique aux réponses données — pas de c
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
+              {honeypot}
               <input className="chat-in" type="text"
                 placeholder={lang === "fr" ? "Votre nom" : "Your name"}
+                aria-label={lang === "fr" ? "Votre nom" : "Your name"}
                 value={contactName} onChange={(e) => setContactName(e.target.value)} required />
               <input className="chat-in" type="email"
                 placeholder={lang === "fr" ? "Votre email" : "Your email"}
+                aria-label={lang === "fr" ? "Votre email" : "Your email"}
                 value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} required />
               <textarea className="chat-in"
                 placeholder={lang === "fr" ? "Votre message..." : "Your message..."}
+                aria-label={lang === "fr" ? "Votre message" : "Your message"}
                 value={contactMessage}
                 onChange={(e) => setContactMessage(e.target.value)}
                 rows={4}
